@@ -2,15 +2,15 @@ import React from 'react';
 
 interface SectionHeadingProps {
   title: string;
-  subtitle?: string;
-  id?: string;
+  subtitle: string;
+  className?: string; // For additional styling
 }
 
-const SectionHeading: React.FC<SectionHeadingProps> = ({ title, subtitle, id }) => {
+const SectionHeading: React.FC<SectionHeadingProps> = ({ title, subtitle, className = '' }) => {
   return (
-    <div id={id} className="text-center mb-12 md:mb-16">
-      <h2 className="text-h1 font-bold text-foreground tracking-tight mb-4">{title}</h2>
-      {subtitle && <p className="text-h3 text-muted max-w-prose mx-auto leading-relaxed">{subtitle}</p>}
+    <div className={`text-center max-w-prose mx-auto ${className}`}>
+      <h2 className="text-h1 font-bold text-foreground mb-4 leading-heading tracking-tight">{title}</h2>
+      <p className="text-h3 text-muted leading-body">{subtitle}</p>
     </div>
   );
 };

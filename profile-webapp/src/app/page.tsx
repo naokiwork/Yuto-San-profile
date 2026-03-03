@@ -1,298 +1,237 @@
 "use client";
-
-import { profile, projects, repos } from '../../data';
-import Button from './components/Button';
+import type { Metadata } from 'next';
+import Image from 'next/image';
+import { profile, projects, repos, Publication, publicationsData } from '../data';
+import AcademicIDList from './components/AcademicIDList';
 import ProjectCard from './components/ProjectCard';
 import RepositoryItem from './components/RepositoryItem';
 import SectionHeading from './components/SectionHeading';
-import { FaGithub, FaLinkedin, FaEnvelope, FaGraduationCap, FaAward, FaBookOpen } from 'react-icons/fa';
+import TabNav from './components/TabNav';
+import { FaGithub, FaLinkedin, FaEnvelope, FaGraduationCap, FaMapMarkerAlt, FaUniversity } from 'react-icons/fa';
 import { useEffect, useState } from 'react';
-import AcademicIDList from './components/AcademicIDList';
 import Reveal from './components/Reveal';
-import React from 'react';
+import React from 'react'; // React is implicitly imported by Next.js components
+import Button from './components/Button';
+
+// Custom Components for Apple.com style
+const Container: React.FC<{ children: React.ReactNode; className?: string }> = ({ children, className = '' }) => (<div className={`mx-auto px-4 max-w-md-container ${className}`}>{children}</div>);
+const Module: React.FC<{ children: React.ReactNode; className?: string }> = ({ children, className = '' }) => (<section className={`py-16 md:py-24 ${className}`}>{children}</section>);
 
 const ResearchFocusCard: React.FC<{ title: string; claim: string; keywords: string[]; linkHref: string }> = ({ title, claim, keywords, linkHref }) => (
   <Reveal>
-    <div className="bg-card border border-border rounded-md shadow-sm p-6 space-y-4 flex flex-col h-full transition-transform hover:translate-y-[-2px]">
-      <FaGraduationCap className="text-accent text-5xl mb-4" />
-      <h3 className="text-h3 font-bold text-foreground tracking-tight">{title}</h3>
-      <p className="text-small text-muted leading-relaxed flex-grow">{claim}</p>
-      <div className="flex flex-wrap gap-2 mt-4">
-        {keywords.map(keyword => (
-          <span key={keyword} className="bg-background text-muted-2 text-micro px-3 py-1 rounded-full border border-border">
-            {keyword}
-          </span>
+    <div className="bg-card border border-border rounded-lg shadow-sm p-6 flex flex-col items-start h-full">
+      <h3 className="text-h3 font-semibold text-foreground mb-2 leading-tight">{title}</h3>
+      <p className="text-muted text-body flex-grow mb-4">{claim}</p>
+      <div className="flex flex-wrap gap-2 mb-4">
+        {keywords.map((keyword, index) => (
+          <span key={index} className="bg-muted/[0.08] text-muted-2 text-xs px-2 py-0.5 rounded-full border border-border">{keyword}</span>
         ))}
       </div>
-      <Button href={linkHref} variant="link" size="sm" className="mt-4 self-start">
-        Read More
-      </Button>
+      <div className="mt-auto">
+        <Button variant="link" asChild size="sm">
+          <a href={linkHref} aria-label={`Read more about ${title}`}>Read more <FaExternalLinkAlt className="inline-block ml-1 w-3 h-3" /></a>
+        </Button>
+      </div>
     </div>
   </Reveal>
 );
 
-interface PublicationData {
-  id: string;
-  title: string;
-  venue: string;
-  year: number;
-  links: { label: string; href: string }[];
-  tags: string[];
-}
-
-const publicationsData: PublicationData[] = [
-  {
-    id: 'pub1',
-    title: 'Advanced Fuzzy Control for Networked Systems',
-    venue: 'IEEE Transactions on Automatic Control',
-    year: 2025,
-    links: [{ label: 'Paper', href: '#' }],
-    tags: ['Fuzzy Control', 'Networked Systems'],
-  },
-  {
-    id: 'pub2',
-    title: 'Robust Output Feedback Control Design',
-    venue: 'Automatica',
-    year: 2024,
-    links: [{ label: 'Paper', href: '#' }],
-    tags: ['Robust Control', 'Output Feedback'],
-  },
-  {
-    id: 'pub3',
-    title: 'LMI-based Observer Synthesis',
-    venue: 'International Journal of Control',
-    year: 2023,
-    links: [{ label: 'Paper', href: '#' }],
-    tags: ['LMI', 'Observers'],
-  },
-];
-
-interface ProjectFilterProps {
-  currentFilter: string;
-  setFilter: (filter: string) => void;
-  tags: string[];
-}
-
-const ProjectFilter: React.FC<ProjectFilterProps> = ({ currentFilter, setFilter, tags }) => {
-  const filters = ['All', ...Array.from(new Set(tags))];
+const ProjectFilter: React.FC<{ tags: string[]; selectedTag: string; onSelectTag: (tag: string) => void }> = ({ tags, selectedTag, onSelectTag }) => {
   return (
-    <div className="flex flex-wrap gap-2 mb-8">
-      {filters.map(filter => (
-        <button
-          key={filter}
-          onClick={() => setFilter(filter)}
-          className={`px-4 py-2 rounded-full text-small font-medium transition-colors border
-            ${currentFilter === filter ? 'bg-accent text-card border-accent' : 'bg-background text-muted-2 border-border hover:bg-muted/10'}`}
+    <div className="flex flex-wrap gap-2">
+      {tags.map(tag => (
+        <Button
+          key={tag}
+          variant={selectedTag === tag ? 'primary' : 'secondary'}
+          size="sm"
+          onClick={() => onSelectTag(tag)}
+          alt={`Filter projects by ${tag}`}
         >
-          {filter}
-        </button>
+          {tag}
+        </Button>
       ))}
     </div>
   );
 };
 
 export default function Home() {
-  const [loadingRepos, setLoadingRepos] = useState(true);
-  const [projectFilter, setProjectFilter] = useState('All');
+  const [selectedTag, setSelectedTag] = useState('All');
+  const [activeSection, setActiveSection] = useState('overview');
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoadingRepos(false);
-    }, 800);
-    return () => clearTimeout(timer);
+    const observerOptions: IntersectionObserverInit = {
+      root: null, // viewport
+      rootMargin: '0px 0px -50% 0px', // When section midpoint crosses the viewport center
+      threshold: 0,
+    };
+
+    const observer = new IntersectionObserver((entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    }, observerOptions);
+
+    sections.forEach((sectionId) => {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        observer.observe(element);
+      }
+    });
+
+    return () => {
+      sections.forEach((sectionId) => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          observer.unobserve(element);
+        }
+      });
+    };
   }, []);
 
-  const researchFocuses = [
-    {
-      title: "Nonlinear Systems via T–S Fuzzy Modeling",
-      claim: "Novel approaches to model complex nonlinear systems using Takagi–Sugeno fuzzy rules, enabling advanced linear control design methods.",
-      keywords: ["Fuzzy Logic", "Nonlinear Control", "Modeling"],
-      linkHref: "#research-ts-fuzzy",
-    },
-    {
-      title: "Robust Output Feedback Control",
-      claim: "Designing robust control strategies using only output measurements, crucial for systems where full state information is unavailable or costly to acquire.",
-      keywords: ["Observers", "State Estimation", "LMI"],
-      linkHref: "#research-output-feedback",
-    },
-    {
-      title: "Guaranteed Cost & H∞ Control",
-      claim: "Ensuring system stability and performance despite uncertainties and external disturbances, utilizing advanced guaranteed cost and H∞ techniques.",
-      keywords: ["Uncertainty", "Disturbance Rejection", "Optimization"],
-      linkHref: "#research-robust-control",
-    },
+  const sections = ['overview', 'research', 'publications', 'projects', 'code', 'contact'];
+
+  const academicIDs = [
+    { icon: <FaGraduationCap className="text-muted-2" />, href: "#", label: "Google Scholar" },
+    { icon: <FaUniversity className="text-muted-2" />, href: "#", label: "ResearchGate" },
+    { icon: <FaGraduationCap className="text-muted-2" />, href: "#", label: "ORCID" },
   ];
 
-  const allProjectTags = projects.flatMap(p => p.tech);
 
-  const filteredProjects = projectFilter === 'All'
-    ? projects
-    : projects.filter(project => project.tech.includes(projectFilter));
+  const filteredProjects = selectedTag === 'All' ? projects : projects.filter(project => project.tags.includes(selectedTag));
 
   return (
-    <div className="space-y-section-mobile md:space-y-section-desktop">
+    <>
       {/* Hero Section */}
-      <section id="overview" className="relative bg-background rounded-lg shadow-sm border border-border p-section-mobile md:p-section-desktop overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8 md:gap-16">
-        <div className="md:w-3/5 text-center md:text-left space-y-4">
+      <Module id="overview" className="md:min-h-[calc(100vh-var(--space-5xl))] flex items-center">
+        <Container className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
           <Reveal>
-            <span className="inline-block bg-muted/10 text-muted-2 text-micro px-4 py-1 rounded-full border border-border mb-4">
-              Systems & Control / Robotics / Aerospace
-            </span>
-          </Reveal>
-          <Reveal delay={100}>
-            <h1 className="text-display font-extrabold text-foreground tracking-tight leading-tight">Control theory <span className="text-accent">→</span> real systems.</h1>
-          </Reveal>
-          <Reveal delay={200}>
-            <p className="text-h3 text-muted leading-normal max-w-prose">Bridging advanced theoretical concepts with practical, impactful engineering solutions for complex dynamic systems.</p>
-          </Reveal>
-          <Reveal delay={300}>
-            <div className="flex flex-col sm:flex-row justify-center md:justify-start gap-4 mt-8">
-              <Button href="#projects" variant="primary" size="lg">
-                View Projects
-              </Button>
-              <Button href="#contact" variant="secondary" size="lg">
-                Contact Me
-              </Button>
+            <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
+              <p className="text-small text-muted-2 uppercase tracking-wide font-semibold mb-2">Systems & Control / Robotics / Aerospace</p>
+              <h1 className="text-display font-bold text-foreground mb-4 leading-tight">Control theory <span className="text-accent">→</span> real systems.</h1>
+              <p className="text-h3 text-muted max-w-prose mb-8">Bridging the gap between theoretical control engineering and practical robotic and aerospace applications.</p>
+              <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+                <Button asChild className="flex-grow sm:flex-grow-0">
+                  <a href="#projects">View Projects</a>
+                </Button>
+                <Button variant="secondary" asChild className="flex-grow sm:flex-grow-0">
+                  <a href="#contact">Contact</a>
+                </Button>
+              </div>
             </div>
           </Reveal>
-        </div>
-        <Reveal delay={400} className="md:w-2/5 flex justify-center items-center h-full">
-          <div className="w-64 h-64 md:w-80 md:h-80 bg-gradient-to-br from-accent/20 to-link/20 rounded-md flex items-center justify-center shadow-md border border-border text-5xl font-bold text-foreground/20">
-            Y.A.
-          </div>
-        </Reveal>
-      </section>
+          <Reveal delay={100} className="flex justify-center lg:justify-end mt-12 lg:mt-0">
+            {/* Abstract Gradient Card with Initials */}
+            <div className="relative w-64 h-64 md:w-80 md:h-80 bg-gradient-to-br from-accent-2 to-accent rounded-lg flex items-center justify-center text-white text-display font-bold leading-none select-none overflow-hidden shadow-lg">
+              <span className="relative z-10">Y.A</span>
+              <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
+            </div>
+          </Reveal>
+        </Container>
+      </Module>
 
       {/* Trust Strip */}
-      <Reveal>
-        <div className="bg-card border border-border rounded-md shadow-sm p-8 text-center flex flex-wrap justify-center gap-8 md:gap-16 mt-section-mobile md:mt-section-desktop">
-          <div className="text-center">
-            <p className="text-h2 font-bold text-foreground">15+</p>
-            <p className="text-small text-muted">Awards & Honors</p>
+      <Module className="bg-card border-t border-b border-border text-foreground">
+        <Container>
+          <h2 className="sr-only">Trust Metrics</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 py-8 text-center">
+            <Reveal>
+              <div className="flex flex-col items-center">
+                <span className="text-5xl font-bold text-accent">10+</span>
+                <span className="text-small text-muted">Awards Received</span>
+              </div>
+            </Reveal>
+            <Reveal delay={100}>
+              <div className="flex flex-col items-center">
+                <span className="text-5xl font-bold text-accent">20+</span>
+                <span className="text-small text-muted">Papers Published</span>
+              </div>
+            </Reveal>
+            <Reveal delay={200}>
+              <div className="flex flex-col items-center">
+                <span className="text-5xl font-bold text-accent">30+</span>
+                <span className="text-small text-muted">Open-Source Repos</span>
+              </div>
+            </Reveal>
           </div>
-          <div className="text-center">
-            <p className="text-h2 font-bold text-foreground">30+</p>
-            <p className="text-small text-muted">Research Papers</p>
+        </Container>
+      </Module>
+
+      {/* Research Focus */}
+      <Module id="research">
+        <Container>
+          <SectionHeading title="Research Focus" subtitle="My areas of expertise and active investigation." className="text-center" />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
+            {profile.researchFocus.map((focus, index) => (
+              <ResearchFocusCard key={index} {...focus} />
+            ))}
           </div>
-          <div className="text-center">
-            <p className="text-h2 font-bold text-foreground">5+</p>
-            <p className="text-small text-muted">Open-Source Repos</p>
+        </Container>
+      </Module>
+
+      {/* Publications */}
+      <Module id="publications" className="bg-muted/[0.05]">
+        <Container>
+          <SectionHeading title="Publications" subtitle="Recent academic contributions and papers." className="text-center" />
+          <PublicationList publications={publicationsData} />
+        </Container>
+      </Module>
+
+      {/* Project Gallery */}
+      <Module id="projects">
+        <Container>
+          <SectionHeading title="Projects Gallery" subtitle="Showcasing my work with real-world applications." className="text-center" />
+          <div className="flex flex-wrap gap-2 mt-12 mb-8 justify-center">
+            <ProjectFilter tags={['All', ...new Set(projects.flatMap(p => p.tags))]} selectedTag={selectedTag} onSelectTag={setSelectedTag} />
           </div>
-        </div>
-      </Reveal>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+            {filteredProjects.map((project) => (
+              <ProjectCard key={project.title} project={project} />
+            ))}
+          </div>
+        </Container>
+      </Module>
 
-      {/* Research Focus Section */}
-      <section id="research" className="bg-background rounded-lg shadow-sm border border-border p-section-mobile md:p-section-desktop space-y-8">
-        <SectionHeading title="Research Focus" subtitle="Key themes from my work across academia and industry." />
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {researchFocuses.map((focus, index) => (
-            <ResearchFocusCard key={index} {...focus} />
-          ))}
-        </div>
-      </section>
+      {/* Open-Source Contributions */}
+      <Module id="code" className="bg-muted/[0.05]">
+        <Container>
+          <SectionHeading title="Open-Source Contributions" subtitle="Exploring my public code repositories on GitHub." className="text-center" />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
+            {repos.map((repo) => (
+              <RepositoryItem key={repo.name} repo={repo} />
+            ))}
+          </div>
+        </Container>
+      </Module>
 
-      {/* Publications Section */}
-      <section id="publications" className="bg-background rounded-lg shadow-sm border border-border p-section-mobile md:p-section-desktop space-y-8">
-        <SectionHeading title="Publications" subtitle="My academic contributions, categorized by year and type." />
-        <div className="space-y-6">
-          {publicationsData.length > 0 ? (
-            publicationsData.sort((a, b) => b.year - a.year).map(pub => (
-              <Reveal key={pub.id} delay={100}>
-                <div className="bg-card border border-border rounded-md p-6 shadow-sm hover:shadow-md transition-shadow flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                  <div className="flex-grow space-y-1">
-                    <h3 className="text-h3 font-semibold text-foreground tracking-tight">{pub.title}</h3>
-                    <p className="text-small text-muted">{pub.venue} ({pub.year})</p>
-                    <div className="flex flex-wrap gap-2 mt-2">
-                      {pub.tags.map(tag => (
-                        <span key={tag} className="bg-background text-muted-2 text-micro px-2 py-0.5 rounded-full border border-border">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                  <div className="flex flex-wrap gap-2 md:ml-4">
-                    {pub.links.map(link => (
-                      <Button key={link.label} href={link.href} variant="secondary" size="sm">
-                        {link.label}
-                      </Button>
-                    ))}
-                  </div>
-                </div>
-              </Reveal>
-            ))
-          ) : (
-            <p className="text-muted text-center text-body">Publications will appear here soon.</p>
-          )}
-        </div>
-      </section>
-
-      {/* Project Gallery Section */}
-      <section id="projects" className="bg-background rounded-lg shadow-sm border border-border p-section-mobile md:p-section-desktop space-y-8">
-        <SectionHeading title="Project Gallery" subtitle="Highlighted works showcasing my skills and expertise in control systems and web development." />
-        <ProjectFilter currentFilter={projectFilter} setFilter={setProjectFilter} tags={allProjectTags} />
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {filteredProjects.map((project, index) => (
-            <ProjectCard key={project.id} project={project} delay={index * 100} />
-          ))}
-        </div>
-      </section>
-
-      {/* Open-Source Contributions Section */}
-      <section id="code" className="bg-background rounded-lg shadow-sm border border-border p-section-mobile md:p-section-desktop space-y-8">
-        <SectionHeading title="Open-Source Contributions" subtitle="A selection of my public repositories and code projects." />
-        <div className="space-y-4">
-          {loadingRepos ? (
-            Array.from({ length: 3 }).map((_, index) => (
-              <div key={index} className="bg-bg1 p-4 rounded-md animate-pulse h-24 border border-border"></div>
-            ))
-          ) : repos.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {repos.map((repo, index) => (
-                <RepositoryItem key={repo.name} repo={repo} delay={index * 100} />
-              ))}
-            </div>
-          ) : (
-            <p className="text-muted text-center text-body">Open-source repositories will appear here.</p>
-          )}
-        </div>
-      </section>
-
-      {/* Get In Touch Section */}
-      <section id="contact" className="bg-background rounded-lg shadow-sm border border-border p-section-mobile md:p-section-desktop text-center space-y-8">
-        <SectionHeading title="Get In Touch" subtitle="Have a question or want to collaborate? Feel free to reach out." />
-        <div className="flex flex-wrap justify-center gap-6">
-          <a
-            href={profile.socials.email}
-            className="flex items-center text-link hover:underline text-lg"
-            aria-label="Email Me"
-          >
-            <FaEnvelope className="mr-2 text-2xl" /> {profile.socials.email.replace("mailto:", "")}
-          </a>
-          <a
-            href={profile.socials.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center text-link hover:underline text-lg"
-            aria-label="GitHub Profile"
-          >
-            <FaGithub className="mr-2 text-2xl" /> GitHub
-          </a>
-          <a
-            href={profile.socials.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center text-link hover:underline text-lg"
-            aria-label="LinkedIn Profile"
-          >
-            <FaLinkedin className="mr-2 text-2xl" /> LinkedIn
-          </a>
-        </div>
-      </section>
-
-      {/* Academic ID List */}
-      <section id="academic-profiles" className="bg-background rounded-lg shadow-sm border border-border p-section-mobile md:p-section-desktop space-y-8">
-        <AcademicIDList socials={profile.socials} />
-      </section>
-    </div>
+      {/* Get In Touch */}
+      <Module id="contact">
+        <Container className="text-center">
+          <SectionHeading title="Get In Touch" subtitle="I'm always open to collaborations and new opportunities." />
+          <p className="text-body text-foreground max-w-prose mx-auto mb-8 mt-12">Feel free to reach out via email or connect with me on social media.</p>
+          <div className="flex flex-wrap justify-center gap-6">
+            <Button variant="secondary" asChild>
+              <a href={`mailto:${profile.socials.email}`} className="inline-flex items-center gap-2 text-link hover:underline">
+                <FaEnvelope className="text-muted-2" /> {profile.socials.email}
+              </a>
+            </Button>
+            <Button variant="secondary" asChild>
+              <a href={profile.socials.github} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-link hover:underline">
+                <FaGithub className="text-muted-2" /> GitHub
+              </a>
+            </Button>
+            <Button variant="secondary" asChild>
+              <a href={profile.socials.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-link hover:underline">
+                <FaLinkedin className="text-muted-2" /> LinkedIn
+              </a>
+            </Button>
+          </div>
+          <div className="mt-16">
+            <AcademicIDList academicIDs={academicIDs} />
+          </div>
+        </Container>
+      </Module>
+    </>
   );
 }

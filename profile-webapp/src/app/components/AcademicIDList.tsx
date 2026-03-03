@@ -1,44 +1,33 @@
+"use client";
 import React from 'react';
 import SectionHeading from './SectionHeading';
-import { FaGithub, FaLinkedin, FaEnvelope, FaResearchgate, FaGraduationCap, FaOrcid } from 'react-icons/fa';
-import { SiIeee } from "react-icons/si";
+import { FaExternalLinkAlt } from 'react-icons/fa'; // Ensure this is explicitly imported
 
-interface AcademicIDListProps {
-  socials: Record<string, string>;
+interface AcademicID {
+  icon: React.ReactNode;
+  href: string;
+  label: string;
 }
 
-const AcademicIDList: React.FC<AcademicIDListProps> = ({ socials }) => {
-  const academicLinks = [
-    { id: 'github', label: 'GitHub', icon: <FaGithub />, href: socials.github },
-    { id: 'linkedin', label: 'LinkedIn', icon: <FaLinkedin />, href: socials.linkedin },
-    { id: 'email', label: 'Email', icon: <FaEnvelope />, href: socials.email },
-    { id: 'researchgate', label: 'ResearchGate', icon: <FaResearchgate />, href: socials.researchgate },
-    { id: 'googleScholar', label: 'Google Scholar', icon: <FaGraduationCap />, href: socials.googleScholar },
-    { id: 'orcid', label: 'ORCID', icon: <FaOrcid />, href: socials.orcid },
-    { id: 'ieeeXplore', label: 'IEEE Xplore', icon: <SiIeee />, href: socials.ieeeXplore },
-  ].filter(link => link.href && link.href !== '#');
+interface AcademicIDListProps {
+  academicIDs: AcademicID[];
+}
 
+const AcademicIDList: React.FC<AcademicIDListProps> = ({ academicIDs }) => {
   return (
-    <div className="bg-card border border-border rounded-md shadow-sm p-6 space-y-4">
-      <SectionHeading title="Academic & Social Profiles" subtitle="My professional and academic online presence." />
-      <div className="grid grid-cols-1 gap-3">
-        {academicLinks.length > 0 ? (
-          academicLinks.map(link => (
-            <a
-              key={link.id}
-              href={link.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center text-foreground hover:text-link transition-colors p-3 bg-background rounded-lg border border-border hover:shadow-sm"
-            >
-              {link.icon && <span className="mr-3 text-xl text-accent">{link.icon}</span>}
-              <span className="text-base font-medium">{link.label}</span>
+    <div className="bg-card border border-border rounded-lg shadow-sm p-6 md:p-8">
+      <SectionHeading title="Academic Identifiers" subtitle="Connect and explore my research profiles." />
+      <ul className="mt-8 space-y-4">
+        {academicIDs.map((id, index) => (
+          <li key={index}>
+            <a href={id.href} target="_blank" rel="noopener noreferrer" className="text-foreground text-body hover:text-link transition-colors flex items-center gap-3 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 rounded-md">
+              {id.icon}
+              <span>{id.label}</span>
+              <FaExternalLinkAlt className="w-3 h-3 text-muted-2 group-hover:text-link transition-colors" />
             </a>
-          ))
-        ) : (
-          <p className="text-muted text-base text-center">Academic profiles coming soon.</p>
-        )}
-      </div>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
