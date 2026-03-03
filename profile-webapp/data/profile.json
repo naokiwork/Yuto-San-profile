@@ -1,0 +1,21 @@
+{
+  "displayName": "Yuto Asai",
+  "headline": "Assistant Professor, Aoyama Gakuin University",
+  "bioShort": "Specializing in Systems and Control Engineering, with a focus on Fuzzy Control Systems, Nonlinear System Control, and Robust Control.",
+  "bioLong": "Dr. Yuto Asai completed all stages of his higher education at Aoyama Gakuin University within the field of Electrical and Electronic Engineering. His doctoral research centers on control design methodologies for Takagi–Sugeno (T–S) fuzzy systems. He has received multiple academic honors, including the IEEE CIS Japan Young Researcher Award.",
+  "location": "Japan",
+  "links": {
+    "github": "https://github.com/Yuto-San",
+    "x": "",
+    "linkedin": "",
+    "blog": ""
+  },
+  "skills": {
+    "Frontend": ["React", "Next.js", "TypeScript", "Tailwind CSS"],
+    "Backend": ["Node.js", "Python"],
+    "Infra": ["Cloudflare", "Docker"],
+    "ML": ["Fuzzy Control Systems", "Nonlinear System Control", "Robust Control"]
+  },
+  "featuredProjects": ["project-id-1"],
+  "updatedAt": "2026-03-03T00:00:00Z"
+}

@@ -1,0 +1,19 @@
+[
+  {
+    "id": "project-id-1",
+    "title": "Takagi–Sugeno Fuzzy Systems Control Design",
+    "summary": "Doctoral research on control design methodologies for Takagi–Sugeno (T–S) fuzzy systems.",
+    "description": "This research focuses on relaxing design conditions and developing methods combining H∞ control with guaranteed cost control. A major technical focus is designing observer-based controllers when premise variables or system states are not measurable.",
+    "stack": ["Control Theory", "Fuzzy Logic", "Lyapunov Stability", "LMI"],
+    "role": "Individual",
+    "links": {
+      "demo": "",
+      "repository": ""
+    },
+    "images": [],
+    "tags": ["Research", "Control Systems", "Fuzzy Logic"],
+    "isFeatured": true,
+    "status": "active",
+    "publishedAt": "2025-03-01T00:00:00Z"
+  }
+]
