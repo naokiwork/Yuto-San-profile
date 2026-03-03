@@ -2,7 +2,7 @@ import { Repo } from '../../../data';
 import { FaStar, FaCodeBranch } from 'react-icons/fa';
 import Button from './Button';
 import React from 'react';
-import { Reveal } from './page'; // Assuming Reveal is exported from page.tsx
+import Reveal from './Reveal'; // Import Reveal from its new location
 
 interface RepositoryItemProps {
   repo: Repo;

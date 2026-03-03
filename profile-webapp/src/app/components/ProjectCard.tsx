@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Button from './Button';
 import { FaExternalLinkAlt } from 'react-icons/fa';
 import React from 'react';
-import { Reveal } from './page'; // Assuming Reveal is exported from page.tsx
+import Reveal from './Reveal'; // Import Reveal from its new location
 
 interface ProjectCardProps {
   project: Project;

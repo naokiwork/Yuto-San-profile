@@ -1,7 +1,7 @@
 import SectionHeading from './SectionHeading';
 import React from 'react';
 import Button from './Button';
-import { Reveal } from './page'; // Assuming Reveal is exported from page.tsx
+import Reveal from './Reveal'; // Import Reveal from its new location
 
 // Minimal local type definition for Publication
 interface Publication {
