@@ -8,7 +8,7 @@ interface ProjectCardProps {
 
 export default function ProjectCard({ project }: ProjectCardProps) {
   return (
-    <div className="bg-panel border border-border rounded-[var(--radius)] shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-accent transform">
+    <div className="bg-panel border border-border rounded-[var(--radius)] shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg hover:translate-y-[-2px]">
       {project.imageUrl ? (
         <Image
           src={project.imageUrl}
@@ -21,7 +21,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         />
       ) : (
         <div className="w-full h-48 bg-bg1 flex items-center justify-center text-text1 text-xl font-bold">
-          {project.title} (Coming soon)
+          {project.title} (Featured)
         </div>
       )}
       <div className="p-6 space-y-3">
@@ -31,13 +31,13 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           {project.tech.map((techItem: string) => (
             <span
               key={techItem}
-              className="bg-bg1 text-text1 text-xs px-2 py-0.5 rounded-full border border-border"
+              className="bg-bg1 text-text1 text-xs px-3 py-1 rounded-full border border-border"
             >
               {techItem}
             </span>
           ))}
         </div>
-        <div className="flex flex-wrap gap-2 pt-4 border-t border-border mt-4">
+        <div className="flex flex-wrap gap-3 pt-4 border-t border-border mt-4">
           {project.links.map((link) => (
             <Button key={link.label} href={link.href} variant="secondary" size="sm">
               {link.label}
