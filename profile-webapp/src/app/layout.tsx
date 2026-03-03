@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import "./globals.css";
 import SkipToContent from "./components/SkipToContent";
 import TabNav from './components/TabNav';
-import ThemeToggle from './components/ThemeToggle';
 
 export const metadata: Metadata = {
   title: {
@@ -79,7 +78,6 @@ export default function RootLayout({
             <a href="#overview" className="text-h3 font-bold text-foreground tracking-tight">Yuto Asai</a>
             <div className="flex items-center space-x-4">
               <TabNav />
-              <ThemeToggle />
             </div>
           </div>
         </header>

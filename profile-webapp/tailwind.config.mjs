@@ -64,9 +64,9 @@ export default {
         'section-desktop': '6rem',
       },
       borderRadius: {
-        sm: 'calc(var(--radius) * 0.5)',
-        md: 'var(--radius)',
-        lg: 'calc(var(--radius) * 1.5)',
+        sm: 'var(--radius-sm)',
+        md: 'var(--radius-md)',
+        lg: 'var(--radius-lg)',
         full: '9999px',
       },
       boxShadow: {
