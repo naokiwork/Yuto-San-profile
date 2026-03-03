@@ -23,9 +23,9 @@ const Button: React.FC<ButtonProps> = ({
     lg: 'px-6 py-3 text-lg',
   };
   const variantStyles = {
-    primary: 'bg-primary text-white hover:bg-secondary',
-    secondary: 'bg-gray-600 text-white hover:bg-gray-700',
-    outline: 'border border-primary text-primary hover:bg-primary hover:text-white',
+    primary: 'bg-accent text-text0 hover:bg-accent2',
+    secondary: 'bg-panel text-text0 hover:bg-bg1',
+    outline: 'border border-accent text-accent hover:bg-accent hover:text-text0 focus:ring-2 focus:ring-focus focus:outline-none',
   };
 
   const buttonClasses = `

@@ -7,7 +7,7 @@ interface ProjectCardProps {
 
 export default function ProjectCard({ project }: ProjectCardProps) {
   return (
-    <div className="bg-dark-700 rounded-lg shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:scale-[1.02] transform">
+    <div className="bg-panel rounded-lg shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:scale-[1.02] transform">
       {project.imageUrl ? (
         <Image
           src={project.imageUrl}
@@ -19,7 +19,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           className="w-full h-48"
         />
       ) : (
-        <div className="w-full h-48 bg-gradient-to-r from-primary to-secondary flex items-center justify-center text-light text-xl font-bold">
+        <div className="w-full h-48 bg-gradient-to-r from-accent to-secondary flex items-center justify-center text-text0 text-xl font-bold">
           {project.title} (Placeholder)
         </div>
       )}
@@ -30,7 +30,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           {project.tech.map((techItem: string) => (
             <span
               key={techItem}
-              className="bg-primary-dark text-white text-xs px-3 py-1 rounded-full"
+              className="bg-accent-dark text-text0 text-xs px-3 py-1 rounded-full border border-line"
             >
               {techItem}
             </span>
@@ -43,7 +43,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-4 py-2 bg-primary text-white rounded-md hover:bg-secondary transition-colors duration-200 text-sm font-medium"
+              className="px-4 py-2 bg-accent text-text0 rounded-md hover:bg-secondary transition-colors duration-200 text-sm font-medium"
               aria-label={link.label}
             >
               {link.label}

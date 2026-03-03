@@ -21,7 +21,7 @@ export default function Home() {
   return (
     <div className="space-y-24 pt-20">
       {/* Hero Section */}
-      <section className="relative text-center py-20 px-4 sm:px-8 bg-gradient-to-br from-dark to-dark-700 rounded-3xl shadow-3xl overflow-hidden">
+      <section className="relative text-center py-20 px-4 sm:px-8 bg-gradient-to-br from-dark-900 to-dark-700 rounded-3xl shadow-3xl overflow-hidden">
         <h1 className="text-5xl md:text-6xl font-extrabold text-light mb-4 leading-tight">
           {profile.name}
         </h1>
@@ -63,7 +63,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-dark-900 rounded-2xl p-8 shadow-3xl space-y-6">
+      <section className="bg-panel rounded-2xl p-8 shadow-3xl space-y-6">
         <SectionHeading title="Research Focus" subtitle="Key themes from my work across academia and practice." />
         <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 text-light-300 text-sm leading-relaxed list-disc list-inside">
           {profile.highlights?.map((item) => (
@@ -101,7 +101,7 @@ export default function Home() {
           {loadingRepos && (
             // Skeleton loader
             Array.from({ length: 3 }).map((_, index) => (
-              <div key={index} className="bg-dark-700 p-6 rounded-lg shadow-md animate-pulse h-40"></div>
+              <div key={index} className="bg-panel p-6 rounded-lg shadow-md animate-pulse h-40"></div>
             ))
           )}
           {!loadingRepos && repos.map((repo) => (
