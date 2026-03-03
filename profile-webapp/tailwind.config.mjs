@@ -19,6 +19,7 @@ export default {
         accent: 'var(--accent)',
         'accent-2': 'var(--accent-2)',
         link: 'var(--link)',
+        'accent-contrast': 'var(--accent-contrast)', // For text on accent background
       },
       fontSize: {
         xs: '0.75rem',
@@ -31,35 +32,24 @@ export default {
         '4xl': '2.25rem',
         '5xl': '3rem',
         '6xl': '4rem',
-        'display': 'clamp(2.5rem, 6vw, 5rem)',
-        'h1': 'clamp(2rem, 5vw, 4rem)',
-        'h2': 'clamp(1.75rem, 4vw, 3rem)',
-        'h3': 'clamp(1.5rem, 3vw, 2.5rem)',
-        'body': '1.0625rem', /* ~17px */
-        'small': '0.9375rem', /* ~15px */
-        'micro': '0.75rem',
+        'display': 'clamp(2.5rem, 6vw, 4.5rem)', // Adjust for Apple-like hero
+        'h1': 'clamp(2.25rem, 5vw, 3.5rem)', // Main section titles
+        'h2': 'clamp(1.75rem, 4vw, 2.75rem)', // Sub-section titles
+        'h3': 'clamp(1.5rem, 3vw, 2.25rem)', // Card titles
+        'body': '1.0625rem', // ~17px
+        'small': '0.9375rem', // ~15px
+        'caption': '0.75rem', // ~12px
       },
       spacing: {
-        '1': '0.25rem',
-        '2': '0.5rem',
-        '3': '0.75rem',
-        '4': '1rem',
-        '5': '1.25rem',
-        '6': '1.5rem',
-        '8': '2rem',
-        '10': '2.5rem',
-        '12': '3rem',
-        '16': '4rem',
-        '20': '5rem',
-        '24': '6rem',
-        '32': '8rem',
-        '40': '10rem',
-        '48': '12rem',
-        '56': '14rem',
-        '64': '16rem',
-        '72': '18rem',
-        '80': '20rem',
-        '96': '24rem',
+        '1': 'var(--space-xs)',  // 4px
+        '2': 'var(--space-sm)',   // 8px
+        '3': 'var(--space-md)',  // 12px
+        '4': 'var(--space-lg)',     // 16px
+        '5': 'var(--space-xl)',  // 24px
+        '6': 'var(--space-2xl)',     // 32px
+        '7': 'var(--space-3xl)',  // 48px
+        '8': 'var(--space-4xl)',     // 64px
+        '9': 'var(--space-5xl)',   // 96px
         'section-mobile': '3rem',
         'section-desktop': '6rem',
       },
@@ -74,11 +64,14 @@ export default {
         sm: 'var(--shadow2)',
       },
       maxWidth: {
-        'prose': '78ch',
+        'prose': '72ch',
+        'md-container': '768px',
         '6xl': '72rem',
         '7xl': '80rem',
       },
-    },
-  },
+      lineHeight: {
+        'heading': 'var(--line-height-heading)',
+        'body': 'var(--line-height-body)',
+      },
   plugins: [],
 };

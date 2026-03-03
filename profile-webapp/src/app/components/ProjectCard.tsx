@@ -1,51 +1,43 @@
-import { Project } from '../../../data';
+"use client";
+import type { Project } from '../../data';
 import Image from 'next/image';
 import Button from './Button';
 import { FaExternalLinkAlt } from 'react-icons/fa';
 import React from 'react';
-import Reveal from './Reveal'; // Import Reveal from its new location
+import Reveal from './Reveal';
 
 interface ProjectCardProps {
   project: Project;
-  delay?: number;
+  className?: string; // Optional for external styling
 }
 
-const ProjectCard: React.FC<ProjectCardProps> = ({ project, delay = 0 }) => {
+const ProjectCard: React.FC<ProjectCardProps> = ({ project, className }) => {
   return (
-    <Reveal delay={delay}>
-      <div className="bg-card border border-border rounded-md shadow-sm overflow-hidden transition-all duration-300 hover:shadow-md hover:translate-y-[-2px]">
-        {project.imageUrl ? (
-          <Image
-            src={project.imageUrl}
-            alt={project.imageAlt}
-            width={400}
-            height={200}
-            sizes="(max-width: 768px) 100vw, 50vw"
-            style={{ width: '100%', height: 'auto' }}
-            className="w-full h-48 object-cover"
-          />
-        ) : (
-          <div className="w-full h-48 bg-bg1 flex items-center justify-center text-muted text-xl font-bold">
-            Project Image
-          </div>
-        )}
-        <div className="p-6 space-y-3">
-          <h3 className="text-h3 font-semibold text-foreground tracking-tight">{project.title}</h3>
-          <p className="text-small text-muted leading-relaxed line-clamp-3">{project.description}</p>
-          <div className="flex flex-wrap gap-2 pt-2">
-            {project.tech.map((techItem: string) => (
-              <span
-                key={techItem}
-                className="bg-bg1 text-muted-2 text-micro px-3 py-1 rounded-full border border-border"
-              >
-                {techItem}
-              </span>
+    <Reveal className={`h-full ${className}`}>
+      <div className="bg-card border border-border rounded-lg shadow-md overflow-hidden flex flex-col h-full hover:translate-y-[-2px] hover:shadow-lg transition-all duration-200">
+        <div className="relative w-full h-48 md:h-56 bg-muted/[0.1] flex items-center justify-center overflow-hidden">
+          {project.imageUrl && project.alt ? (
+            <Image src={project.imageUrl} alt={project.alt} fill style={{ objectFit: 'cover' }} className="transition-transform duration-300 group-hover:scale-105" loading="lazy" />
+          ) : project.alt ? (
+            <span className="text-muted-2 text-xl">{project.alt}</span>
+          ) : (
+            <span className="text-muted-2 text-xl">Project Image</span> // Fallback if alt is also missing
+          )}
+        </div>
+        <div className="p-6 flex flex-col flex-grow">
+          <h3 className="text-h3 font-semibold text-foreground mb-3 leading-tight">{project.title}</h3>
+          <p className="text-muted text-body flex-grow mb-4">{project.description}</p>
+          <div className="flex flex-wrap gap-2 mb-6">
+            {project.tech.map((tech, index) => (
+              <span key={index} className="bg-muted/[0.08] text-muted-2 text-sm px-3 py-1 rounded-full border border-border">{tech}</span>
             ))}
           </div>
-          <div className="flex flex-wrap gap-3 pt-4 border-t border-border mt-4">
-            {project.links.map((link) => (
-              <Button key={link.label} href={link.href} variant="secondary" size="sm">
-                {link.label} {link.href.startsWith('http') && <FaExternalLinkAlt className="ml-1 text-micro" />}
+          <div className="mt-auto flex flex-wrap gap-3">
+            {project.links.map((link, index) => (
+              <Button key={index} variant={link.label === 'Live Demo' || link.label === 'GitHub' ? 'primary' : 'secondary'} size="sm" asChild>
+                <a href={link.href} target="_blank" rel="noopener noreferrer" aria-label={`${project.title} ${link.label}`}>
+                  {link.label}
+                </a>
               </Button>
             ))}
           </div>

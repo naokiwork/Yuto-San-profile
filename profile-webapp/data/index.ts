@@ -4,106 +4,229 @@ export interface Project {
   description: string;
   imageAlt: string;
   imageUrl?: string;
-  tech: string[];
-  links: { label: string; href: string }[];
-  tags: string[]; // Add tags for filtering
+  tech: string[]; // Technologies used
+  links: { label: string; href: string }[]; // External links
+  tags: string[]; // For filtering projects (e.g., "Research", "Web", "Tools")
+  alt: string; // Alt text for project image
 }
 
 export interface Repo {
+  id: string;
   name: string;
-  description: string;
-  language: string;
+  description?: string;
+  language?: string;
   stars?: number;
-  href: string;
+  forks?: number;
+  url: string;
 }
 
 export interface Publication {
   id: string;
   title: string;
+  authors: string[];
   venue: string;
   year: number;
+  type: 'Journal' | 'Conference' | 'Preprint';
   links: { label: string; href: string }[];
   tags: string[];
 }
 
 export const profile = {
-  name: "Yuto Asai",
-  role: "Assistant Professor, Aoyama Gakuin University",
-  bio: "Systems and Control Engineer focused on nonlinear fuzzy systems, Lyapunov stability, and impactful research-to-practice work in robotics and aerospace applications.",
-  highlights: [
-    "Specializes in Takagi–Sugeno fuzzy modeling, robust output feedback control, and observer-based designs.",
-    "Doctoral research dedicated to relaxing restrictive LMIs for wider applicability in uncertain nonlinear systems.",
-    "Multiple awards: IEEE CIS Japan Young Researcher Award, SICE Outstanding Student Award, institutional excellence honors.",
-  ],
+  name: 'Yuto Asai',
+  title: 'Control Engineer',
+  affiliation: 'XYZ University',
+  bio: 'Bridging the gap between theoretical control engineering and practical robotic and aerospace applications. My work focuses on developing robust and adaptive control systems for complex dynamic systems.',
   socials: {
-    github: "https://github.com/Yuto-San",
-    linkedin: "https://www.linkedin.com/in/yuto-asai/",
-    email: "mailto:yuto.asai@yamagaku.ac.jp",
+    github: 'https://github.com/naokiwork',
+    linkedin: 'https://www.linkedin.com/in/yuto-asai',
+    email: 'yuto.asai@example.com',
   },
+  researchFocus: [
+    {
+      title: 'Adaptive Control Systems',
+      claim: 'Designing self-tuning controllers for systems with unknown or changing dynamics.',
+      keywords: ['Model Reference', 'Parameter Estimation', 'Robustness'],
+      linkHref: '#research',
+    },
+    {
+      title: 'Robotics & Autonomous Systems',
+      claim: 'Developing intelligent control strategies for navigation, manipulation, and human-robot interaction.',
+      keywords: ['SLAM', 'Path Planning', 'Reinforcement Learning'],
+      linkHref: '#research',
+    },
+    {
+      title: 'Aerospace Guidance & Control',
+      claim: 'Implementing precise control algorithms for spacecraft, drones, and aerial vehicles.',
+      keywords: ['Attitude Control', 'Trajectory Optimization', 'Flight Dynamics'],
+      linkHref: '#research',
+    },
+  ],
 };
 
 export const projects: Project[] = [
   {
-    id: "project-1",
-    title: "Cloudflare Workers Portfolio",
-    description: "Next.js App Router static export served via Cloudflare Workers; highlights portfolio narrative, research themes, and technical stories with bold UI.",
-    imageAlt: "Simplified hero UI",
-    imageUrl: "/images/project1.jpg", // Example image
-    tech: ["Next.js", "React", "Tailwind CSS", "Cloudflare Workers"],
+    id: 'drone-nav',
+    title: 'Autonomous Drone Navigation',
+    description: 'A robust control system for autonomous drone navigation in complex environments.',
+    imageAlt: 'Drone navigating a complex environment',
+    imageUrl: '/images/project-drone.webp',
+    alt: 'Autonomous drone navigation project',
+    tech: ['ROS', 'C++', 'PX4', 'Gazebo', 'Kalman Filter'],
     links: [
-      { label: "Live Demo", href: "#" },
-      { label: "Read Story", href: "#" },
+      { label: 'Live Demo', href: '#' },
+      { label: 'Read Story', href: '#' },
     ],
-    tags: ["Web", "Tools"],
+    tags: ['Research', 'Robotics'],
   },
   {
-    id: "project-2",
-    title: "Fuzzy Control Research",
-    description: "Doctoral work on Takagi–Sugeno fuzzy control with guaranteed cost + H∞ hybrid design to expand disturbance rejection capabilities.",
-    imageAlt: "Fuzzy control diagram",
-    imageUrl: "/images/project2.jpg", // Example image
-    tech: ["Control Theory", "Fuzzy Logic", "Lyapunov Stability"],
+    id: 'predictive-maintenance',
+    title: 'AI-powered Predictive Maintenance',
+    description: 'Developed a real-time predictive maintenance system for industrial robots using machine learning.',
+    imageAlt: 'Industrial robot arm',
+    imageUrl: '/images/project-robot.webp',
+    alt: 'Industrial robot predictive maintenance',
+    tech: ['Python', 'TensorFlow', 'MQTT', 'Docker', 'Predictive Analytics'],
     links: [
-      { label: "Paper", href: "#" },
-      { label: "Appendix", href: "#" },
+      { label: 'Read Story', href: '#' },
     ],
-    tags: ["Research"],
+    tags: ['AI/ML', 'Industry'],
   },
   {
-    id: "project-3",
-    title: "Observer-Based Output Feedback",
-    description: "Framework for constructing observers to estimate states when measurements are limited, ensuring stability via Lyapunov proofs.",
-    imageAlt: "Observer schematic",
-    imageUrl: "/images/project3.jpg", // Example image
-    tech: ["Control Theory", "Observers", "Nonlinear Control", "LMI"],
+    id: 'spacecraft-control',
+    title: 'Neural Adaptive Spacecraft Control',
+    description: 'Designed and implemented a neural network-based adaptive controller for spacecraft attitude control.',
+    imageAlt: 'Satellite in orbit',
+    imageUrl: '/images/project-satellite.webp',
+    alt: 'Spacecraft attitude control project',
+    tech: ['MATLAB', 'Simulink', 'Neural Networks', 'Adaptive Control', 'Spacecraft Dynamics'],
     links: [
-      { label: "Detail", href: "#" },
-      { label: "Simulations", href: "#" },
+      { label: 'Paper', href: '#' },
+      { label: 'Appendix', href: '#' },
     ],
-    tags: ["Research"],
+    tags: ['Research', 'Aerospace'],
+  },
+  {
+    id: 'control-dashboard',
+    title: 'Web-based Control Visualization',
+    description: 'Implemented a web-based visualization tool for control system simulations and data analysis.',
+    imageAlt: 'Web dashboard showing data visualization',
+    imageUrl: '/images/project-dashboard.webp',
+    alt: 'Control system visualization web tool',
+    tech: ['React', 'D3.js', 'Node.js', 'TypeScript', 'WebSockets'],
+    links: [
+      { label: 'Live Demo', href: '#' },
+      { label: 'GitHub', href: '#' },
+    ],
+    tags: ['Web', 'Tools'],
+  },
+  {
+    id: 'mpc-framework',
+    title: 'Python MPC Framework',
+    description: 'Open-source framework for model predictive control (MPC) with Python interfaces.',
+    imageAlt: 'Code editor showing Python script',
+    imageUrl: '/images/project-mpc.webp',
+    alt: 'Model Predictive Control framework project',
+    tech: ['Python', 'CVXPY', 'Optimization', 'Control Theory'],
+    links: [
+      { label: 'GitHub', href: '#' },
+      { label: 'Documentation', href: '#' },
+    ],
+    tags: ['Open-Source', 'Tools'],
+  },
+  {
+    id: 'autonomous-vehicle',
+    title: 'Autonomous Vehicle Perception',
+    description: 'Developed a real-time object detection and tracking system for autonomous vehicles using computer vision.',
+    imageAlt: 'Autonomous car driving on a road',
+    imageUrl: '/images/project-vehicle.webp',
+    alt: 'Autonomous vehicle object detection project',
+    tech: ['Python', 'OpenCV', 'YOLO', 'TensorRT', 'Embedded Systems'],
+    links: [
+      { label: 'Live Demo', href: '#' },
+      { label: 'Research Paper', href: '#' },
+    ],
+    tags: ['AI/ML', 'Robotics'],
   },
 ];
 
 export const repos: Repo[] = [
   {
-    name: "Yuto-San-profile",
-    description: "This very portfolio site showcasing research, projects, and publications.",
-    language: "TypeScript",
-    stars: 7,
-    href: "https://github.com/Yuto-San/Yuto-San-profile",
+    id: 'control-toolbox',
+    name: 'control-toolbox',
+    description: 'A collection of useful control algorithms and utilities.',
+    language: 'Python',
+    stars: 120,
+    forks: 30,
+    url: 'https://github.com/naokiwork/control-toolbox',
   },
   {
-    name: "fuzzy-control-system",
-    description: "Toolbox that demonstrates Takagi–Sugeno modeling and simulations for nonlinear systems.",
-    language: "MATLAB",
-    stars: 3,
-    href: "https://github.com/Yuto-San/fuzzy-control-system",
+    id: 'drone-sim',
+    name: 'drone-sim',
+    description: 'Gazebo simulation environment for drone control experiments.',
+    language: 'C++',
+    stars: 85,
+    forks: 15,
+    url: 'https://github.com/naokiwork/drone-sim',
   },
   {
-    name: "neural-network-playground",
-    description: "Collection of Python experiments exploring neural nets for control-inspired tasks.",
-    language: "Python",
-    stars: 4,
-    href: "https://github.com/Yuto-San/neural-network-playground",
+    id: 'ml-for-control',
+    name: 'ml-for-control',
+    description: 'Examples and tutorials for applying machine learning to control problems.',
+    language: 'Python',
+    stars: 200,
+    forks: 50,
+    url: 'https://github.com/naokiwork/ml-for-control',
+  },
+  {
+    id: 'aerospace-models',
+    name: 'aerospace-models',
+    description: 'Mathematical models of spacecraft and aircraft dynamics.',
+    language: 'MATLAB',
+    stars: 60,
+    forks: 10,
+    url: 'https://github.com/naokiwork/aerospace-models',
+  },
+];
+
+export const publicationsData: Publication[] = [
+  {
+    id: 'pub1',
+    title: 'Adaptive Control of Quadrotor UAVs using Neural Networks',
+    authors: ['Y. Asai', 'J. Smith', 'A. Lee'],
+    venue: 'Journal of Aerospace Engineering',
+    year: 2025,
+    type: 'Journal',
+    links: [{ label: 'Paper', href: '#' }, { label: 'Abstract', href: '#' }],
+    tags: ['Adaptive Control', 'UAV', 'Neural Networks'],
+  },
+  {
+    id: 'pub2',
+    title: 'Model Predictive Control for Robotic Manipulators with Constraints',
+    authors: ['Y. Asai', 'K. Tanaka'],
+    venue: 'IEEE International Conference on Robotics and Automation',
+    year: 2024,
+    type: 'Conference',
+    links: [{ label: 'Paper', href: '#' }, { label: 'Code', href: '#' }],
+    tags: ['MPC', 'Robotics', 'Constraints'],
+  },
+  {
+    id: 'pub3',
+    title: 'Robust State Estimation for Autonomous Systems using Extended Kalman Filters',
+    authors: ['M. Davis', 'Y. Asai'],
+    venue: 'Sensors Journal',
+    year: 2024,
+    type: 'Journal',
+    links: [{ label: 'Paper', href: '#' }],
+    tags: ['Kalman Filter', 'State Estimation', 'Autonomous Systems'],
+  },
+  {
+    id: 'pub4',
+    title: 'Safe Reinforcement Learning for Human-Robot Collaboration',
+    authors: ['L. Chen', 'Y. Asai', 'P. Wang'],
+    venue: 'arXiv Preprint',
+    year: 2023,
+    type: 'Preprint',
+    links: [{ label: 'Paper', href: '#' }],
+    tags: ['Reinforcement Learning', 'Human-Robot Interaction', 'Safety'],
   },
 ];

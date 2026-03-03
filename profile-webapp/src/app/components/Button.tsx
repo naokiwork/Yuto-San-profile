@@ -1,54 +1,36 @@
-import Link from 'next/link';
+"use client";
 import React from 'react';
+import { Slot } from '@radix-ui/react-slot'; // Assuming @radix-ui/react-slot is installed and desired
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  href?: string;
   variant?: 'primary' | 'secondary' | 'link';
   size?: 'sm' | 'md' | 'lg';
-  children: React.ReactNode;
   className?: string;
+  asChild?: boolean;
+  alt?: string; // For accessibility
 }
 
-const Button: React.FC<ButtonProps> = ({
-  href,
-  variant = 'primary',
-  size = 'md',
-  children,
-  className = '',
-  ...props
-}) => {
-  const baseStyles = `font-medium rounded-full transition-colors duration-200 active:scale-[0.98] active:duration-120 ${className}`;
-  const sizeStyles = {
-    sm: 'h-9 px-4 text-small',
-    md: 'h-11 px-5 text-base',
-    lg: 'h-14 px-7 text-lg',
-  };
+const Button: React.FC<ButtonProps> = ({ variant = 'primary', size = 'md', className, asChild = false, children, alt, ...props }) => {
+  const Comp = asChild ? Slot : 'button';
+
+  const baseStyles = "inline-flex items-center justify-center font-medium rounded-full transition-colors duration-200 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2";
+
   const variantStyles = {
-    primary: 'bg-accent text-white hover:opacity-80',
-    secondary: 'border border-border text-link hover:opacity-80',
-    link: 'text-link hover:underline p-0 h-auto',
+    primary: "bg-accent text-white hover:bg-accent-2",
+    secondary: "bg-card text-foreground border border-border hover:bg-muted/[0.1]",
+    link: "text-link hover:underline",
   };
 
-  const buttonClasses = `
-    inline-flex items-center justify-center
-    ${baseStyles}
-    ${sizeStyles[size]}
-    ${variantStyles[variant]}
-    focus:ring-2 focus:ring-[var(--focus)] focus:outline-none
-  `;
-
-  if (href) {
-    return (
-      <Link href={href} className={buttonClasses} {...props as any}>
-        {children}
-      </Link>
-    );
-  }
+  const sizeStyles = {
+    sm: "px-4 py-2 text-small",
+    md: "px-5 py-2.5 text-base",
+    lg: "px-6 py-3 text-lg",
+  };
 
   return (
-    <button className={buttonClasses} {...props}>
+    <Comp className={`${baseStyles} ${variantStyles[variant]} ${sizeStyles[size]} ${className}`} aria-label={alt} {...props}>
       {children}
-    </button>
+    </Comp>
   );
 };
 

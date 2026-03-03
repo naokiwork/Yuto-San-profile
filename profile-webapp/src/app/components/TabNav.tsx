@@ -1,64 +1,30 @@
 "use client";
-
 import React, { useState, useEffect } from 'react';
 
-const TabNav: React.FC = () => {
-  const tabs = [
-    { name: 'Overview', href: '#overview' },
-    { name: 'Research', href: '#research' },
-    { name: 'Publications', href: '#publications' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Code', href: '#code' },
-    { name: 'Contact', href: '#contact' },
+interface TabNavProps {
+  activeSection: string;
+  setActiveSection: (section: string) => void;
+}
+
+const TabNav: React.FC<TabNavProps> = ({ activeSection, setActiveSection }) => {
+  const sections = [
+    { id: 'overview', label: 'Overview' },
+    { id: 'research', label: 'Research' },
+    { id: 'publications', label: 'Publications' },
+    { id: 'projects', label: 'Projects' },
+    { id: 'code', label: 'Code' },
+    { id: 'contact', label: 'Contact' },
   ];
 
-  const [activeHash, setActiveHash] = useState('');
-
-  useEffect(() => {
-    const handleHashChange = () => {
-      setActiveHash(window.location.hash);
-    };
-
-    window.addEventListener('hashchange', handleHashChange);
-    setActiveHash(window.location.hash);
-
-    // Observe sections for active state on scroll
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveHash(`#${entry.target.id}`);
-          }
-        });
-      },
-      { threshold: 0.5 } // Trigger when 50% of the section is visible
-    );
-
-    tabs.forEach(tab => {
-      const section = document.getElementById(tab.href.substring(1));
-      if (section) observer.observe(section);
-    });
-
-    return () => {
-      window.removeEventListener('hashchange', handleHashChange);
-      tabs.forEach(tab => {
-        const section = document.getElementById(tab.href.substring(1));
-        if (section) observer.unobserve(section);
-      });
-    };
-  }, [tabs]);
-
   return (
-    <nav className="flex space-x-4">
-      {tabs.map((tab) => (
-        <a
-          key={tab.name}
-          href={tab.href}
-          className={`text-small font-medium py-2 relative transition-colors
-            ${activeHash === tab.href ? 'text-foreground after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full after:bg-accent' : 'text-muted hover:text-foreground'}
-          `}
-        >
-          {tab.name}
+    <nav className="hidden md:flex items-center space-x-6">
+      {sections.map((section) => (
+        <a key={section.id} href={`#${section.id}`} onClick={() => setActiveSection(section.id)} className={`relative text-body font-medium transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 rounded-md\n          ${activeSection === section.id ? 'text-foreground' : 'text-muted hover:text-foreground'}
+        `}>
+          {section.label}
+          {activeSection === section.id && (
+            <span className="absolute bottom-[-8px] left-0 w-full h-0.5 bg-accent rounded-full" />
+          )}
         </a>
       ))}
     </nav>

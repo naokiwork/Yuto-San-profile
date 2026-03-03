@@ -41,8 +41,8 @@ const Reveal: React.FC<RevealProps> = ({ children, delay = 0, className = '' }) 
     ? {} // No animation
     : {
         opacity: isVisible ? 1 : 0,
-        transform: isVisible ? 'translateY(0)' : 'translateY(12px)',
-        transition: `opacity 450ms ease-out ${delay}ms, transform 450ms ease-out ${delay}ms`,
+    transform: isVisible ? 'translateY(0)' : 'translateY(8px)', // Slightly less aggressive reveal
+    transition: `opacity 400ms ease-out ${delay}ms, transform 400ms ease-out ${delay}ms`, // Adjusted duration
       };
 
   return <div ref={ref} style={animationStyles} className={className}>{children}</div>;
