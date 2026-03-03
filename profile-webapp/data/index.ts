@@ -16,6 +16,18 @@ export interface Repo {
   href: string;
 }
 
+export interface Publication {
+  id: string;
+  title: string;
+  venue: string;
+  year: number;
+  type: "Journal" | "Conference" | "Thesis" | "Preprint";
+  links: { label: string; href: string; icon?: string }[];
+  citation: string;
+}
+
+export const publications: Publication[] = [];
+
 export const profile = {
   name: "Yuto Asai",
   role: "Assistant Professor, Aoyama Gakuin University",
