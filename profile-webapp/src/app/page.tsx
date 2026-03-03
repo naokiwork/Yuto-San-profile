@@ -8,9 +8,8 @@ import SectionHeading from './components/SectionHeading';
 import { FaGithub, FaLinkedin, FaEnvelope, FaGraduationCap, FaAward, FaBookOpen } from 'react-icons/fa';
 import { useEffect, useState } from 'react';
 import AcademicIDList from './components/AcademicIDList';
-
 import Reveal from './components/Reveal';
-
+import React from 'react';
 
 const ResearchFocusCard: React.FC<{ title: string; claim: string; keywords: string[]; linkHref: string }> = ({ title, claim, keywords, linkHref }) => (
   <Reveal>
