@@ -52,7 +52,7 @@ export default async function Home() {
           My Skills
         </h2>
         <div className="flex flex-wrap justify-center gap-4">
-          {Object.entries(profile.skills).map(([category, skills]) => (
+          {Object.entries(profile.skills as Record<string, string[]>).map(([category, skills]) => (
             <div key={category} className="bg-github-blue text-white px-4 py-2 rounded-full text-lg">
               {category}: {skills.join(", ")}
             </div>
