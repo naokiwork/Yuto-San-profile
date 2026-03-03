@@ -2,4 +2,4 @@ name = "yuto-san-profile"
 compatibility_date = "2026-03-03"
 main = "src/worker.ts"
 [assets]
-directory = "out"
+directory = ".next/static"
