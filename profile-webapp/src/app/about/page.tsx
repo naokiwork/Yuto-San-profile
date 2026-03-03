@@ -19,7 +19,7 @@ export default async function AboutPage() {
       <section className="bg-gray-800 rounded-lg shadow-lg p-6 mb-8">
         <h2 className="text-3xl font-bold text-github-lightgray mb-4">Skills</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {Object.entries(profile.skills).map(([category, skills]) => (
+          {Object.entries(profile.skills as Record<string, string[]>).map(([category, skills]) => (
             <div key={category}>
               <h3 className="text-xl font-semibold text-github-lightgray mb-2">{category}</h3>
               <div className="flex flex-wrap gap-2">
