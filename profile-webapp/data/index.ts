@@ -3,6 +3,7 @@ export interface Project {
   title: string;
   description: string;
   imageAlt: string;
+  imageUrl?: string;
   tech: string[];
   links: { label: string; href: string }[];
 }
