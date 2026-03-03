@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
-// import Header from "./components/Header"; // Removed Header
-// import Footer from "./components/Footer"; // Removed Footer
 import SkipToContent from "./components/SkipToContent";
-import TabNav from './components/TabNav'; // Import TabNav
+import TabNav from './components/TabNav';
+import ThemeToggle from './components/ThemeToggle';
 
 export const metadata: Metadata = {
   title: {
@@ -13,7 +12,7 @@ export const metadata: Metadata = {
   description: "Yuto Asai is an Assistant Professor specializing in Systems and Control Engineering, focusing on nonlinear fuzzy systems, Lyapunov stability, and robust control. Showcasing academic publications, research highlights, and awards.",
   openGraph: {
     title: "Yuto Asai - Assistant Professor, Systems and Control Engineer",
-    description: "Yuto Asai is an Assistant Professor specializing in Systems and Control Engineering, focusing on nonlinear fuzzy systems, Lyapunov stability, and robust control. Showcaging academic publications, research highlights, and awards.",
+    description: "Yuto Asai is an Assistant Professor specializing in Systems and Control Engineering, focusing on nonlinear fuzzy systems, Lyapunov stability, and robust control. Showcasing academic publications, research highlights, and awards.",
     url: "https://yuto-asai.com", // Replace with actual domain
     siteName: "Yuto Asai's Profile",
     images: [
@@ -38,7 +37,6 @@ export const metadata: Metadata = {
     shortcut: "/favicon-16x16.png",
     apple: "/apple-touch-icon.png",
   },
-  // Add structured data as a script tag in the body later
 };
 
 export default function RootLayout({
@@ -73,20 +71,21 @@ export default function RootLayout({
               "name": "Kyoto University",
               "alumniOf": "Ph.D."
             },
-            // Add other alumni info if applicable
           ]
         })}} />
         <SkipToContent />
-        <div className="w-full bg-bg0 border-b border-border py-4">
+        <header className="w-full bg-bg0 border-b border-border py-4 sticky top-0 z-50">
           <div className="container mx-auto px-4 flex items-center justify-between">
             <span className="text-xl font-bold text-text0">Portfolio</span>
-            <TabNav />
+            <div className="flex items-center space-x-4">
+              <TabNav />
+              <ThemeToggle />
+            </div>
           </div>
-        </div>
-        <main id="main-content" className="flex-grow container mx-auto p-4 sm:p-6 lg:p-8">
+        </header>
+        <main id="main-content" className="flex-grow container mx-auto p-4 sm:p-6 lg:p-8 max-w-screen-xl">
           {children}
         </main>
-        {/* <Footer /> */}
       </body>
     </html>
   );

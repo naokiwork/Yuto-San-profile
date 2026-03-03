@@ -11,47 +11,25 @@ export default {
       colors: {
         // Custom colors mapping to CSS variables
         primary: 'var(--accent)',
-        secondary: 'var(--success)',
+        secondary: 'var(--link)',
         accent: 'var(--accent)',
         danger: 'var(--danger)',
         gray: 'var(--text1)',
-        dark: {
-          DEFAULT: 'var(--bg0)',
-          700: 'var(--bg1)',
-          800: 'var(--panel)',
-          900: 'var(--bg0)',
-        },
-        light: 'var(--text0)',
-        'light-300': 'var(--text1)',
-        'light-400': 'var(--text1)',
-        'light-500': 'var(--text1)',
+        bg0: 'var(--bg0)',
+        bg1: 'var(--bg1)',
+        panel: 'var(--panel)',
+        border: 'var(--border)',
+        text0: 'var(--text0)',
+        text1: 'var(--text1)',
+        link: 'var(--link)',
       },
-      textColor: {
-        DEFAULT: 'var(--text0)',
-        primary: 'var(--accent)',
-        secondary: 'var(--success)',
-        accent: 'var(--accent)',
-        dark: 'var(--bg0)',
-        light: 'var(--text0)',
-        'light-300': 'var(--text1)',
-        'light-400': 'var(--text1)',
-        'light-500': 'var(--text1)',
+      spacing: {
+        '128': '32rem',
+        '144': '36rem',
       },
-      backgroundColor: {
-        DEFAULT: 'var(--bg0)',
-        primary: 'var(--accent)',
-        secondary: 'var(--success)',
-        accent: 'var(--accent)',
-        dark: 'var(--bg0)',
-        'dark-700': 'var(--bg1)',
-        'dark-800': 'var(--panel)',
-        'dark-900': 'var(--bg0)',
-        light: 'var(--text0)',
-      },
-      borderColor: {
-        DEFAULT: 'var(--border)',
-        accent: 'var(--accent)',
-        dark: 'var(--border)',
+      borderRadius: {
+        '4xl': '2rem',
+        DEFAULT: 'var(--radius)',
       },
       boxShadow: {
         DEFAULT: 'var(--shadow)',
@@ -60,24 +38,8 @@ export default {
         xl: 'var(--shadow)',
         '3xl': 'var(--shadow)',
       },
-      outlineColor: {
-        DEFAULT: 'var(--focus)',
-      },
-      ringColor: {
-        DEFAULT: 'var(--focus)',
-      },
-      spacing: {
-        '128': '32rem',
-        '144': '36rem',
-      },
-      borderRadius: {
-        '4xl': '2rem',
-      },
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-      },
+      // Direct use of CSS variables for properties not easily mapped
+      // These will be used with arbitrary values like `bg-[var(--panel)]`
     },
   },
   plugins: [],
