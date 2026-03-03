@@ -5,7 +5,7 @@ import Button from './components/Button';
 import ProjectCard from './components/ProjectCard';
 import RepositoryItem from './components/RepositoryItem';
 import SectionHeading from './components/SectionHeading';
-import { FaGraduationCap, FaAward, FaBookOpen } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaEnvelope, FaGraduationCap, FaAward, FaBookOpen } from 'react-icons/fa';
 import { useEffect, useState } from 'react';
 import AcademicIDList from './components/AcademicIDList';
 
