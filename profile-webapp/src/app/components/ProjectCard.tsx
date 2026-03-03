@@ -1,5 +1,6 @@
 import { Project } from '../../../data';
 import Image from 'next/image';
+import Button from './Button'; // Import Button component
 
 interface ProjectCardProps {
   project: Project;
@@ -7,7 +8,7 @@ interface ProjectCardProps {
 
 export default function ProjectCard({ project }: ProjectCardProps) {
   return (
-    <div className="bg-bg1 border border-border rounded-lg shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl hover:border-accent transform">
+    <div className="bg-panel border border-border rounded-[var(--radius)] shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-accent transform">
       {project.imageUrl ? (
         <Image
           src={project.imageUrl}
@@ -19,35 +20,28 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           className="w-full h-48"
         />
       ) : (
-        <div className="w-full h-48 bg-gray-700 flex items-center justify-center text-text1 text-xl font-bold">
+        <div className="w-full h-48 bg-bg1 flex items-center justify-center text-text1 text-xl font-bold">
           {project.title} (Coming soon)
         </div>
       )}
-      <div className="p-4 space-y-2">
-        <h3 className="text-lg font-semibold text-text0">{project.title}</h3>
-        <p className="text-text1 text-sm line-clamp-3">{project.description}</p>
+      <div className="p-6 space-y-3">
+        <h3 className="text-xl font-semibold text-text0 tracking-tight">{project.title}</h3>
+        <p className="text-text1 text-sm leading-relaxed line-clamp-3">{project.description}</p>
         <div className="flex flex-wrap gap-2 pt-2">
           {project.tech.map((techItem: string) => (
             <span
               key={techItem}
-              className="bg-gray-700 text-text1 text-xs px-2 py-0.5 rounded-full border border-border"
+              className="bg-bg1 text-text1 text-xs px-2 py-0.5 rounded-full border border-border"
             >
               {techItem}
             </span>
           ))}
         </div>
-        <div className="flex flex-wrap gap-2 pt-2 border-t border-border mt-4">
+        <div className="flex flex-wrap gap-2 pt-4 border-t border-border mt-4">
           {project.links.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center px-3 py-1 text-sm font-medium text-link hover:underline"
-              aria-label={link.label}
-            >
+            <Button key={link.label} href={link.href} variant="secondary" size="sm">
               {link.label}
-            </a>
+            </Button>
           ))}
         </div>
       </div>

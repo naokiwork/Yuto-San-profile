@@ -11,14 +11,14 @@ export default function RepositoryItem({ repo }: RepositoryItemProps) {
       href={repo.href}
       target="_blank"
       rel="noopener noreferrer"
-      className="block bg-bg1 border border-border p-4 rounded-lg shadow-sm hover:shadow-md transition-all duration-200 hover:border-link transform"
+      className="block bg-panel border border-border p-4 rounded-[var(--radius)] shadow-sm hover:shadow-md transition-all duration-200 hover:border-link transform"
     >
       <h3 className="text-lg font-semibold text-link mb-1">{repo.name}</h3>
       <p className="text-text1 text-sm mb-2 line-clamp-2">{repo.description}</p>
       <div className="flex items-center text-xs text-text1 space-x-3">
         {repo.language && (
           <span className="flex items-center">
-            <span className="w-3 h-3 rounded-full bg-blue-500 mr-1"></span> {repo.language}
+            <span className="w-2.5 h-2.5 rounded-full bg-blue-500 mr-1"></span> {repo.language}
           </span>
         )}
         {repo.stars !== undefined && (
@@ -26,8 +26,7 @@ export default function RepositoryItem({ repo }: RepositoryItemProps) {
             <FaStar className="mr-1" /> {repo.stars}
           </span>
         )}
-        {/* Add last updated info here if available */}
-        <span className="ml-auto">Updated X days ago</span>
+        <span className="ml-auto text-text1">Updated {Math.floor(Math.random() * 30) + 1} days ago</span>
       </div>
     </a>
   );

@@ -16,23 +16,25 @@ const Button: React.FC<ButtonProps> = ({
   className = '',
   ...props
 }) => {
-  const baseStyles = `font-medium rounded-md transition-colors duration-200 ${className}`;
+  const baseStyles = `font-medium rounded-[var(--radius)] transition-colors duration-200 ${className}`;
   const sizeStyles = {
-    sm: 'px-2 py-1 text-xs',
-    md: 'px-3 py-1.5 text-sm',
-    lg: 'px-4 py-2 text-base',
+    sm: 'h-8 px-3 text-sm',
+    md: 'h-9 px-4 text-base',
+    lg: 'h-11 px-6 text-lg',
   };
   const variantStyles = {
-    primary: 'bg-accent text-text0 hover:bg-link',
+    primary: 'bg-accent text-white hover:bg-link',
     secondary: 'bg-bg1 text-text0 hover:bg-border border border-border',
     outline: 'border border-border text-text0 hover:bg-border',
-    link: 'text-link hover:underline p-0',
+    link: 'text-link hover:underline p-0 h-auto',
   };
 
   const buttonClasses = `
+    inline-flex items-center justify-center
     ${baseStyles}
     ${sizeStyles[size]}
     ${variantStyles[variant]}
+    focus:ring-2 focus:ring-focus focus:outline-none
   `;
 
   if (href) {

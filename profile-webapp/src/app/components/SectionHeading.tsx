@@ -8,9 +8,9 @@ interface SectionHeadingProps {
 
 const SectionHeading: React.FC<SectionHeadingProps> = ({ title, subtitle, id }) => {
   return (
-    <div id={id} className="mb-4">
-      <h2 className="text-xl font-semibold text-text0 mb-2 border-b border-border pb-2 inline-block">{title}</h2>
-      {subtitle && <p className="text-text1 text-sm mt-2">{subtitle}</p>}
+    <div id={id} className="mb-6">
+      <h2 className="text-3xl font-bold text-text0 tracking-tight mb-2">{title}</h2>
+      {subtitle && <p className="text-text1 text-lg">{subtitle}</p>}
     </div>
   );
 };
