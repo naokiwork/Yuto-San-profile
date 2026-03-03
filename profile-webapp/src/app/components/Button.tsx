@@ -3,7 +3,7 @@ import React from 'react';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   href?: string;
-  variant?: 'primary' | 'secondary' | 'outline' | 'link';
+  variant?: 'primary' | 'secondary' | 'link';
   size?: 'sm' | 'md' | 'lg';
   children: React.ReactNode;
 }
@@ -16,16 +16,15 @@ const Button: React.FC<ButtonProps> = ({
   className = '',
   ...props
 }) => {
-  const baseStyles = `font-medium rounded-full transition-colors duration-200 ${className}`;
+  const baseStyles = `font-medium rounded-full transition-colors duration-200 active:scale-[0.98] active:duration-120 ${className}`;
   const sizeStyles = {
-    sm: 'h-8 px-4 text-sm',
-    md: 'h-10 px-5 text-base',
-    lg: 'h-12 px-6 text-lg',
+    sm: 'h-9 px-4 text-small',
+    md: 'h-11 px-5 text-base',
+    lg: 'h-14 px-7 text-lg',
   };
   const variantStyles = {
     primary: 'bg-accent text-white hover:opacity-80',
     secondary: 'border border-border text-link hover:opacity-80',
-    outline: 'border border-border text-text0 hover:bg-bg1',
     link: 'text-link hover:underline p-0 h-auto',
   };
 

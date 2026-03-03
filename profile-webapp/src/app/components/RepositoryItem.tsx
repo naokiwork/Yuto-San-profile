@@ -1,24 +1,26 @@
 import { Repo } from '../../../data';
 import { FaStar, FaCodeBranch } from 'react-icons/fa';
+import Button from './Button';
 
 interface RepositoryItemProps {
   repo: Repo;
+  delay?: number;
 }
 
-export default function RepositoryItem({ repo }: RepositoryItemProps) {
+export default function RepositoryItem({ repo, delay = 0 }: RepositoryItemProps) {
   return (
     <a
       href={repo.href}
       target="_blank"
       rel="noopener noreferrer"
-      className="block bg-panel border border-border p-4 rounded-[var(--radius)] shadow-sm hover:shadow-md transition-all duration-200 hover:translate-y-[-2px]"
+      className="block bg-card border border-border p-6 rounded-[var(--radius)] shadow-sm hover:shadow-md transition-all duration-300 hover:translate-y-[-4px]"
     >
-      <h3 className="text-lg font-semibold text-link mb-1">{repo.name}</h3>
-      <p className="text-text1 text-sm mb-2 line-clamp-2">{repo.description}</p>
-      <div className="flex items-center text-xs text-text1 space-x-3">
+      <h3 className="text-h3 font-semibold text-link mb-2">{repo.name}</h3>
+      <p className="text-small text-muted mb-3 line-clamp-2">{repo.description}</p>
+      <div className="flex items-center text-micro text-muted space-x-3 border-t border-border pt-3 mt-3">
         {repo.language && (
           <span className="flex items-center">
-            <span className="w-2.5 h-2.5 rounded-full bg-blue-500 mr-1"></span> {repo.language}
+            <span className="w-2 h-2 rounded-full bg-blue-500 mr-1"></span> {repo.language}
           </span>
         )}
         {repo.stars !== undefined && (
@@ -26,7 +28,12 @@ export default function RepositoryItem({ repo }: RepositoryItemProps) {
             <FaStar className="mr-1" /> {repo.stars}
           </span>
         )}
-        <span className="ml-auto text-text1">Updated {Math.floor(Math.random() * 30) + 1} days ago</span>
+        <span className="ml-auto">Updated {Math.floor(Math.random() * 30) + 1} days ago</span>
+      </div>
+      <div className="mt-4 flex justify-end">
+        <Button href={repo.href} variant="secondary" size="sm">
+          View on GitHub
+        </Button>
       </div>
     </a>
   );

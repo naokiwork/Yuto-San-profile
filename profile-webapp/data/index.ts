@@ -21,12 +21,9 @@ export interface Publication {
   title: string;
   venue: string;
   year: number;
-  type: "Journal" | "Conference" | "Thesis" | "Preprint";
-  links: { label: string; href: string; icon?: string }[];
-  citation: string;
+  links: { label: string; href: string }[];
+  tags: string[];
 }
-
-export const publications: Publication[] = [];
 
 export const profile = {
   name: "Yuto Asai",
