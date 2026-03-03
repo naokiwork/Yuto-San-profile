@@ -4,11 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && rm -rf out && mkdir -p out/_next/static && cp -r .next/static/* out/_next/static/ && cp -r public/* out/",
     "start": "next start",
+    "deploy": "wrangler deploy --minify",
     "lint": "eslint"
   },
   "dependencies": {
+    "@cloudflare/kv-asset-handler": "^0.4.2",
     "next": "16.1.6",
     "react": "19.2.3",
     "react-dom": "19.2.3",
