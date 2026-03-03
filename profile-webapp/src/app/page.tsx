@@ -1,62 +1,132 @@
-import { getProfileData, getProjectsData } from "@/lib/data";
-import Link from "next/link";
-import ProjectCard from "./components/ProjectCard";
+"use client";
 
-export default async function Home() {
-  const profile = await getProfileData();
-  const projects = await getProjectsData();
-  const featuredProjects = projects.filter((project: any) => project.isFeatured);
+import { profile, projects, repos } from '../../data';
+import Button from './components/Button';
+import ProjectCard from './components/ProjectCard';
+import RepositoryItem from './components/RepositoryItem';
+import SectionHeading from './components/SectionHeading';
+import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
+import { useEffect, useState } from 'react';
+
+export default function Home() {
+  const [loadingRepos, setLoadingRepos] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoadingRepos(false);
+    }, 800); // Simulate loading for 800ms
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
-    <div className="min-h-screen">
+    <div className="space-y-24">
       {/* Hero Section */}
-      <section className="text-center py-20 bg-github-darkblue rounded-lg shadow-xl mb-12">
-        <h1 className="text-5xl font-extrabold text-github-lightgray mb-4">
-          {profile.displayName}
+      <section className="text-center py-20 bg-dark-800 rounded-lg shadow-xl mb-12 animate-fade-in">
+        <h1 className="text-5xl md:text-6xl font-extrabold text-light mb-4 leading-tight">
+          {profile.name}
         </h1>
-        <p className="text-xl text-github-gray mb-6">{profile.headline}</p>
-        <p className="text-lg text-github-gray max-w-2xl mx-auto mb-8">
-          {profile.bioShort}
+        <p className="text-xl md:text-2xl text-accent mb-6 font-semibold">
+          {profile.role}
         </p>
-        <Link
-          href="/contact"
-          className="bg-github-blue hover:bg-github-green text-white font-bold py-3 px-8 rounded-full transition duration-300"
-        >
-          Contact Me
-        </Link>
+        <p className="text-lg text-light-400 max-w-3xl mx-auto mb-10">
+          {profile.bio}
+        </p>
+        <div className="flex flex-wrap justify-center gap-4">
+          <Button href="#projects" size="lg" variant="primary">
+            View Projects
+          </Button>
+          <a
+            href={profile.socialLinks.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-light hover:text-primary transition-colors duration-200 text-3xl"
+            aria-label="GitHub Profile"
+          >
+            <FaGithub />
+          </a>
+          <a
+            href={profile.socialLinks.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-light hover:text-primary transition-colors duration-200 text-3xl"
+            aria-label="LinkedIn Profile"
+          >
+            <FaLinkedin />
+          </a>
+          <a
+            href={profile.socialLinks.email}
+            className="text-light hover:text-primary transition-colors duration-200 text-3xl"
+            aria-label="Email Me"
+          >
+            <FaEnvelope />
+          </a>
+        </div>
       </section>
 
       {/* Featured Projects Section */}
-      <section className="py-12">
-        <h2 className="text-4xl font-bold text-center text-github-lightgray mb-10">
-          Featured Projects
-        </h2>
+      <section id="projects">
+        <SectionHeading
+          title="Featured Projects"
+          subtitle="Highlighted works showcasing my skills and expertise."
+        />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {featuredProjects.map((project: any) => (
+          {projects.map((project) => (
             <ProjectCard key={project.id} project={project} />
           ))}
         </div>
-        <div className="text-center mt-10">
-          <Link
-            href="/projects"
-            className="text-github-blue hover:underline text-lg"
-          >
-            View All Projects &rarr;
-          </Link>
+      </section>
+
+      {/* GitHub Repositories Section */}
+      <section id="repositories">
+        <SectionHeading
+          title="GitHub Repositories"
+          subtitle="A selection of my public repositories."
+        />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {loadingRepos && (
+            // Skeleton loader
+            Array.from({ length: 3 }).map((_, index) => (
+              <div key={index} className="bg-dark-700 p-6 rounded-lg shadow-md animate-pulse h-40"></div>
+            ))
+          )}
+          {!loadingRepos && repos.map((repo) => (
+            <RepositoryItem key={repo.name} repo={repo} />
+          ))}
         </div>
       </section>
 
-      {/* Skills Section (placeholder for now) */}
-      <section className="py-12 bg-github-darkblue rounded-lg shadow-xl mb-12">
-        <h2 className="text-4xl font-bold text-center text-github-lightgray mb-10">
-          My Skills
-        </h2>
-        <div className="flex flex-wrap justify-center gap-4">
-          {Object.entries(profile.skills as Record<string, string[]>).map(([category, skills]) => (
-            <div key={category} className="bg-github-blue text-white px-4 py-2 rounded-full text-lg">
-              {category}: {skills.join(", ")}
-            </div>
-          ))}
+      {/* Get In Touch Section */}
+      <section id="contact" className="text-center bg-dark-800 p-12 rounded-lg shadow-xl">
+        <SectionHeading
+          title="Get In Touch"
+          subtitle="Have a question or want to collaborate? Feel free to reach out."
+        />
+        <div className="flex flex-wrap justify-center gap-6 mt-8">
+          <a
+            href={profile.socialLinks.email}
+            className="flex items-center text-light hover:text-primary transition-colors duration-200 text-xl"
+            aria-label="Email Me"
+          >
+            <FaEnvelope className="mr-2" /> {profile.socialLinks.email.replace("mailto:", "")}
+          </a>
+          <a
+            href={profile.socialLinks.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center text-light hover:text-primary transition-colors duration-200 text-xl"
+            aria-label="GitHub Profile"
+          >
+            <FaGithub className="mr-2" /> GitHub
+          </a>
+          <a
+            href={profile.socialLinks.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center text-light hover:text-primary transition-colors duration-200 text-xl"
+            aria-label="LinkedIn Profile"
+          >
+            <FaLinkedin className="mr-2" /> LinkedIn
+          </a>
         </div>
       </section>
     </div>

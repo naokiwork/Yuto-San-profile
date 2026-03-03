@@ -17,6 +17,23 @@ export default {
           gray: '#c9d1d9',
           lightgray: '#f0f6fc',
         },
+        // Custom colors for portfolio
+        primary: '#6366f1', // Indigo 500
+        secondary: '#4f46e5', // Indigo 600
+        accent: '#fde047', // Yellow 300
+        dark: '#1a202c', // Dark gray
+        light: '#f7fafc', // Light gray
+      },
+      spacing: {
+        '128': '32rem',
+        '144': '36rem',
+      },
+      borderRadius: {
+        '4xl': '2rem',
+      },
+      boxShadow: {
+        '3xl': '0 35px 60px -15px rgba(0, 0, 0, 0.3)',
+        'inner': 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.06)',
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
