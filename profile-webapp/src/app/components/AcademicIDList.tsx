@@ -1,6 +1,6 @@
 import SectionHeading from './SectionHeading';
 import { FaGithub, FaLinkedin, FaEnvelope, FaResearchgate, FaGraduationCap, FaOrcid } from 'react-icons/fa';
-import { SiIeee } from "react-icons/si"; // Example for IEEE
+import { SiIeee } from "react-icons/si";
 
 interface AcademicIDListProps {
   socials: Record<string, string>;
@@ -15,11 +15,11 @@ export default function AcademicIDList({ socials }: AcademicIDListProps) {
     { id: 'googleScholar', label: 'Google Scholar', icon: <FaGraduationCap />, href: socials.googleScholar },
     { id: 'orcid', label: 'ORCID', icon: <FaOrcid />, href: socials.orcid },
     { id: 'ieeeXplore', label: 'IEEE Xplore', icon: <SiIeee />, href: socials.ieeeXplore },
-  ].filter(link => link.href && link.href !== '#'); // Only show links that have an actual href
+  ].filter(link => link.href && link.href !== '#');
 
   return (
-    <div className="bg-panel border border-border rounded-lg shadow-md p-6 space-y-4">
-      <h2 className="text-xl font-semibold text-text0">Academic Profiles</h2>
+    <div className="bg-panel border border-border rounded-[var(--radius)] shadow-md p-6 space-y-4">
+      <h2 className="text-xl font-semibold text-text0 mb-4">Academic Profiles</h2>
       <div className="space-y-3">
         {academicLinks.length > 0 ? (
           academicLinks.map(link => (
@@ -28,7 +28,7 @@ export default function AcademicIDList({ socials }: AcademicIDListProps) {
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center text-text1 hover:text-link transition-colors duration-200"
+              className="flex items-center text-text1 hover:text-link transition-colors"
             >
               {link.icon && <span className="mr-3 text-lg text-link">{link.icon}</span>}
               <span className="text-sm font-medium">{link.label}</span>
