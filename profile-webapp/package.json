@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build && rm -rf out && mkdir -p out/_next/static && cp -r .next/static/* out/_next/static/ && cp -r public/* out/ && cp -r .next/server/app/*.html out/",
     "start": "next start",
-    "deploy": "WRANGLER_LOG_PATH=/tmp/wrangler.log npx wrangler@4.69.0 deploy --minify",
+    "deploy": "node scripts/deploy-with-retry.mjs",
     "lint": "eslint"
   },
   "dependencies": {
