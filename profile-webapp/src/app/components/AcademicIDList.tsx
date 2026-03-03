@@ -19,7 +19,7 @@ export default function AcademicIDList({ socials }: AcademicIDListProps) {
 
   return (
     <div className="bg-panel border border-border rounded-[var(--radius)] shadow-md p-6 space-y-4">
-      <h2 className="text-xl font-semibold text-text0 mb-4">Academic Profiles</h2>
+      <SectionHeading title="Academic Profiles" />
       <div className="space-y-3">
         {academicLinks.length > 0 ? (
           academicLinks.map(link => (
@@ -30,12 +30,12 @@ export default function AcademicIDList({ socials }: AcademicIDListProps) {
               rel="noopener noreferrer"
               className="flex items-center text-text1 hover:text-link transition-colors"
             >
-              {link.icon && <span className="mr-3 text-lg text-link">{link.icon}</span>}
-              <span className="text-sm font-medium">{link.label}</span>
+              {link.icon && <span className="mr-3 text-xl text-link">{link.icon}</span>}
+              <span className="text-base font-medium">{link.label}</span>
             </a>
           ))
         ) : (
-          <p className="text-text1 text-sm">Academic profiles coming soon.</p>
+          <p className="text-text1 text-base text-center">Academic profiles coming soon.</p>
         )}
       </div>
     </div>

@@ -11,7 +11,7 @@ export default function RepositoryItem({ repo }: RepositoryItemProps) {
       href={repo.href}
       target="_blank"
       rel="noopener noreferrer"
-      className="block bg-panel border border-border p-4 rounded-[var(--radius)] shadow-sm hover:shadow-md transition-all duration-200 hover:border-link transform"
+      className="block bg-panel border border-border p-4 rounded-[var(--radius)] shadow-sm hover:shadow-md transition-all duration-200 hover:translate-y-[-2px]"
     >
       <h3 className="text-lg font-semibold text-link mb-1">{repo.name}</h3>
       <p className="text-text1 text-sm mb-2 line-clamp-2">{repo.description}</p>
