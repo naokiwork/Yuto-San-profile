@@ -6,6 +6,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary' | 'link';
   size?: 'sm' | 'md' | 'lg';
   children: React.ReactNode;
+  className?: string;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -33,7 +34,7 @@ const Button: React.FC<ButtonProps> = ({
     ${baseStyles}
     ${sizeStyles[size]}
     ${variantStyles[variant]}
-    focus:ring-2 focus:ring-focus focus:outline-none
+    focus:ring-2 focus:ring-[var(--focus)] focus:outline-none
   `;
 
   if (href) {

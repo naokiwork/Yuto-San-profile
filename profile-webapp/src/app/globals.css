@@ -2,36 +2,77 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
+/* Base styles for Apple Light theme */
+:root,
+html[data-theme="light"] {
   --bg: #ffffff;
   --fg: #1d1d1f;
   --muted: #6e6e73;
+  --muted-2: #86868b; /* Lighter muted for secondary elements */
   --border: rgba(0,0,0,0.10);
   --card: #ffffff;
   --shadow: 0 10px 30px rgba(0,0,0,0.08);
   --shadow2: 0 1px 0 rgba(0,0,0,0.06); /* For subtle borders/dividers */
   --radius: 20px;
   --accent: #0071e3;
+  --accent-2: #00a0e3; /* A slightly different accent for variety */
   --link: #0066cc;
   --focus: rgba(0,113,227,0.6);
 }
 
+/* Dark mode via prefers-color-scheme (default) */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0d1117;
+    --fg: #c9d1d9;
+    --muted: #8b949e;
+    --muted-2: #6a737d;
+    --border: #30363d;
+    --card: #161b22;
+    --shadow: 0 8px 24px rgba(0,0,0,0.25);
+    --shadow2: 0 1px 0 rgba(255,255,255,0.05);
+    --radius: 12px; /* Slightly smaller radius for dark theme */
+    --accent: #58a6ff;
+    --accent-2: #79c0ff;
+    --link: #58a6ff;
+    --focus: rgba(88,166,255,.6);
+  }
+}
+
+/* Manual Dark mode toggle (overrides prefers-color-scheme) */
+html[data-theme="dark"] {
+  --bg: #0d1117;
+  --fg: #c9d1d9;
+  --muted: #8b949e;
+  --muted-2: #6a737d;
+  --border: #30363d;
+  --card: #161b22;
+  --shadow: 0 8px 24px rgba(0,0,0,0.25);
+  --shadow2: 0 1px 0 rgba(255,255,255,0.05);
+  --radius: 12px;
+  --accent: #58a6ff;
+  --accent-2: #79c0ff;
+  --link: #58a6ff;
+  --focus: rgba(88,166,255,.6);
+}
+
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji";
   background-color: var(--bg);
   color: var(--fg);
-  line-height: 1.7; /* Increased for readability */
+  line-height: 1.6; /* Adjusted line-height */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  letter-spacing: -0.02em; /* Tighter tracking for headings */
+  letter-spacing: -0.02em;
   line-height: 1.2;
 }
 
 p {
-  max-width: 76ch; /* Constrain prose width */
+  max-width: 78ch; /* Adjusted prose width */
 }
 
 a {
