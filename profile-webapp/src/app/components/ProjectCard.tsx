@@ -7,7 +7,7 @@ interface ProjectCardProps {
 
 export default function ProjectCard({ project }: ProjectCardProps) {
   return (
-    <div className="bg-panel rounded-lg shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:scale-[1.02] transform">
+    <div className="bg-bg1 border border-border rounded-lg shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl hover:border-accent transform">
       {project.imageUrl ? (
         <Image
           src={project.imageUrl}
@@ -19,31 +19,31 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           className="w-full h-48"
         />
       ) : (
-        <div className="w-full h-48 bg-gradient-to-r from-accent to-secondary flex items-center justify-center text-text0 text-xl font-bold">
-          {project.title} (Placeholder)
+        <div className="w-full h-48 bg-gray-700 flex items-center justify-center text-text1 text-xl font-bold">
+          {project.title} (Coming soon)
         </div>
       )}
-      <div className="p-6">
-        <h3 className="text-2xl font-bold text-light mb-2">{project.title}</h3>
-        <p className="text-light-400 text-base mb-4 line-clamp-3">{project.description}</p>
-        <div className="flex flex-wrap gap-2 mb-4">
+      <div className="p-4 space-y-2">
+        <h3 className="text-lg font-semibold text-text0">{project.title}</h3>
+        <p className="text-text1 text-sm line-clamp-3">{project.description}</p>
+        <div className="flex flex-wrap gap-2 pt-2">
           {project.tech.map((techItem: string) => (
             <span
               key={techItem}
-              className="bg-accent-dark text-text0 text-xs px-3 py-1 rounded-full border border-line"
+              className="bg-gray-700 text-text1 text-xs px-2 py-0.5 rounded-full border border-border"
             >
               {techItem}
             </span>
           ))}
         </div>
-        <div className="flex flex-wrap gap-3">
+        <div className="flex flex-wrap gap-2 pt-2 border-t border-border mt-4">
           {project.links.map((link) => (
             <a
               key={link.label}
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-4 py-2 bg-accent text-text0 rounded-md hover:bg-secondary transition-colors duration-200 text-sm font-medium"
+              className="inline-flex items-center px-3 py-1 text-sm font-medium text-link hover:underline"
               aria-label={link.label}
             >
               {link.label}

@@ -11,8 +11,10 @@ export default {
       colors: {
         // Custom colors mapping to CSS variables
         primary: 'var(--accent)',
-        secondary: 'var(--accent2)',
+        secondary: 'var(--success)',
         accent: 'var(--accent)',
+        danger: 'var(--danger)',
+        gray: 'var(--text1)',
         dark: {
           DEFAULT: 'var(--bg0)',
           700: 'var(--bg1)',
@@ -27,7 +29,7 @@ export default {
       textColor: {
         DEFAULT: 'var(--text0)',
         primary: 'var(--accent)',
-        secondary: 'var(--accent2)',
+        secondary: 'var(--success)',
         accent: 'var(--accent)',
         dark: 'var(--bg0)',
         light: 'var(--text0)',
@@ -38,7 +40,7 @@ export default {
       backgroundColor: {
         DEFAULT: 'var(--bg0)',
         primary: 'var(--accent)',
-        secondary: 'var(--accent2)',
+        secondary: 'var(--success)',
         accent: 'var(--accent)',
         dark: 'var(--bg0)',
         'dark-700': 'var(--bg1)',
@@ -47,12 +49,15 @@ export default {
         light: 'var(--text0)',
       },
       borderColor: {
-        DEFAULT: 'var(--line)',
+        DEFAULT: 'var(--border)',
         accent: 'var(--accent)',
-        dark: 'var(--line)',
+        dark: 'var(--border)',
       },
       boxShadow: {
         DEFAULT: 'var(--shadow)',
+        md: 'var(--shadow)',
+        lg: 'var(--shadow)',
+        xl: 'var(--shadow)',
         '3xl': 'var(--shadow)',
       },
       outlineColor: {
