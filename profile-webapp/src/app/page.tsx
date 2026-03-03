@@ -12,11 +12,13 @@ import AcademicIDList from './components/AcademicIDList';
 interface RevealProps {
   children: React.ReactNode;
   delay?: number;
+  className?: string;
 }
 
-const Reveal: React.FC<RevealProps> = ({ children, delay = 0 }) => {
+const Reveal: React.FC<RevealProps> = ({ children, delay = 0, className = '' }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const ref = React.useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (window.matchMedia) {
@@ -33,11 +35,13 @@ const Reveal: React.FC<RevealProps> = ({ children, delay = 0 }) => {
       { threshold: 0.1 }
     );
 
-    if (typeof window !== 'undefined') {
-      observer.observe(document.getElementById('main-content')!); // Observe main content area
+    if (ref.current) {
+      observer.observe(ref.current);
     }
 
-    return () => observer.disconnect();
+    return () => {
+      if (ref.current) observer.disconnect();
+    };
   }, []);
 
   const animationStyles = prefersReducedMotion
@@ -48,18 +52,18 @@ const Reveal: React.FC<RevealProps> = ({ children, delay = 0 }) => {
         transition: `opacity 450ms ease-out ${delay}ms, transform 450ms ease-out ${delay}ms`,
       };
 
-  return <div style={animationStyles}>{children}</div>;
+  return <div ref={ref} style={animationStyles} className={className}>{children}</div>;
 };
 
 const ResearchFocusCard: React.FC<{ title: string; claim: string; keywords: string[]; linkHref: string }> = ({ title, claim, keywords, linkHref }) => (
   <Reveal>
-    <div className="bg-card border border-border rounded-[var(--radius)] shadow-sm p-8 space-y-4 flex flex-col h-full transition-transform hover:translate-y-[-4px]">
+    <div className="bg-card border border-border rounded-md shadow-sm p-6 space-y-4 flex flex-col h-full transition-transform hover:translate-y-[-2px]">
       <FaGraduationCap className="text-accent text-5xl mb-4" />
       <h3 className="text-h3 font-bold text-foreground tracking-tight">{title}</h3>
       <p className="text-small text-muted leading-relaxed flex-grow">{claim}</p>
       <div className="flex flex-wrap gap-2 mt-4">
         {keywords.map(keyword => (
-          <span key={keyword} className="bg-background text-muted text-micro px-3 py-1 rounded-full border border-border">
+          <span key={keyword} className="bg-background text-muted-2 text-micro px-3 py-1 rounded-full border border-border">
             {keyword}
           </span>
         ))}
@@ -107,8 +111,33 @@ const publicationsData: PublicationData[] = [
   },
 ];
 
+interface ProjectFilterProps {
+  currentFilter: string;
+  setFilter: (filter: string) => void;
+  tags: string[];
+}
+
+const ProjectFilter: React.FC<ProjectFilterProps> = ({ currentFilter, setFilter, tags }) => {
+  const filters = ['All', ...Array.from(new Set(tags))];
+  return (
+    <div className="flex flex-wrap gap-2 mb-8">
+      {filters.map(filter => (
+        <button
+          key={filter}
+          onClick={() => setFilter(filter)}
+          className={`px-4 py-2 rounded-full text-small font-medium transition-colors border
+            ${currentFilter === filter ? 'bg-accent text-card border-accent' : 'bg-background text-muted-2 border-border hover:bg-muted/10'}`}
+        >
+          {filter}
+        </button>
+      ))}
+    </div>
+  );
+};
+
 export default function Home() {
   const [loadingRepos, setLoadingRepos] = useState(true);
+  const [projectFilter, setProjectFilter] = useState('All');
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -138,13 +167,19 @@ export default function Home() {
     },
   ];
 
+  const allProjectTags = projects.flatMap(p => p.tech);
+
+  const filteredProjects = projectFilter === 'All'
+    ? projects
+    : projects.filter(project => project.tech.includes(projectFilter));
+
   return (
     <div className="space-y-section-mobile md:space-y-section-desktop">
       {/* Hero Section */}
-      <section id="overview" className="relative bg-background rounded-[var(--radius)] shadow-sm p-section-mobile md:p-section-desktop overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12">
+      <section id="overview" className="relative bg-background rounded-lg shadow-sm border border-border p-section-mobile md:p-section-desktop overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8 md:gap-16">
         <div className="md:w-3/5 text-center md:text-left space-y-4">
           <Reveal>
-            <span className="inline-block bg-bg1 text-muted text-small px-4 py-1 rounded-full border border-border mb-4">
+            <span className="inline-block bg-muted/10 text-muted-2 text-micro px-4 py-1 rounded-full border border-border mb-4">
               Systems & Control / Robotics / Aerospace
             </span>
           </Reveal>
@@ -165,18 +200,16 @@ export default function Home() {
             </div>
           </Reveal>
         </div>
-        <Reveal delay={400}>
-          <div className="md:w-2/5 flex justify-center items-center h-full">
-            <div className="w-64 h-64 md:w-80 md:h-80 bg-gradient-to-br from-accent/20 to-link/20 rounded-[var(--radius)] flex items-center justify-center shadow-lg border border-border text-5xl font-bold text-foreground/20">
-              Y.A.
-            </div>
+        <Reveal delay={400} className="md:w-2/5 flex justify-center items-center h-full">
+          <div className="w-64 h-64 md:w-80 md:h-80 bg-gradient-to-br from-accent/20 to-link/20 rounded-md flex items-center justify-center shadow-md border border-border text-5xl font-bold text-foreground/20">
+            Y.A.
           </div>
         </Reveal>
       </section>
 
       {/* Trust Strip */}
       <Reveal>
-        <div className="bg-bg1 border border-border rounded-[var(--radius)] shadow-sm p-8 text-center flex flex-wrap justify-center gap-8 md:gap-16">
+        <div className="bg-card border border-border rounded-md shadow-sm p-8 text-center flex flex-wrap justify-center gap-8 md:gap-16 mt-section-mobile md:mt-section-desktop">
           <div className="text-center">
             <p className="text-h2 font-bold text-foreground">15+</p>
             <p className="text-small text-muted">Awards & Honors</p>
@@ -193,7 +226,7 @@ export default function Home() {
       </Reveal>
 
       {/* Research Focus Section */}
-      <section id="research" className="bg-background rounded-[var(--radius)] shadow-sm border border-border p-section-mobile md:p-section-desktop space-y-8">
+      <section id="research" className="bg-background rounded-lg shadow-sm border border-border p-section-mobile md:p-section-desktop space-y-8">
         <SectionHeading title="Research Focus" subtitle="Key themes from my work across academia and industry." />
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {researchFocuses.map((focus, index) => (
@@ -203,19 +236,19 @@ export default function Home() {
       </section>
 
       {/* Publications Section */}
-      <section id="publications" className="bg-background rounded-[var(--radius)] shadow-sm border border-border p-section-mobile md:p-section-desktop space-y-8">
+      <section id="publications" className="bg-background rounded-lg shadow-sm border border-border p-section-mobile md:p-section-desktop space-y-8">
         <SectionHeading title="Publications" subtitle="My academic contributions, categorized by year and type." />
         <div className="space-y-6">
           {publicationsData.length > 0 ? (
             publicationsData.sort((a, b) => b.year - a.year).map(pub => (
               <Reveal key={pub.id} delay={100}>
-                <div className="bg-card border border-border rounded-[var(--radius)] p-6 shadow-sm hover:shadow-md transition-shadow flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div className="bg-card border border-border rounded-md p-6 shadow-sm hover:shadow-md transition-shadow flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                   <div className="flex-grow space-y-1">
                     <h3 className="text-h3 font-semibold text-foreground tracking-tight">{pub.title}</h3>
                     <p className="text-small text-muted">{pub.venue} ({pub.year})</p>
                     <div className="flex flex-wrap gap-2 mt-2">
                       {pub.tags.map(tag => (
-                        <span key={tag} className="bg-bg1 text-muted text-micro px-2 py-0.5 rounded-full border border-border">
+                        <span key={tag} className="bg-background text-muted-2 text-micro px-2 py-0.5 rounded-full border border-border">
                           {tag}
                         </span>
                       ))}
@@ -237,23 +270,24 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Featured Projects Section */}
-      <section id="projects" className="bg-background rounded-[var(--radius)] shadow-sm border border-border p-section-mobile md:p-section-desktop space-y-8">
+      {/* Project Gallery Section */}
+      <section id="projects" className="bg-background rounded-lg shadow-sm border border-border p-section-mobile md:p-section-desktop space-y-8">
         <SectionHeading title="Project Gallery" subtitle="Highlighted works showcasing my skills and expertise in control systems and web development." />
+        <ProjectFilter currentFilter={projectFilter} setFilter={setProjectFilter} tags={allProjectTags} />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {projects.map((project, index) => (
+          {filteredProjects.map((project, index) => (
             <ProjectCard key={project.id} project={project} delay={index * 100} />
           ))}
         </div>
       </section>
 
-      {/* GitHub Repositories Section */}
-      <section id="code" className="bg-background rounded-[var(--radius)] shadow-sm border border-border p-section-mobile md:p-section-desktop space-y-8">
+      {/* Open-Source Contributions Section */}
+      <section id="code" className="bg-background rounded-lg shadow-sm border border-border p-section-mobile md:p-section-desktop space-y-8">
         <SectionHeading title="Open-Source Contributions" subtitle="A selection of my public repositories and code projects." />
         <div className="space-y-4">
           {loadingRepos ? (
             Array.from({ length: 3 }).map((_, index) => (
-              <div key={index} className="bg-bg1 p-4 rounded-[var(--radius)] animate-pulse h-24 border border-border"></div>
+              <div key={index} className="bg-bg1 p-4 rounded-md animate-pulse h-24 border border-border"></div>
             ))
           ) : repos.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -268,7 +302,7 @@ export default function Home() {
       </section>
 
       {/* Get In Touch Section */}
-      <section id="contact" className="bg-background rounded-[var(--radius)] shadow-sm border border-border p-section-mobile md:p-section-desktop text-center space-y-8">
+      <section id="contact" className="bg-background rounded-lg shadow-sm border border-border p-section-mobile md:p-section-desktop text-center space-y-8">
         <SectionHeading title="Get In Touch" subtitle="Have a question or want to collaborate? Feel free to reach out." />
         <div className="flex flex-wrap justify-center gap-6">
           <a
@@ -300,7 +334,7 @@ export default function Home() {
       </section>
 
       {/* Academic ID List */}
-      <section id="academic-profiles" className="bg-background rounded-[var(--radius)] shadow-sm border border-border p-section-mobile md:p-section-desktop space-y-8">
+      <section id="academic-profiles" className="bg-background rounded-lg shadow-sm border border-border p-section-mobile md:p-section-desktop space-y-8">
         <AcademicIDList socials={profile.socials} />
       </section>
     </div>

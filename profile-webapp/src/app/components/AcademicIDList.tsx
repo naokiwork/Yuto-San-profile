@@ -7,7 +7,7 @@ interface AcademicIDListProps {
   socials: Record<string, string>;
 }
 
-export default function AcademicIDList({ socials }: AcademicIDListProps) {
+const AcademicIDList: React.FC<AcademicIDListProps> = ({ socials }) => {
   const academicLinks = [
     { id: 'github', label: 'GitHub', icon: <FaGithub />, href: socials.github },
     { id: 'linkedin', label: 'LinkedIn', icon: <FaLinkedin />, href: socials.linkedin },
@@ -19,7 +19,7 @@ export default function AcademicIDList({ socials }: AcademicIDListProps) {
   ].filter(link => link.href && link.href !== '#');
 
   return (
-    <div className="bg-card border border-border rounded-[var(--radius)] shadow-sm p-6 space-y-4">
+    <div className="bg-card border border-border rounded-md shadow-sm p-6 space-y-4">
       <SectionHeading title="Academic & Social Profiles" subtitle="My professional and academic online presence." />
       <div className="grid grid-cols-1 gap-3">
         {academicLinks.length > 0 ? (
@@ -29,7 +29,7 @@ export default function AcademicIDList({ socials }: AcademicIDListProps) {
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center text-foreground hover:text-link transition-colors p-3 bg-bg1 rounded-lg border border-border hover:shadow-sm"
+              className="flex items-center text-foreground hover:text-link transition-colors p-3 bg-background rounded-lg border border-border hover:shadow-sm"
             >
               {link.icon && <span className="mr-3 text-xl text-accent">{link.icon}</span>}
               <span className="text-base font-medium">{link.label}</span>
@@ -41,4 +41,6 @@ export default function AcademicIDList({ socials }: AcademicIDListProps) {
       </div>
     </div>
   );
-}
+};
+
+export default AcademicIDList;

@@ -3,16 +3,16 @@
 import React, { useState, useEffect } from 'react';
 
 const ThemeToggle: React.FC = () => {
-  const [theme, setTheme] = useState('apple'); // Default to Apple Light
+  const [theme, setTheme] = useState('light'); // Default to light theme
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem('theme') || 'apple';
+    const savedTheme = localStorage.getItem('theme') || 'light';
     setTheme(savedTheme);
     document.documentElement.setAttribute('data-theme', savedTheme);
   }, []);
 
   const toggleTheme = () => {
-    const newTheme = theme === 'apple' ? 'github' : 'apple';
+    const newTheme = theme === 'light' ? 'dark' : 'light';
     setTheme(newTheme);
     localStorage.setItem('theme', newTheme);
     document.documentElement.setAttribute('data-theme', newTheme);
@@ -21,10 +21,10 @@ const ThemeToggle: React.FC = () => {
   return (
     <button
       onClick={toggleTheme}
-      className="px-3 py-1 rounded-full bg-bg1 border border-border text-text1 text-sm font-medium focus:ring-2 focus:ring-focus focus:outline-none"
+      className="px-3 py-1 rounded-full bg-card border border-border text-muted text-micro font-medium focus:ring-2 focus:ring-focus focus:outline-none transition-colors"
       aria-label="Toggle theme"
     >
-      {theme === 'apple' ? 'GitHub Dark' : 'Apple Light'}
+      {theme === 'light' ? 'Dark Mode' : 'Light Mode'}
     </button>
   );
 };

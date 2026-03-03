@@ -6,6 +6,7 @@ export interface Project {
   imageUrl?: string;
   tech: string[];
   links: { label: string; href: string }[];
+  tags: string[]; // Add tags for filtering
 }
 
 export interface Repo {
@@ -47,33 +48,39 @@ export const projects: Project[] = [
     title: "Cloudflare Workers Portfolio",
     description: "Next.js App Router static export served via Cloudflare Workers; highlights portfolio narrative, research themes, and technical stories with bold UI.",
     imageAlt: "Simplified hero UI",
-    tech: ["Next.js", "React", "Tailwind CSS", "Workers"],
+    imageUrl: "/images/project1.jpg", // Example image
+    tech: ["Next.js", "React", "Tailwind CSS", "Cloudflare Workers"],
     links: [
       { label: "Live Demo", href: "#" },
       { label: "Read Story", href: "#" },
     ],
+    tags: ["Web", "Tools"],
   },
   {
     id: "project-2",
     title: "Fuzzy Control Research",
     description: "Doctoral work on Takagi–Sugeno fuzzy control with guaranteed cost + H∞ hybrid design to expand disturbance rejection capabilities.",
     imageAlt: "Fuzzy control diagram",
-    tech: ["Fuzzy Logic", "H∞ Control", "Lyapunov Stability"],
+    imageUrl: "/images/project2.jpg", // Example image
+    tech: ["Control Theory", "Fuzzy Logic", "Lyapunov Stability"],
     links: [
       { label: "Paper", href: "#" },
       { label: "Appendix", href: "#" },
     ],
+    tags: ["Research"],
   },
   {
     id: "project-3",
     title: "Observer-Based Output Feedback",
     description: "Framework for constructing observers to estimate states when measurements are limited, ensuring stability via Lyapunov proofs.",
     imageAlt: "Observer schematic",
-    tech: ["Observers", "Nonlinear Control", "Lyapunov"],
+    imageUrl: "/images/project3.jpg", // Example image
+    tech: ["Control Theory", "Observers", "Nonlinear Control", "LMI"],
     links: [
       { label: "Detail", href: "#" },
       { label: "Simulations", href: "#" },
     ],
+    tags: ["Research"],
   },
 ];
 
