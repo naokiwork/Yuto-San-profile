@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+// import Header from "./components/Header"; // Removed Header
+// import Footer from "./components/Footer"; // Removed Footer
 import SkipToContent from "./components/SkipToContent";
+import TabNav from './components/TabNav'; // Import TabNav
 
 export const metadata: Metadata = {
   title: {
@@ -12,7 +13,7 @@ export const metadata: Metadata = {
   description: "Yuto Asai is an Assistant Professor specializing in Systems and Control Engineering, focusing on nonlinear fuzzy systems, Lyapunov stability, and robust control. Showcasing academic publications, research highlights, and awards.",
   openGraph: {
     title: "Yuto Asai - Assistant Professor, Systems and Control Engineer",
-    description: "Yuto Asai is an Assistant Professor specializing in Systems and Control Engineering, focusing on nonlinear fuzzy systems, Lyapunov stability, and robust control. Showcasing academic publications, research highlights, and awards.",
+    description: "Yuto Asai is an Assistant Professor specializing in Systems and Control Engineering, focusing on nonlinear fuzzy systems, Lyapunov stability, and robust control. Showcaging academic publications, research highlights, and awards.",
     url: "https://yuto-asai.com", // Replace with actual domain
     siteName: "Yuto Asai's Profile",
     images: [
@@ -47,7 +48,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className="min-h-screen flex flex-col font-sans antialiased">
+      <body className="min-h-screen flex flex-col">
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Person",
@@ -76,11 +77,16 @@ export default function RootLayout({
           ]
         })}} />
         <SkipToContent />
-        <Header />
+        <div className="w-full bg-bg0 border-b border-border py-4">
+          <div className="container mx-auto px-4 flex items-center justify-between">
+            <span className="text-xl font-bold text-text0">Portfolio</span>
+            <TabNav />
+          </div>
+        </div>
         <main id="main-content" className="flex-grow container mx-auto p-4 sm:p-6 lg:p-8">
           {children}
         </main>
-        <Footer />
+        {/* <Footer /> */}
       </body>
     </html>
   );
