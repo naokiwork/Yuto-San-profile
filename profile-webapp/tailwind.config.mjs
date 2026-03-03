@@ -21,7 +21,12 @@ export default {
         primary: '#6366f1', // Indigo 500
         secondary: '#4f46e5', // Indigo 600
         accent: '#fde047', // Yellow 300
-        dark: '#1a202c', // Dark gray
+        dark: {
+          DEFAULT: '#0A192F',
+          700: '#102A43',
+          800: '#1F3A5F',
+          900: '#0A192F',
+        },
         light: '#f7fafc', // Light gray
       },
       spacing: {
