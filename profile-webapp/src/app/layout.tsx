@@ -47,7 +47,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className="bg-dark text-light min-h-screen flex flex-col font-sans antialiased">
+      <body className="bg-gradient-to-br from-dark-900 to-dark-700 text-light min-h-screen flex flex-col font-sans antialiased">
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Person",
