@@ -1,5 +1,5 @@
 import SectionHeading from './SectionHeading';
-import { FaGithub, FaLinkedin, FaEnvelope, FaResearchgate, FaGoogleScholar, FaOrcid, FaGlobe } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaEnvelope, FaResearchgate, FaGraduationCap, FaOrcid, FaGlobe } from 'react-icons/fa';
 import { SiIeee } from "react-icons/si"; // Example for IEEE
 
 interface AcademicIDListProps {
@@ -12,7 +12,7 @@ export default function AcademicIDList({ socials }: AcademicIDListProps) {
     { id: 'linkedin', label: 'LinkedIn', icon: <FaLinkedin />, href: socials.linkedin },
     { id: 'email', label: 'Email', icon: <FaEnvelope />, href: socials.email },
     { id: 'researchgate', label: 'ResearchGate', icon: <FaResearchgate />, href: socials.researchgate },
-    { id: 'googleScholar', label: 'Google Scholar', icon: <FaGoogleScholar />, href: socials.googleScholar },
+    { id: 'googleScholar', label: 'Google Scholar', icon: <FaGraduationCap />, href: socials.googleScholar },
     { id: 'orcid', label: 'ORCID', icon: <FaOrcid />, href: socials.orcid },
     { id: 'ieeeXplore', label: 'IEEE Xplore', icon: <SiIeee />, href: socials.ieeeXplore },
   ].filter(link => link.href && link.href !== '#'); // Only show links that have an actual href
