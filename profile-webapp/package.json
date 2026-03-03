@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && rm -rf out && mkdir -p out/_next/static && cp -r .next/server/app/*.html out/ && cp -r .next/static/* out/_next/static/ && cp -r public/* out/",
+    "build": "next build",
     "start": "next start",
-    "deploy": "WRANGLER_LOG_PATH=/tmp/wrangler.log wrangler deploy --minify",
+    "deploy": "WRANGLER_LOG_PATH=/tmp/wrangler.log npx wrangler@4.69.0 deploy --minify",
     "lint": "eslint"
   },
   "dependencies": {
