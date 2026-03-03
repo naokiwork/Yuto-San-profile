@@ -1,9 +1,3 @@
-# Yuto-San-profile
-A profile website of Yuto-San
-
-
-git checkout -b feature/xxx
-
  cd ~/Git-Hub_repository/Yuto-San-profile/design-referr 
 git add .
 git commit -m "Update 変更内容"
