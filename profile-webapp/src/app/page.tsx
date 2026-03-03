@@ -1,4 +1,6 @@
-import { profile, projects, repos } from '../../../data';
+"use client";
+
+import { profile, projects, repos } from '../../data';
 import Button from './components/Button';
 import ProjectCard from './components/ProjectCard';
 import RepositoryItem from './components/RepositoryItem';
@@ -8,12 +10,10 @@ import { useEffect, useState } from 'react';
 
 export default function Home() {
   const [loadingRepos, setLoadingRepos] = useState(true);
-  const [displayRepos, setDisplayRepos] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoadingRepos(false);
-      setDisplayRepos(true);
     }, 800); // Simulate loading for 800ms
     return () => clearTimeout(timer);
   }, []);
@@ -89,7 +89,7 @@ export default function Home() {
               <div key={index} className="bg-dark-700 p-6 rounded-lg shadow-md animate-pulse h-40"></div>
             ))
           )}
-          {displayRepos && repos.map((repo) => (
+          {!loadingRepos && repos.map((repo) => (
             <RepositoryItem key={repo.name} repo={repo} />
           ))}
         </div>

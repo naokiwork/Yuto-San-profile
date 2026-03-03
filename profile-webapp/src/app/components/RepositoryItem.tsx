@@ -1,1 +1,31 @@
-import { Repo } from '../../../data';\nimport { FaStar, FaCodeBranch } from 'react-icons/fa'; // Icons, assuming installation\n\ninterface RepositoryItemProps {\n  repo: Repo;\n}\n\nexport default function RepositoryItem({ repo }: RepositoryItemProps) {\n  return (\n    <a\n      href={repo.href}\n      target=\"_blank\"\n      rel=\"noopener noreferrer\"\n      className=\"block bg-dark-700 p-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 hover:scale-[1.02] transform\">\n      <h3 className=\"text-xl font-bold text-light mb-2\">{repo.name}</h3>\n      <p className=\"text-light-400 text-base mb-3 line-clamp-2\">{repo.description}</p>\n      <div className=\"flex items-center text-sm text-light-500\">\n        {repo.language && (\n          <span className=\"flex items-center mr-4\">\n            <FaCodeBranch className=\"mr-1\" /> {repo.language}\n          </span>\n        )}\n        {repo.stars !== undefined && (\n          <span className=\"flex items-center\">\n            <FaStar className=\"mr-1\" /> {repo.stars}\n          </span>\n        )}\n      </div>\n    </a>\n  );\n}\n
+import { Repo } from '../../../data';
+import { FaStar, FaCodeBranch } from 'react-icons/fa'; // Icons, assuming installation
+
+interface RepositoryItemProps {
+  repo: Repo;
+}
+
+export default function RepositoryItem({ repo }: RepositoryItemProps) {
+  return (
+    <a
+      href={repo.href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="block bg-dark-700 p-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 hover:scale-[1.02] transform">
+      <h3 className="text-xl font-bold text-light mb-2">{repo.name}</h3>
+      <p className="text-light-400 text-base mb-3 line-clamp-2">{repo.description}</p>
+      <div className="flex items-center text-sm text-light-500">
+        {repo.language && (
+          <span className="flex items-center mr-4">
+            <FaCodeBranch className="mr-1" /> {repo.language}
+          </span>
+        )}
+        {repo.stars !== undefined && (
+          <span className="flex items-center">
+            <FaStar className="mr-1" /> {repo.stars}
+          </span>
+        )}
+      </div>
+    </a>
+  );
+}

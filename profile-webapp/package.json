@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && [ -d out ] || (echo >&2 \"Error: 'out' directory not found after build.\" && exit 1)",
+    "build": "next build && rm -rf out && mkdir -p out/_next/static && cp -r .next/static/* out/_next/static/ && cp -r public/* out/ && cp -r .next/server/app/*.html out/",
     "start": "next start",
     "deploy": "WRANGLER_LOG_PATH=/tmp/wrangler.log npx wrangler@4.69.0 deploy --minify",
     "lint": "eslint"

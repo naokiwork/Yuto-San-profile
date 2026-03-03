@@ -1,1 +1,18 @@
-import React from 'react';\n\ninterface SectionHeadingProps {\n  title: string;\n  subtitle?: string;\n  id?: string;\n}\n\nconst SectionHeading: React.FC<SectionHeadingProps> = ({ title, subtitle, id }) => {\n  return (\n    <div id={id} className=\"text-center mb-12\">\n      <h2 className=\"text-4xl font-extrabold text-light mb-4\">{title}</h2>\n      {subtitle && <p className=\"text-light-400 text-lg max-w-2xl mx-auto\">{subtitle}</p>}\n    </div>\n  );\n};\n\nexport default SectionHeading;\n
+import React from 'react';
+
+interface SectionHeadingProps {
+  title: string;
+  subtitle?: string;
+  id?: string;
+}
+
+const SectionHeading: React.FC<SectionHeadingProps> = ({ title, subtitle, id }) => {
+  return (
+    <div id={id} className="text-center mb-12">
+      <h2 className="text-4xl font-extrabold text-light mb-4">{title}</h2>
+      {subtitle && <p className="text-light-400 text-lg max-w-2xl mx-auto">{subtitle}</p>}
+    </div>
+  );
+};
+
+export default SectionHeading;
