@@ -36,7 +36,7 @@ export default function Home() {
             View Projects
           </Button>
           <a
-            href={profile.socialLinks.github}
+            href={profile.socials.github}
             target="_blank"
             rel="noopener noreferrer"
             className="text-light hover:text-primary transition-colors duration-200 text-3xl"
@@ -45,7 +45,7 @@ export default function Home() {
             <FaGithub />
           </a>
           <a
-            href={profile.socialLinks.linkedin}
+            href={profile.socials.linkedin}
             target="_blank"
             rel="noopener noreferrer"
             className="text-light hover:text-primary transition-colors duration-200 text-3xl"
@@ -54,7 +54,7 @@ export default function Home() {
             <FaLinkedin />
           </a>
           <a
-            href={profile.socialLinks.email}
+            href={profile.socials.email}
             className="text-light hover:text-primary transition-colors duration-200 text-3xl"
             aria-label="Email Me"
           >
@@ -72,45 +72,13 @@ export default function Home() {
         </ul>
       </section>
 
-      {/* Featured Projects Section */}
-      <section id="projects" className="space-y-8">
-        <SectionHeading
-          title="Featured Projects"
-          subtitle="Highlighted works showcasing my skills and expertise."
-        />
-        <div className="flex justify-center">
-          <p className="text-light-400 max-w-3xl text-center">
-            Each project blends rigorous control theory with production-quality web tooling—mirroring
-            the precision expected in advanced engineering research.
-          </p>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project) => (
-            <ProjectCard key={project.id} project={project} />
-          ))}
-        </div>
-      </section>
 
-      {/* GitHub Repositories Section */}
-      <section id="repositories">
-        <SectionHeading
-          title="GitHub Repositories"
-          subtitle="A selection of my public repositories."
-        />
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {loadingRepos && (
-            // Skeleton loader
-            Array.from({ length: 3 }).map((_, index) => (
-              <div key={index} className="bg-dark-700 p-6 rounded-lg shadow-md animate-pulse h-40"></div>
-            ))
-          )}
-          {!loadingRepos && repos.map((repo) => (
-            <RepositoryItem key={repo.name} repo={repo} />
-          ))}
-        </div>
-      </section>
+      {/* Publications Section */}
+      <section id="publications"></section>
 
-      {/* Get In Touch Section */}
+      {/* Awards Section */}
+      <section id="awards"></section>
+
       <section id="contact" className="text-center bg-gradient-to-br from-dark-900 to-dark-700 p-12 rounded-3xl shadow-xl border border-white/10">
         <SectionHeading
           title="Get In Touch"
@@ -118,14 +86,14 @@ export default function Home() {
         />
         <div className="flex flex-wrap justify-center gap-6 mt-8">
           <a
-            href={profile.socialLinks.email}
+            href={profile.socials.email}
             className="flex items-center text-light hover:text-primary transition-colors duration-200 text-xl"
             aria-label="Email Me"
           >
-            <FaEnvelope className="mr-2" /> {profile.socialLinks.email.replace("mailto:", "")}
+            <FaEnvelope className="mr-2" /> {profile.socials.email.replace("mailto:", "")}
           </a>
           <a
-            href={profile.socialLinks.github}
+            href={profile.socials.github}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center text-light hover:text-primary transition-colors duration-200 text-xl"
@@ -134,7 +102,7 @@ export default function Home() {
             <FaGithub className="mr-2" /> GitHub
           </a>
           <a
-            href={profile.socialLinks.linkedin}
+            href={profile.socials.linkedin}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center text-light hover:text-primary transition-colors duration-200 text-xl"
@@ -144,6 +112,3 @@ export default function Home() {
           </a>
         </div>
       </section>
-    </div>
-  );
-}
