@@ -1,3 +1,4 @@
+import React from 'react';
 import SectionHeading from './SectionHeading';
 import { FaGithub, FaLinkedin, FaEnvelope, FaResearchgate, FaGraduationCap, FaOrcid } from 'react-icons/fa';
 import { SiIeee } from "react-icons/si";
@@ -18,9 +19,9 @@ export default function AcademicIDList({ socials }: AcademicIDListProps) {
   ].filter(link => link.href && link.href !== '#');
 
   return (
-    <div className="bg-panel border border-border rounded-[var(--radius)] shadow-md p-6 space-y-4">
-      <SectionHeading title="Academic Profiles" />
-      <div className="space-y-3">
+    <div className="bg-card border border-border rounded-[var(--radius)] shadow-sm p-6 space-y-4">
+      <SectionHeading title="Academic & Social Profiles" subtitle="My professional and academic online presence." />
+      <div className="grid grid-cols-1 gap-3">
         {academicLinks.length > 0 ? (
           academicLinks.map(link => (
             <a
@@ -28,14 +29,14 @@ export default function AcademicIDList({ socials }: AcademicIDListProps) {
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center text-text1 hover:text-link transition-colors"
+              className="flex items-center text-foreground hover:text-link transition-colors p-3 bg-bg1 rounded-lg border border-border hover:shadow-sm"
             >
-              {link.icon && <span className="mr-3 text-xl text-link">{link.icon}</span>}
+              {link.icon && <span className="mr-3 text-xl text-accent">{link.icon}</span>}
               <span className="text-base font-medium">{link.label}</span>
             </a>
           ))
         ) : (
-          <p className="text-text1 text-base text-center">Academic profiles coming soon.</p>
+          <p className="text-muted text-base text-center">Academic profiles coming soon.</p>
         )}
       </div>
     </div>

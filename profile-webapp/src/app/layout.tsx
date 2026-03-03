@@ -5,21 +5,21 @@ import TabNav from './components/TabNav';
 
 export const metadata: Metadata = {
   title: {
-    default: "Yuto Asai - Assistant Professor, Systems and Control Engineer",
+    default: "Yuto Asai - Control Engineer",
     template: "%s | Yuto Asai",
   },
-  description: "Yuto Asai is an Assistant Professor specializing in Systems and Control Engineering, focusing on nonlinear fuzzy systems, Lyapunov stability, and robust control. Showcasing academic publications, research highlights, and awards.",
+  description: "Yuto Asai is a Systems and Control Engineer focusing on nonlinear fuzzy systems and robust control. Showcasing academic publications, research highlights, and open-source contributions.",
   openGraph: {
-    title: "Yuto Asai - Assistant Professor, Systems and Control Engineer",
-    description: "Yuto Asai is an Assistant Professor specializing in Systems and Control Engineering, focusing on nonlinear fuzzy systems, Lyapunov stability, and robust control. Showcasing academic publications, research highlights, and awards.",
+    title: "Yuto Asai - Control Engineer",
+    description: "Yuto Asai is a Systems and Control Engineer focusing on nonlinear fuzzy systems and robust control. Showcasing academic publications, research highlights, and open-source contributions.",
     url: "https://yuto-asai.com", // Replace with actual domain
-    siteName: "Yuto Asai's Profile",
+    siteName: "Yuto Asai's Portfolio",
     images: [
       {
         url: "/og-image.jpg", // Image for social media previews
         width: 1200,
         height: 630,
-        alt: "Yuto Asai's Profile",
+        alt: "Yuto Asai's Portfolio",
       },
     ],
     locale: "en_US",
@@ -27,8 +27,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Yuto Asai - Assistant Professor, Systems and Control Engineer",
-    description: "Yuto Asai is an Assistant Professor specializing in Systems and Control Engineering, focusing on nonlinear fuzzy systems, Lyapunov stability, and robust control. Showcasing academic publications, research highlights, and awards.",
+    title: "Yuto Asai - Control Engineer",
+    description: "Yuto Asai is a Systems and Control Engineer focusing on nonlinear fuzzy systems and robust control. Showcasing academic publications, research highlights, and open-source contributions.",
     images: ["/og-image.jpg"],
   },
   icons: {
@@ -73,13 +73,13 @@ export default function RootLayout({
           ]
         })}} />
         <SkipToContent />
-        <header className="w-full bg-bg0 border-b border-border py-4 sticky top-0 z-50 shadow-sm-light">
-          <div className="container mx-auto px-4 flex items-center justify-between max-w-screen-lg">
-            <a href="#overview" className="text-xl font-bold text-text0 tracking-tight">Yuto Asai</a>
+        <header className="w-full bg-background/80 backdrop-blur-md border-b border-border sticky top-0 z-50 shadow-sm">
+          <div className="container mx-auto px-4 py-4 flex items-center justify-between max-w-7xl">
+            <a href="#overview" className="text-h3 font-bold text-foreground tracking-tight">Yuto Asai</a>
             <TabNav />
           </div>
         </header>
-        <main id="main-content" className="flex-grow container mx-auto p-section-mobile md:p-section-desktop max-w-screen-lg">
+        <main id="main-content" className="flex-grow container mx-auto px-4 py-section-mobile md:py-section-desktop max-w-7xl">
           {children}
         </main>
       </body>
