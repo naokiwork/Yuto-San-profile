@@ -9,25 +9,57 @@ export default {
   theme: {
     extend: {
       colors: {
-        github: {
-          darkblue: '#0d1117',
-          blue: '#1f6feb',
-          green: '#2ea043',
-          purple: '#8957e5',
-          gray: '#c9d1d9',
-          lightgray: '#f0f6fc',
-        },
-        // Custom colors for portfolio
-        primary: '#6366f1', // Indigo 500
-        secondary: '#4f46e5', // Indigo 600
-        accent: '#fde047', // Yellow 300
+        // Custom colors mapping to CSS variables
+        primary: 'var(--accent)',
+        secondary: 'var(--accent2)',
+        accent: 'var(--accent)',
         dark: {
-          DEFAULT: '#0A192F',
-          700: '#102A43',
-          800: '#1F3A5F',
-          900: '#0A192F',
+          DEFAULT: 'var(--bg0)',
+          700: 'var(--bg1)',
+          800: 'var(--panel)',
+          900: 'var(--bg0)',
         },
-        light: '#f7fafc', // Light gray
+        light: 'var(--text0)',
+        'light-300': 'var(--text1)',
+        'light-400': 'var(--text1)',
+        'light-500': 'var(--text1)',
+      },
+      textColor: {
+        DEFAULT: 'var(--text0)',
+        primary: 'var(--accent)',
+        secondary: 'var(--accent2)',
+        accent: 'var(--accent)',
+        dark: 'var(--bg0)',
+        light: 'var(--text0)',
+        'light-300': 'var(--text1)',
+        'light-400': 'var(--text1)',
+        'light-500': 'var(--text1)',
+      },
+      backgroundColor: {
+        DEFAULT: 'var(--bg0)',
+        primary: 'var(--accent)',
+        secondary: 'var(--accent2)',
+        accent: 'var(--accent)',
+        dark: 'var(--bg0)',
+        'dark-700': 'var(--bg1)',
+        'dark-800': 'var(--panel)',
+        'dark-900': 'var(--bg0)',
+        light: 'var(--text0)',
+      },
+      borderColor: {
+        DEFAULT: 'var(--line)',
+        accent: 'var(--accent)',
+        dark: 'var(--line)',
+      },
+      boxShadow: {
+        DEFAULT: 'var(--shadow)',
+        '3xl': 'var(--shadow)',
+      },
+      outlineColor: {
+        DEFAULT: 'var(--focus)',
+      },
+      ringColor: {
+        DEFAULT: 'var(--focus)',
       },
       spacing: {
         '128': '32rem',
@@ -35,10 +67,6 @@ export default {
       },
       borderRadius: {
         '4xl': '2rem',
-      },
-      boxShadow: {
-        '3xl': '0 35px 60px -15px rgba(0, 0, 0, 0.3)',
-        'inner': 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.06)',
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
