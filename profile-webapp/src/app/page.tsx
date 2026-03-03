@@ -14,14 +14,14 @@ export default function Home() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoadingRepos(false);
-    }, 800); // Simulate loading for 800ms
+    }, 800);
     return () => clearTimeout(timer);
   }, []);
 
   return (
     <div className="space-y-24">
       {/* Hero Section */}
-      <section className="text-center py-20 bg-dark-800 rounded-lg shadow-xl mb-12 animate-fade-in">
+      <section className="relative text-center py-20 px-4 sm:px-8 bg-gradient-to-br from-dark to-dark-700 rounded-3xl shadow-3xl overflow-hidden">
         <h1 className="text-5xl md:text-6xl font-extrabold text-light mb-4 leading-tight">
           {profile.name}
         </h1>
@@ -31,7 +31,7 @@ export default function Home() {
         <p className="text-lg text-light-400 max-w-3xl mx-auto mb-10">
           {profile.bio}
         </p>
-        <div className="flex flex-wrap justify-center gap-4">
+        <div className="flex flex-wrap justify-center gap-4 mt-6">
           <Button href="#projects" size="lg" variant="primary">
             View Projects
           </Button>
@@ -63,12 +63,27 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="bg-dark-900 rounded-2xl p-8 shadow-3xl space-y-6">
+        <SectionHeading title="Research Focus" subtitle="Key themes from my work across academia and practice." />
+        <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 text-light-300 text-sm leading-relaxed list-disc list-inside">
+          {profile.highlights?.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
+      </section>
+
       {/* Featured Projects Section */}
-      <section id="projects">
+      <section id="projects" className="space-y-8">
         <SectionHeading
           title="Featured Projects"
           subtitle="Highlighted works showcasing my skills and expertise."
         />
+        <div className="flex justify-center">
+          <p className="text-light-400 max-w-3xl text-center">
+            Each project blends rigorous control theory with production-quality web tooling—mirroring
+            the precision expected in advanced engineering research.
+          </p>
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project) => (
             <ProjectCard key={project.id} project={project} />
@@ -96,7 +111,7 @@ export default function Home() {
       </section>
 
       {/* Get In Touch Section */}
-      <section id="contact" className="text-center bg-dark-800 p-12 rounded-lg shadow-xl">
+      <section id="contact" className="text-center bg-gradient-to-br from-dark-900 to-dark-700 p-12 rounded-3xl shadow-xl border border-white/10">
         <SectionHeading
           title="Get In Touch"
           subtitle="Have a question or want to collaborate? Feel free to reach out."
