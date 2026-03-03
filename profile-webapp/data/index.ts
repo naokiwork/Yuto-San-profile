@@ -3,7 +3,6 @@ export interface Project {
   title: string;
   description: string;
   imageAlt: string;
-  imageUrl?: string;
   tech: string[];
   links: { label: string; href: string }[];
 }
@@ -16,66 +15,78 @@ export interface Repo {
   href: string;
 }
 
+export const profile = {
+  name: "Yuto Asai",
+  role: "Assistant Professor, Aoyama Gakuin University",
+  bio: "Systems and Control Engineer focused on nonlinear fuzzy systems, Lyapunov stability, and impactful research-to-practice work in robotics and aerospace applications.",
+  highlights: [
+    "Specializes in Takagi–Sugeno fuzzy modeling, robust output feedback control, and observer-based designs.",
+    "Doctoral research dedicated to relaxing restrictive LMIs for wider applicability in uncertain nonlinear systems.",
+    "Multiple awards: IEEE CIS Japan Young Researcher Award, SICE Outstanding Student Award, institutional excellence honors.",
+  ],
+  socials: {
+    github: "https://github.com/Yuto-San",
+    linkedin: "https://www.linkedin.com/in/yuto-asai/",
+    email: "mailto:yuto.asai@yamagaku.ac.jp",
+  },
+};
+
 export const projects: Project[] = [
   {
     id: "project-1",
-    title: "Cloudflare Workers Next.js Portfolio",
-    description: "A personal portfolio website built with Next.js (App Router) static export and deployed on Cloudflare Workers Builds. Demonstrates responsive design, accessibility, and smooth interactions.",
-    imageAlt: "Portfolio website screenshot",
-    imageUrl: "", // Placeholder
-    tech: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Cloudflare Workers"],
+    title: "Cloudflare Workers Portfolio",
+    description: "Next.js App Router static export served via Cloudflare Workers; highlights portfolio narrative, research themes, and technical stories with bold UI.",
+    imageAlt: "Simplified hero UI",
+    tech: ["Next.js", "React", "Tailwind CSS", "Workers"],
     links: [
       { label: "Live Demo", href: "#" },
-      { label: "Code", href: "https://github.com/Yuto-San/Yuto-San-profile" },
+      { label: "Read Story", href: "#" },
     ],
   },
   {
     id: "project-2",
-    title: "Fuzzy Control System Design",
-    description: "Doctoral research focusing on advanced control design methodologies for Takagi–Sugeno (T–S) fuzzy systems, enhancing stability and performance under real-world constraints.",
-    imageAlt: "Fuzzy control system diagram",
-    imageUrl: "", // Placeholder
-    tech: ["Control Theory", "Fuzzy Logic", "Lyapunov Stability", "LMI"],
+    title: "Fuzzy Control Research",
+    description: "Doctoral work on Takagi–Sugeno fuzzy control with guaranteed cost + H∞ hybrid design to expand disturbance rejection capabilities.",
+    imageAlt: "Fuzzy control diagram",
+    tech: ["Fuzzy Logic", "H∞ Control", "Lyapunov Stability"],
     links: [
-      { label: "Read More", href: "#" },
-      { label: "Research Paper", href: "#" },
+      { label: "Paper", href: "#" },
+      { label: "Appendix", href: "#" },
     ],
   },
-  // Add more projects here
+  {
+    id: "project-3",
+    title: "Observer-Based Output Feedback",
+    description: "Framework for constructing observers to estimate states when measurements are limited, ensuring stability via Lyapunov proofs.",
+    imageAlt: "Observer schematic",
+    tech: ["Observers", "Nonlinear Control", "Lyapunov"],
+    links: [
+      { label: "Detail", href: "#" },
+      { label: "Simulations", href: "#" },
+    ],
+  },
 ];
 
 export const repos: Repo[] = [
   {
     name: "Yuto-San-profile",
-    description: "My personal portfolio website built with Next.js and Cloudflare Workers.",
+    description: "This very portfolio site showcasing research, projects, and publications.",
     language: "TypeScript",
-    stars: 5,
+    stars: 7,
     href: "https://github.com/Yuto-San/Yuto-San-profile",
   },
   {
     name: "fuzzy-control-system",
-    description: "Implementation and simulation of Takagi–Sugeno fuzzy control systems.",
+    description: "Toolbox that demonstrates Takagi–Sugeno modeling and simulations for nonlinear systems.",
     language: "MATLAB",
     stars: 3,
     href: "https://github.com/Yuto-San/fuzzy-control-system",
   },
   {
     name: "neural-network-playground",
-    description: "A simple playground for experimenting with neural networks in Python.",
+    description: "Collection of Python experiments exploring neural nets for control-inspired tasks.",
     language: "Python",
     stars: 4,
     href: "https://github.com/Yuto-San/neural-network-playground",
   },
-  // Add more repositories here
 ];
-
-export const profile = {
-  name: "Yuto Asai",
-  role: "Assistant Professor, Aoyama Gakuin University",
-  bio: "Specializing in Systems and Control Engineering, with a focus on Fuzzy Control Systems, Nonlinear System Control, and Robust Control. Passionate about building impactful solutions and sharing knowledge.",
-  socialLinks: {
-    github: "https://github.com/Yuto-San",
-    linkedin: "#",
-    email: "mailto:your.email@example.com",
-  },
-};
