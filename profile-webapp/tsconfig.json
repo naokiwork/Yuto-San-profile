@@ -20,7 +20,9 @@
     ],
     "types": ["@cloudflare/workers-types"],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/app/*": ["./src/app/*"],
+      "@/data": ["./data/index.ts"],
+      "@/components/*": ["./src/app/components/*"]
     }
   },
   "include": [

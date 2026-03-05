@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-export default {
+const config = {
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -10,16 +10,19 @@ export default {
     extend: {
       colors: {
         // Custom colors mapping to CSS variables
-        background: 'var(--bg)',
-        foreground: 'var(--fg)',
-        muted: 'var(--muted)',
-        'muted-2': 'var(--muted-2)',
-        border: 'var(--border)',
-        card: 'var(--card)',
-        accent: 'var(--accent)',
-        'accent-2': 'var(--accent-2)',
-        link: 'var(--link)',
-        'accent-contrast': 'var(--accent-contrast)', // For text on accent background
+        'bg-base': 'var(--bg-base)',
+        'bg-surface': 'var(--bg-surface)',
+        'bg-elevated': 'var(--bg-elevated)',
+        'text-primary': 'var(--text-primary)',
+        'text-secondary': 'var(--text-secondary)',
+        'text-muted': 'var(--text-muted)',
+        'brand-primary': 'var(--brand-primary)',
+        'brand-cta-primary': 'var(--brand-cta-primary)',
+        'brand-cta-secondary': 'var(--brand-cta-secondary)',
+        'brand-link': 'var(--brand-link)',
+        'brand-contrast': 'var(--brand-contrast)',
+        'border-subtle': 'var(--border-subtle)',
+        'focus-ring': 'var(--focus-ring)',
       },
       fontSize: {
         xs: '0.75rem',
@@ -32,24 +35,24 @@ export default {
         '4xl': '2.25rem',
         '5xl': '3rem',
         '6xl': '4rem',
-        'display': 'clamp(2.5rem, 6vw, 4.5rem)', // Adjust for Apple-like hero
-        'h1': 'clamp(2.25rem, 5vw, 3.5rem)', // Main section titles
-        'h2': 'clamp(1.75rem, 4vw, 2.75rem)', // Sub-section titles
-        'h3': 'clamp(1.5rem, 3vw, 2.25rem)', // Card titles
-        'body': '1.0625rem', // ~17px
-        'small': '0.9375rem', // ~15px
-        'caption': '0.75rem', // ~12px
+        'display': 'clamp(2.5rem, 6vw, 4.5rem)',
+        'h1': 'clamp(2.25rem, 5vw, 3.5rem)',
+        'h2': 'clamp(1.75rem, 4vw, 2.75rem)',
+        'h3': 'clamp(1.5rem, 3vw, 2.25rem)',
+        'body': '1.0625rem',
+        'small': '0.9375rem',
+        'caption': '0.75rem',
       },
       spacing: {
-        '1': 'var(--space-xs)',  // 4px
-        '2': 'var(--space-sm)',   // 8px
-        '3': 'var(--space-md)',  // 12px
-        '4': 'var(--space-lg)',     // 16px
-        '5': 'var(--space-xl)',  // 24px
-        '6': 'var(--space-2xl)',     // 32px
-        '7': 'var(--space-3xl)',  // 48px
-        '8': 'var(--space-4xl)',     // 64px
-        '9': 'var(--space-5xl)',   // 96px
+        '1': 'var(--space-xs)',
+        '2': 'var(--space-sm)',
+        '3': 'var(--space-md)',
+        '4': 'var(--space-lg)',
+        '5': 'var(--space-xl)',
+        '6': 'var(--space-2xl)',
+        '7': 'var(--space-3xl)',
+        '8': 'var(--space-4xl)',
+        '9': 'var(--space-5xl)',
         'section-mobile': '3rem',
         'section-desktop': '6rem',
       },
@@ -60,8 +63,8 @@ export default {
         full: '9999px',
       },
       boxShadow: {
-        DEFAULT: 'var(--shadow)',
-        sm: 'var(--shadow2)',
+        DEFAULT: 'var(--shadow-default)',
+        sm: 'var(--shadow-sm)',
       },
       maxWidth: {
         'prose': '72ch',
@@ -77,3 +80,5 @@ export default {
   },
   plugins: [],
 };
+
+export default config;

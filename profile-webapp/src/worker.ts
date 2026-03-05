@@ -23,14 +23,14 @@ function handleNextjsStaticRouting(pathname: string): string {
   return pathname;
 }
 
-export default {
-  async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
+const worker = {
+  async fetch(request: Request, env: Env, _ctx: ExecutionContext): Promise<Response> {
     const url = new URL(request.url);
-    let pathname = url.pathname;
+    const pathname = url.pathname;
 
     // DEBUG mode
     if (url.searchParams.has("__debug")) {
-      const debugInfo: Record<string, any> = {
+      const debugInfo: Record<string, unknown> = {
         requestUrl: request.url,
         pathname: pathname,
         envKeys: Object.keys(env),
@@ -43,9 +43,9 @@ export default {
         const indexResponse = await env.ASSETS.fetch(explicitIndexRequest);
         debugInfo.explicitIndexHtmlStatus = indexResponse.status;
         debugInfo.explicitIndexHtmlHeaders = Object.fromEntries(indexResponse.headers.entries());
-      } catch (e: any) {
-        debugInfo.explicitIndexHtmlError = e.message || e.toString();
-        debugInfo.explicitIndexHtmlErrorStack = e.stack;
+      } catch (e: unknown) {
+        debugInfo.explicitIndexHtmlError = (e as Error).message || String(e);
+        debugInfo.explicitIndexHtmlErrorStack = (e as Error).stack;
       }
 
       return new Response(JSON.stringify(debugInfo, null, 2), {
@@ -61,7 +61,7 @@ export default {
       );
     }
 
-    let mappedPathname = handleNextjsStaticRouting(pathname);
+    const mappedPathname = handleNextjsStaticRouting(pathname);
 
     // Construct a new request with the mapped pathname, preserving querystring
     const assetUrl = new URL(request.url);
@@ -81,8 +81,8 @@ export default {
       }
 
       return response;
-    } catch (e: any) {
-      const errorDiagnostic = e.message || e.toString();
+    } catch (e: unknown) {
+      const errorDiagnostic = (e as Error).message || String(e);
       return new Response("Not Found", {
         status: 404,
         headers: {
@@ -93,3 +93,5 @@ export default {
     }
   },
 };
+
+export default worker;
