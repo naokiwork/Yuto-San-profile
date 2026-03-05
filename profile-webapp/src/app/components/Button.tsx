@@ -2,17 +2,27 @@
 import React from "react";
 
 type ButtonProps =
-  | ({ href: string } & React.AnchorHTMLAttributes<HTMLAnchorElement> & { variant?: "primary"|"secondary"|"link"; size?: "sm"|"md"|"lg"; alt?:string;})
-  | ({ href?: undefined } & React.ButtonHTMLAttributes<HTMLButtonElement> & { variant?: "primary"|"secondary"|"link"; size?: "sm"|"md"|"lg"; alt?:string;});
+  | ({ href: string } & React.AnchorHTMLAttributes<HTMLAnchorElement> & { variant?: "primary"|"secondary"|"link"|"cta-primary"; size?: "sm"|"md"|"lg"; alt?:string;})
+  | ({ href?: undefined } & React.ButtonHTMLAttributes<HTMLButtonElement> & { variant?: "primary"|"secondary"|"link"|"cta-primary"; size?: "sm"|"md"|"lg"; alt?:string;});
 
 export default function Button(props: ButtonProps) {
   const { variant="primary", size="md", className="", alt="", children, ...rest } = props as any;
-  const base = "inline-flex items-center justify-center rounded-full font-medium transition-colors duration-200 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2";
-  const v = variant==="primary" ? "bg-accent text-white hover:bg-accent-2" :
-            variant==="secondary" ? "bg-card text-foreground border border-border hover:bg-muted/[0.1]" :
-            "text-link hover:underline";
-  const s = size==="lg" ? "px-6 py-3 text-lg" : size==="sm" ? "px-4 py-2 text-small" : "px-5 py-2.5 text-base";
-  const cls = `${base} ${v} ${s} ${className}`.trim();
+  const base = "inline-flex items-center justify-center rounded-full font-medium transition-colors duration-200 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus-ring focus-visible:ring-offset-2";
+  
+  const variantStyles = {
+    primary: "bg-brand-primary text-brand-contrast hover:opacity-90",
+    secondary: "bg-bg-surface text-text-primary border border-border-subtle hover:bg-bg-elevated",
+    link: "text-brand-link hover:underline",
+    'cta-primary': "bg-brand-cta-primary text-brand-contrast hover:opacity-90",
+  };
+
+  const sizeStyles = {
+    sm: "px-4 py-2 text-small",
+    md: "px-5 py-2.5 text-base",
+    lg: "px-6 py-3 text-lg",
+  };
+
+  const cls = `${base} ${variantStyles[variant]} ${sizeStyles[size]} ${className}`.trim();
 
   if ("href" in props && props.href) {
     const { href, ...a } = rest as React.AnchorHTMLAttributes<HTMLAnchorElement>;

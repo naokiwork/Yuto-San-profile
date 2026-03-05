@@ -4,13 +4,14 @@ interface SectionHeadingProps {
   title: string;
   subtitle: string;
   className?: string; // For additional styling
+  id?: string; // Optional ID for anchor linking
 }
 
-const SectionHeading: React.FC<SectionHeadingProps> = ({ title, subtitle, className = '' }) => {
+const SectionHeading: React.FC<SectionHeadingProps> = ({ title, subtitle, className = '', id }) => {
   return (
-    <div className={`text-center max-w-prose mx-auto ${className}`}>
-      <h2 className="text-h1 font-bold text-foreground mb-4 leading-heading tracking-tight">{title}</h2>
-      <p className="text-h3 text-muted leading-body">{subtitle}</p>
+    <div id={id} className={`text-center max-w-prose mx-auto ${className}`}>
+      <h2 className="text-h1 font-bold text-text-primary mb-4 leading-heading tracking-tight">{title}</h2>
+      <p className="text-h3 text-text-secondary leading-body">{subtitle}</p>
     </div>
   );
 };
