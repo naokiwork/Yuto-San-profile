@@ -57,7 +57,7 @@ const PublicationList: React.FC<PublicationListProps> = ({ publications, classNa
       {Object.keys(groupedPublications).sort((a, b) => Number(b) - Number(a)).map((yearStr) => (
         <div key={yearStr} className="mb-10 pb-6 last:pb-0">
           <h3 className="text-2xl font-semibold text-text mb-6 sticky top-0 bg-bg-base py-2 z-10">{yearStr}</h3>
-          <ul className="space-y-6">
+          <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12">
             {(groupedPublications[yearStr] ?? []).map((pub, index) => (
               <Card key={index} delay={index * 50}>
                 <p className="text-small text-muted mb-1">{pub.type} · {pub.venue}</p>
