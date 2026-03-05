@@ -1,17 +1,18 @@
 import { spawn } from 'child_process';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import fs from 'fs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const projectRoot = path.resolve(__dirname, '../..'); // Assuming scripts/deploy-with-retry.mjs is in profile-webapp/scripts
+const appRoot = path.resolve(__dirname, '..'); // => profile-webapp
 
-// Assert package.json exists
-import fs from 'fs';
-const packageJsonPath = path.join(projectRoot, 'package.json');
+const packageJsonPath = path.join(appRoot, 'package.json');
 if (!fs.existsSync(packageJsonPath)) {
   console.error(`Error: package.json not found at expected path: ${packageJsonPath}`);
+  console.error(`Current working directory: ${process.cwd()}`);
+  console.error(`Script directory: ${__dirname}`);
   process.exit(1);
 }
 
@@ -30,7 +31,7 @@ async function deployWithRetry() {
     ['run', 'predeploy'],
     {
       stdio: 'inherit',
-      cwd: projectRoot, // Ensure it runs in the correct working directory
+      cwd: appRoot, // Ensure it runs in the correct working directory
     }
   );
 
@@ -60,7 +61,7 @@ async function deployWithRetry() {
             ...process.env,
             WRANGLER_LOG_PATH: process.env.WRANGLER_LOG_PATH || '/tmp/wrangler.log',
           },
-          cwd: projectRoot, // Ensure it runs in the correct working directory
+          cwd: appRoot, // Ensure it runs in the correct working directory
         }
       );
 
