@@ -4,7 +4,7 @@ import type { Publication } from '@/data';
 import SectionHeading from './SectionHeading';
 import Button from './Button';
 import Reveal from './Reveal';
-import { FaExternalLinkAlt, FaBook, FaFilePdf } from '@/components/icons';
+import { FaExternalLinkAlt, FaBook, FaFilePdf, Fa } from '@/components/icons';
 import Chip from './Chip'; // Import Chip component
 import Card from './Card'; // Import Card component
 
@@ -55,7 +55,7 @@ const PublicationList: React.FC<PublicationListProps> = ({ publications, classNa
       </div>
 
       {Object.keys(groupedPublications).sort((a, b) => Number(b) - Number(a)).map((yearStr) => (
-        <div key={yearStr} className="mb-10 border-b border-border pb-6 last:border-b-0 last:pb-0">
+        <div key={yearStr} className="mb-10 pb-6 last:pb-0">
           <h3 className="text-2xl font-semibold text-text mb-6 sticky top-0 bg-bg-base py-2 z-10">{yearStr}</h3>
           <ul className="space-y-6">
             {(groupedPublications[yearStr] ?? []).map((pub, index) => (

@@ -31,6 +31,14 @@ export interface Publication {
   tags: string[];
 }
 
+export interface ResearchFocus {
+  title: string;
+  claim: string;
+  keywords: string[];
+  linkHref: string;
+  icon: string; // Icon name as string
+}
+
 export const profile = {
   name: 'Yuto Asai',
   title: 'Control Engineer',
@@ -47,20 +55,23 @@ export const profile = {
       claim: 'Designing self-tuning controllers for systems with unknown or changing dynamics.',
       keywords: ['Model Reference', 'Parameter Estimation', 'Robustness'],
       linkHref: '#research',
+      icon: 'FaMicrochip',
     },
     {
       title: 'Robotics & Autonomous Systems',
       claim: 'Developing intelligent control strategies for navigation, manipulation, and human-robot interaction.',
       keywords: ['SLAM', 'Path Planning', 'Reinforcement Learning'],
       linkHref: '#research',
+      icon: 'FaRobot',
     },
     {
       title: 'Aerospace Guidance & Control',
       claim: 'Implementing precise control algorithms for spacecraft, drones, and aerial vehicles.',
       keywords: ['Attitude Control', 'Trajectory Optimization', 'Flight Dynamics'],
       linkHref: '#research',
+      icon: 'FaRocket',
     },
-  ],
+  ] as ResearchFocus[],
 };
 
 export const projects: Project[] = [

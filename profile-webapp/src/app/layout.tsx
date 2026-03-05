@@ -20,9 +20,9 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body>
         <SkipToContent />
-        <header className="w-full bg-bg-surface/[var(--tw-bg-opacity, 0.9)] [@supports(backdrop-filter:blur(0))]:backdrop-blur-md border-b border-border-subtle sticky top-0 z-50 shadow-sm">
+        <header className="w-full bg-surface/[var(--tw-bg-opacity, 0.9)] [@supports(backdrop-filter:blur(0))]:backdrop-blur-md sticky top-0 z-50 shadow-sm">
           <div className="container mx-auto px-4 py-4 flex items-center justify-between max-w-md-container">
-            <a href="#overview" className="text-h3 font-bold text-text-primary tracking-tight">Yuto Asai</a>
+            <a href="#overview" className="text-h3 font-bold text-text tracking-tight">Yuto Asai</a>
             <TabNav />
           </div>
          </header>
