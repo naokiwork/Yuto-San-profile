@@ -10,7 +10,7 @@ import ResearchFocusCard from '@/components/ResearchFocusCard';
 import Card from '@/components/Card'; // Add Card component
 import Chip from '@/components/Chip'; // Add Chip component
 
-import { FaGithub, FaLinkedin, FaEnvelope, FaGraduationCap, FaUniversity, FaArrowDown } from '@/components/icons';
+import { FaGithub, FaLinkedin, FaEnvelope, FaGraduationCap, FaUniversity, FaArrowDown, FaExternalLinkAlt } from '@/components/icons';
 import { useState } from 'react';
 import Reveal from '@/components/Reveal';
 import React from 'react';
@@ -74,16 +74,16 @@ export default function Home() {
             </div>
           </Reveal>
           <Reveal delay={400}>
-            <div className="flex flex-wrap gap-4 justify-center text-muted">
-              <Button variant="secondary" href={profile.socials.github} target="_blank" rel="noopener noreferrer" alt="GitHub Profile">
-                <FaGithub className="text-text" /> GitHub
-              </Button>
-              <Button variant="secondary" href={profile.socials.linkedin} target="_blank" rel="noopener noreferrer" alt="LinkedIn Profile">
-                <FaLinkedin className="text-text" /> LinkedIn
-              </Button>
-              <Button variant="secondary" href={`mailto:${profile.socials.email}`} alt={`Email ${profile.socials.email}`}>
-                <FaEnvelope className="text-text" /> Email
-              </Button>
+            <div className="grid grid-cols-3 gap-4 justify-center text-muted">
+              <Card className="text-center flex flex-col items-center p-4">
+                <FaGithub className="text-accent w-6 h-6 mb-2" /> GitHub
+              </Card>
+              <Card className="text-center flex flex-col items-center p-4">
+                <FaLinkedin className="text-accent w-6 h-6 mb-2" /> LinkedIn
+              </Card>
+              <Card className="text-center flex flex-col items-center p-4">
+                <FaEnvelope className="text-accent w-6 h-6 mb-2" /> Email
+              </Card>
             </div>
           </Reveal>
         </Container>
@@ -122,7 +122,7 @@ export default function Home() {
           <div className="flex flex-wrap gap-2 mt-12 mb-8 justify-center">
             <ProjectFilter tags={['All', ...new Set(projects.flatMap(p => p.tags))]} selectedTag={selectedTag} onSelectTag={setSelectedTag} />
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 bg-bg-base">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8 bg-bg-base">
             {filteredProjects.map((project) => (
               <ProjectCard key={project.title} project={project} />
             ))}
@@ -136,7 +136,7 @@ export default function Home() {
           <Reveal>
             <SectionHeading title="Open-Source Contributions" subtitle="Exploring my public code repositories on GitHub." className="text-text" />
           </Reveal>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12 bg-surface-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-12 bg-surface-2">
             {repos.map((repo) => (
               <RepositoryItem key={repo.name} repo={repo} />
             ))}
@@ -151,16 +151,28 @@ export default function Home() {
             <SectionHeading title="Get In Touch" subtitle="I'm always open to collaborations and new opportunities." className="text-text" />
           </Reveal>
           <p className="text-body text-text max-w-prose mx-auto mb-8 mt-12">Feel free to reach out via email or connect with me on social media.</p>
-          <div className="flex flex-wrap justify-center gap-6 bg-bg-base">
-            <Button variant="secondary" href={`mailto:${profile.socials.email}`} alt={`Email ${profile.socials.email}`}>
-              <FaEnvelope className="text-muted" /> Email
-            </Button>
-            <Button variant="secondary" href={profile.socials.github} target="_blank" rel="noopener noreferrer" alt="GitHub Profile">
-              <FaGithub className="text-muted" /> GitHub
-            </Button>
-            <Button variant="secondary" href={profile.socials.linkedin} target="_blank" rel="noopener noreferrer" alt="LinkedIn Profile">
-              <FaLinkedin className="text-muted" /> LinkedIn
-            </Button>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 bg-bg-base">
+            <Card className="text-center flex flex-col items-center p-8">
+              <FaEnvelope className="text-accent w-10 h-10 mb-4" />
+              <h3 className="text-h3 font-semibold text-text mb-2">Email</h3>
+              <a href={`mailto:${profile.socials.email}`} className="text-link hover:underline" alt={`Email ${profile.socials.email}`}>
+                {profile.socials.email}
+              </a>
+            </Card>
+            <Card className="text-center flex flex-col items-center p-8">
+              <FaLinkedin className="text-accent w-10 h-10 mb-4" />
+              <h3 className="text-h3 font-semibold text-text mb-2">LinkedIn</h3>
+              <a href={profile.socials.linkedin} target="_blank" rel="noopener noreferrer" className="text-link hover:underline" alt="LinkedIn Profile">
+                Connect <FaExternalLinkAlt className="inline-block ml-1 w-3 h-3" />
+              </a>
+            </Card>
+            <Card className="text-center flex flex-col items-center p-8">
+              <FaGithub className="text-accent w-10 h-10 mb-4" />
+              <h3 className="text-h3 font-semibold text-text mb-2">GitHub</h3>
+              <a href={profile.socials.github} target="_blank" rel="noopener noreferrer" className="text-link hover:underline" alt="GitHub Profile">
+                View Profile <FaExternalLinkAlt className="inline-block ml-1 w-3 h-3" />
+              </a>
+            </Card>
           </div>
           <div className="mt-16">
             <AcademicIDList academicIDs={academicIDs} className="bg-bg-base" />
