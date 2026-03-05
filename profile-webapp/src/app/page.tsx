@@ -155,21 +155,21 @@ export default function Home() {
             <Card className="text-center flex flex-col items-center p-8">
               <FaEnvelope className="text-accent w-10 h-10 mb-4" />
               <h3 className="text-h3 font-semibold text-text mb-2">Email</h3>
-              <a href={`mailto:${profile.socials.email}`} className="text-link hover:underline" alt={`Email ${profile.socials.email}`}>
+              <a href={`mailto:${profile.socials.email}`} className="text-link hover:underline" aria-label={`Email ${profile.socials.email}`}>
                 {profile.socials.email}
               </a>
             </Card>
             <Card className="text-center flex flex-col items-center p-8">
               <FaLinkedin className="text-accent w-10 h-10 mb-4" />
               <h3 className="text-h3 font-semibold text-text mb-2">LinkedIn</h3>
-              <a href={profile.socials.linkedin} target="_blank" rel="noopener noreferrer" className="text-link hover:underline" alt="LinkedIn Profile">
+              <a href={profile.socials.linkedin} target="_blank" rel="noopener noreferrer" className="text-link hover:underline" aria-label="LinkedIn Profile">
                 Connect <FaExternalLinkAlt className="inline-block ml-1 w-3 h-3" />
               </a>
             </Card>
             <Card className="text-center flex flex-col items-center p-8">
               <FaGithub className="text-accent w-10 h-10 mb-4" />
               <h3 className="text-h3 font-semibold text-text mb-2">GitHub</h3>
-              <a href={profile.socials.github} target="_blank" rel="noopener noreferrer" className="text-link hover:underline" alt="GitHub Profile">
+              <a href={profile.socials.github} target="_blank" rel="noopener noreferrer" className="text-link hover:underline" aria-label="GitHub Profile">
                 View Profile <FaExternalLinkAlt className="inline-block ml-1 w-3 h-3" />
               </a>
             </Card>
