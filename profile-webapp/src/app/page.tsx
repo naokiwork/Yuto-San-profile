@@ -10,7 +10,7 @@ import ResearchFocusCard from '@/components/ResearchFocusCard';
 import Card from '@/components/Card'; // Add Card component
 import Chip from '@/components/Chip'; // Add Chip component
 
-import { FaGithub, FaLinkedin, FaEnvelope, FaGraduationCap, FaUniversity, FaArrowDown, Fa } from '@/components/icons';
+import { FaGithub, FaLinkedin, FaEnvelope, FaGraduationCap, FaUniversity, FaArrowDown } from '@/components/icons';
 import { useState } from 'react';
 import Reveal from '@/components/Reveal';
 import React from 'react';

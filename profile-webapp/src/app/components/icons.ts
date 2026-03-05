@@ -1,3 +1,6 @@
-import * as FaIcons from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaEnvelope, FaGraduationCap, FaUniversity, FaArrowDown, FaExternalLinkAlt, FaBook, FaFilePdf, FaCodeBranch, FaStar, FaMicrochip, FaRobot, FaRocket } from "react-icons/fa";
 
-export const Fa = FaIcons;
+export {
+  FaGithub, FaLinkedin, FaEnvelope, FaGraduationCap, FaUniversity, FaArrowDown,
+  FaExternalLinkAlt, FaBook, FaFilePdf, FaCodeBranch, FaStar, FaMicrochip, FaRobot, FaRocket
+};
