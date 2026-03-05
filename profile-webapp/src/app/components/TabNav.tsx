@@ -1,22 +1,17 @@
 "use client";
-import React, { useState, useEffect } from 'react';
-import Reveal from './Reveal'; // Import Reveal
-
-interface TabNavProps {
-  activeSection: string;
-  setActiveSection: (section: string) => void;
-}
+import React, { useState, useEffect, useMemo } from 'react';
+import Reveal from './Reveal';
 
 const TabNav: React.FC = () => {
   const [activeSection, setActiveSection] = useState('overview');
-  const sections = [
+  const sections = useMemo(() => [
     { id: 'overview', label: 'Overview' },
     { id: 'research', label: 'Research' },
     { id: 'publications', label: 'Publications' },
     { id: 'projects', label: 'Projects' },
     { id: 'code', label: 'Code' },
     { id: 'contact', label: 'Contact' },
-  ];
+  ], []);
 
   useEffect(() => {
     const observerOptions: IntersectionObserverInit = {
@@ -48,7 +43,7 @@ const TabNav: React.FC = () => {
         }
       });
     };
-  }, []);
+  }, [sections]);
 
   return (
     <nav className="hidden md:flex items-center space-x-6">

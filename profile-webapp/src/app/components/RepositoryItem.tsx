@@ -1,6 +1,6 @@
 "use client";
 import type { Repo } from '@/data';
-import React from 'react';
+import React, { useState } from 'react';
 import { FaStar, FaCodeBranch, FaGithub } from '@/components/icons';
 import Button from './Button';
 import Reveal from './Reveal';
@@ -10,6 +10,7 @@ interface RepositoryItemProps {
 }
 
 const RepositoryItem: React.FC<RepositoryItemProps> = ({ repo }) => {
+  const [daysAgo] = useState(25); // Hardcoded value to avoid impure function call
   return (
     <Reveal className="h-full">
       <div className="bg-bg-surface border border-border-subtle rounded-lg shadow-sm p-6 flex flex-col h-full hover:translate-y-[-2px] hover:shadow-md transition-all duration-200">
@@ -36,7 +37,7 @@ const RepositoryItem: React.FC<RepositoryItemProps> = ({ repo }) => {
               <FaCodeBranch className="w-3.5 h-3.5" /> {repo.forks}
             </span>
           )}
-          <span className="text-text-muted text-small ml-auto">Updated {Math.floor(Math.random() * 30) + 1} days ago</span>
+          <span className="text-text-muted text-small ml-auto">Updated {daysAgo} days ago</span>
         </div>
         <div className="mt-6">
           <Button variant="secondary" size="sm" href={repo.url} target="_blank" rel="noopener noreferrer" alt={`View ${repo.name} on GitHub`}>

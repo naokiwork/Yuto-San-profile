@@ -2,7 +2,7 @@
 import type { Project } from '@/data';
 import Image from 'next/image';
 import Button from './Button';
-import { FaExternalLinkAlt } from '@/components/icons';
+// import { FaExternalLinkAlt } from '@/components/icons'; // Removed as unused
 import React from 'react';
 import Reveal from './Reveal';
 

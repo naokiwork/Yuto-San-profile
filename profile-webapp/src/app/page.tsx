@@ -1,21 +1,18 @@
 "use client";
-import type { Metadata } from 'next';
-import Image from 'next/image';
 import { profile, projects, repos, publicationsData } from '@/data';
-import type { Publication } from '@/data';
-import AcademicIDList from './components/AcademicIDList';
-import ProjectCard from './components/ProjectCard';
-import RepositoryItem from './components/RepositoryItem';
-import SectionHeading from './components/SectionHeading';
-import TabNav from './components/TabNav';
-import PublicationList from './components/PublicationList';
-import ResearchFocusCard from './components/ResearchFocusCard';
 
-import { FaGithub, FaLinkedin, FaEnvelope, FaGraduationCap, FaMapMarkerAlt, FaUniversity, FaArrowDown } from '@/components/icons';
-import { useEffect, useState } from 'react';
-import Reveal from './components/Reveal';
+import AcademicIDList from '@/components/AcademicIDList';
+import ProjectCard from '@/components/ProjectCard';
+import RepositoryItem from '@/components/RepositoryItem';
+import SectionHeading from '@/components/SectionHeading';
+import PublicationList from '@/components/PublicationList';
+import ResearchFocusCard from '@/components/ResearchFocusCard';
+
+import { FaGithub, FaLinkedin, FaEnvelope, FaGraduationCap, FaUniversity, FaArrowDown } from '@/components/icons';
+import { useState } from 'react';
+import Reveal from '@/components/Reveal';
 import React from 'react';
-import Button from './components/Button';
+import Button from '@/components/Button';
 
 const Container: React.FC<{ children: React.ReactNode; className?: string }> = ({ children, className = '' }) => (<div className={`mx-auto px-4 max-w-md-container ${className}`}>{children}</div>);
 const Module: React.FC<{ children: React.ReactNode; className?: string; id?: string }> = ({ children, className = '', id }) => (<section id={id} className={`py-16 md:py-24 ${className}`}>{children}</section>);
@@ -40,48 +37,12 @@ const ProjectFilter: React.FC<{ tags: string[]; selectedTag: string; onSelectTag
 
 export default function Home() {
   const [selectedTag, setSelectedTag] = useState('All');
-  const [activeSection, setActiveSection] = useState('overview');
-
-  useEffect(() => {
-    const observerOptions: IntersectionObserverInit = {
-      root: null, // viewport
-      rootMargin: '0px 0px -50% 0px', // When section midpoint crosses the viewport center
-      threshold: 0,
-    };
-
-    const observer = new IntersectionObserver((entries: IntersectionObserverEntry[]) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setActiveSection(entry.target.id);
-        }
-      });
-    }, observerOptions);
-
-    sections.forEach((sectionId) => {
-      const element = document.getElementById(sectionId);
-      if (element) {
-        observer.observe(element);
-      }
-    });
-
-    return () => {
-      sections.forEach((sectionId) => {
-        const element = document.getElementById(sectionId);
-        if (element) {
-          observer.unobserve(element);
-        }
-      });
-    };
-  }, []);
-
-  const sections = ['overview', 'research', 'publications', 'projects', 'code', 'contact'];
 
   const academicIDs = [
     { icon: <FaGraduationCap className="text-text-muted" />, href: "#", label: "Google Scholar" },
     { icon: <FaUniversity className="text-text-muted" />, href: "#", label: "ResearchGate" },
     { icon: <FaGraduationCap className="text-text-muted" />, href: "#", label: "ORCID" },
   ];
-
 
   const filteredProjects = selectedTag === 'All' ? projects : projects.filter(project => project.tags.includes(selectedTag));
 
@@ -104,7 +65,7 @@ export default function Home() {
           </Reveal>
           <Reveal delay={300}>
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-              <Button variant="cta-primary" href="#projects" alt="View My Projects">
+              <Button variant="cta-primary" href="#projects" alt="View My Projects" className="flex-grow sm:flex-grow-0">
                 View Projects <FaArrowDown className="ml-2" />
               </Button>
             </div>
@@ -155,7 +116,7 @@ export default function Home() {
           <Reveal>
             <SectionHeading title="Projects Gallery" subtitle="Showcasing my work with real-world applications." className="text-text-primary" />
           </Reveal>
-          <div className="flex flex-wrap gap-2 mt-12 mb-8 justify-center bg-bg-base">
+          <div className="flex flex-wrap gap-2 mt-12 mb-8 justify-center">
             <ProjectFilter tags={['All', ...new Set(projects.flatMap(p => p.tags))]} selectedTag={selectedTag} onSelectTag={setSelectedTag} />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 bg-bg-base">
@@ -172,7 +133,7 @@ export default function Home() {
           <Reveal>
             <SectionHeading title="Open-Source Contributions" subtitle="Exploring my public code repositories on GitHub." className="text-text-primary" />
           </Reveal>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12 bg-bg-elevated">
             {repos.map((repo) => (
               <RepositoryItem key={repo.name} repo={repo} />
             ))}

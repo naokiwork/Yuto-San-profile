@@ -1,6 +1,5 @@
 "use client";
-
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 
 interface RevealProps {
   children: React.ReactNode;
@@ -9,14 +8,19 @@ interface RevealProps {
 }
 
 const Reveal: React.FC<RevealProps> = ({ children, delay = 0, className = '' }) => {
-  const [isVisible, setIsVisible] = useState(false);
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const prefersReducedMotion = useMemo(() => {
+    if (typeof window !== 'undefined' && window.matchMedia) {
+      return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    }
+    return false;
+  }, []);
+  const [isVisible, setIsVisible] = useState(prefersReducedMotion);
   const ref = React.useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (window.matchMedia) {
-      setPrefersReducedMotion(window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-    }
+    const currentRef = ref.current; // Capture ref.current
+
+    // Removed conditional setIsVisible based on prefersReducedMotion as it's handled in useState initialization
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -28,21 +32,21 @@ const Reveal: React.FC<RevealProps> = ({ children, delay = 0, className = '' }) 
       { threshold: 0.1 }
     );
 
-    if (ref.current) {
-      observer.observe(ref.current);
+    if (currentRef) {
+      observer.observe(currentRef);
     }
 
     return () => {
-      if (ref.current) observer.disconnect();
+      if (currentRef) observer.disconnect();
     };
-  }, []);
+  }, [prefersReducedMotion]); // Added prefersReducedMotion as a dependency
 
-  const animationStyles = prefersReducedMotion
+  const animationStyles: React.CSSProperties = prefersReducedMotion
     ? {} // No animation
     : {
         opacity: isVisible ? 1 : 0,
-    transform: isVisible ? 'translateY(0)' : 'translateY(8px)', // Slightly less aggressive reveal
-    transition: `opacity 400ms ease-out ${delay}ms, transform 400ms ease-out ${delay}ms`, // Adjusted duration
+        transform: isVisible ? 'translateY(0)' : 'translateY(8px)', // Slightly less aggressive reveal
+        transition: `opacity 400ms ease-out ${delay}ms, transform 400ms ease-out ${delay}ms`, // Adjusted duration
       };
 
   return <div ref={ref} style={animationStyles} className={className}>{children}</div>;
