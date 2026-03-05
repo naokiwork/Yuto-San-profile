@@ -9,8 +9,8 @@
   --bg-vignette-start: #0D1013; /* For radial vignette effect */
   --bg-vignette-end: rgba(13, 16, 19, 0.9); /* For radial vignette effect */
 
-  --surface: #171B22;
-  --surface-2: #1B1F26;
+  --surface: #1E232B; /* Slightly lighter black */
+  --surface-2: #242931; /* Even lighter black */
 
   --text: #E0E6F0; /* Near-white */
   --muted: #6B7078; /* Muted grey */

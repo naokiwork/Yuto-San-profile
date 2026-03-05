@@ -95,7 +95,7 @@ export default function Home() {
           <Reveal>
             <SectionHeading title="Research Focus" subtitle="My areas of expertise and active investigation." className="text-text" />
           </Reveal>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
             {profile.researchFocus.map((focus, index) => (
               <ResearchFocusCard key={index} {...focus} />
             ))}
