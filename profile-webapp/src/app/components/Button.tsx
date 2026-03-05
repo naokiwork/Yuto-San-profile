@@ -11,7 +11,7 @@ export default function Button(props: ButtonProps) {
   
   const variantStyles = {
     primary: "bg-accent text-brand-contrast hover:opacity-90",
-    secondary: "bg-surface text-text-primary hover:bg-surface-2",
+    secondary: "bg-surface text-text hover:bg-surface-2",
     link: "text-link hover:underline",
     'cta-primary': "bg-cta text-brand-contrast hover:opacity-90",
   };

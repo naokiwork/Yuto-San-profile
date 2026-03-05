@@ -29,15 +29,15 @@
   --brand-contrast: #ffffff; /* For text on accent background (e.g. green CTA) */
 
   /* Spacing */
-  --space-xs: 4px;
-  --space-sm: 8px;
-  --space-md: 12px;
-  --space-lg: 16px;
-  --space-xl: 24px;
-  --space-2xl: 32px;
-  --space-3xl: 64px; /* Increased from 48px */
-  --space-4xl: 96px; /* Increased from 64px */
-  --space-5xl: 128px; /* Increased from 96px */
+  --space-xs: 8px; /* Doubled from 4px */
+  --space-sm: 16px; /* Doubled from 8px */
+  --space-md: 24px; /* Doubled from 12px */
+  --space-lg: 32px; /* Doubled from 16px */
+  --space-xl: 48px; /* Doubled from 24px */
+  --space-2xl: 64px; /* Doubled from 32px */
+  --space-3xl: 320px; /* 5x from 64px */
+  --space-4xl: 480px; /* 5x from 96px */
+  --space-5xl: 640px; /* 5x from 128px */
 
   /* Border Radii */
   --radius-sm: 8px;

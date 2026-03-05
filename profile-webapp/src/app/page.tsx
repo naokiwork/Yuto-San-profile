@@ -76,13 +76,13 @@ export default function Home() {
           <Reveal delay={400}>
             <div className="flex flex-wrap gap-4 justify-center text-muted">
               <Button variant="secondary" href={profile.socials.github} target="_blank" rel="noopener noreferrer" alt="GitHub Profile">
-                <FaGithub className="text-muted" /> GitHub
+                <FaGithub className="text-text" /> GitHub
               </Button>
               <Button variant="secondary" href={profile.socials.linkedin} target="_blank" rel="noopener noreferrer" alt="LinkedIn Profile">
-                <FaLinkedin className="text-muted" /> LinkedIn
+                <FaLinkedin className="text-text" /> LinkedIn
               </Button>
               <Button variant="secondary" href={`mailto:${profile.socials.email}`} alt={`Email ${profile.socials.email}`}>
-                <FaEnvelope className="text-muted" /> Email
+                <FaEnvelope className="text-text" /> Email
               </Button>
             </div>
           </Reveal>
@@ -122,7 +122,7 @@ export default function Home() {
           <div className="flex flex-wrap gap-2 mt-12 mb-8 justify-center">
             <ProjectFilter tags={['All', ...new Set(projects.flatMap(p => p.tags))]} selectedTag={selectedTag} onSelectTag={setSelectedTag} />
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 bg-bg-base">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 bg-bg-base">
             {filteredProjects.map((project) => (
               <ProjectCard key={project.title} project={project} />
             ))}
