@@ -2,7 +2,7 @@
 import React from 'react';
 import Reveal from './Reveal';
 import Button from './Button';
-import { FaExternalLinkAlt, Fa } from '@/components/icons';
+import { FaExternalLinkAlt, FaMicrochip, FaRobot, FaRocket } from '@/components/icons'; // Import specific icons
 import Chip from './Chip'; // Import Chip component
 import Card from './Card'; // Import Card component
 
@@ -14,11 +14,16 @@ interface ResearchFocusCardProps {
   icon: string; // Icon name as string
 }
 
+const iconComponents: Record<string, React.ElementType> = {
+  FaMicrochip,
+  FaRobot,
+  FaRocket,
+};
+
 const ResearchFocusCard: React.FC<ResearchFocusCardProps> = ({ title, claim, keywords, linkHref, icon }) => {
-  const IconComponent = Fa[icon];
+  const IconComponent = iconComponents[icon];
   if (!IconComponent) {
     console.warn(`Icon ${icon} not found for ResearchFocusCard. Using a placeholder.`);
-    // You might want to return a default icon or null here
     return null; // or <span className="text-muted">?</span>
   }
   return (

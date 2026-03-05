@@ -4,7 +4,7 @@ import type { Publication } from '@/data';
 import SectionHeading from './SectionHeading';
 import Button from './Button';
 import Reveal from './Reveal';
-import { FaExternalLinkAlt, FaBook, FaFilePdf, Fa } from '@/components/icons';
+import { FaExternalLinkAlt, FaBook, FaFilePdf } from '@/components/icons';
 import Chip from './Chip'; // Import Chip component
 import Card from './Card'; // Import Card component
 
