@@ -53,8 +53,8 @@ const config = {
         '7': 'var(--space-3xl)',
         '8': 'var(--space-4xl)',
         '9': 'var(--space-5xl)',
-        'section-mobile': '4rem', /* Increased from 3rem */
-        'section-desktop': '8rem', /* Increased from 6rem */
+        'section-mobile': '20rem', /* 5x from 4rem */
+        'section-desktop': '40rem', /* 5x from 8rem */
       },
       borderRadius: {
         sm: 'var(--radius-sm)',
