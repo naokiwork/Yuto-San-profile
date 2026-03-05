@@ -1,5 +1,5 @@
 "use client";
-import type { Repo } from '../../data';
+import type { Repo } from '../../../data';
 import React from 'react';
 import { FaStar, FaCodeBranch, FaGithub } from 'react-icons/fa';
 import Button from './Button';
@@ -39,10 +39,8 @@ const RepositoryItem: React.FC<RepositoryItemProps> = ({ repo }) => {
           <span className="text-muted text-small ml-auto">Updated {Math.floor(Math.random() * 30) + 1} days ago</span>
         </div>
         <div className="mt-6">
-          <Button variant="secondary" size="sm" asChild alt={`View ${repo.name} on GitHub`}>
-            <a href={repo.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2" aria-label={`View ${repo.name} on GitHub`}>
-              <FaGithub /> View on GitHub
-            </a>
+          <Button variant="secondary" size="sm" href={repo.url} target="_blank" rel="noopener noreferrer" alt={`View ${repo.name} on GitHub`}>
+            <FaGithub /> View on GitHub
           </Button>
         </div>
       </div>

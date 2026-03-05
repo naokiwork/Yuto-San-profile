@@ -1,37 +1,22 @@
 "use client";
-import React from 'react';
-import { Slot } from '@radix-ui/react-slot'; // Assuming @radix-ui/react-slot is installed and desired
+import React from "react";
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'link';
-  size?: 'sm' | 'md' | 'lg';
-  className?: string;
-  asChild?: boolean;
-  alt?: string; // For accessibility
+type ButtonProps =
+  | ({ href: string } & React.AnchorHTMLAttributes<HTMLAnchorElement> & { variant?: "primary"|"secondary"|"link"; size?: "sm"|"md"|"lg"; alt?:string;})
+  | ({ href?: undefined } & React.ButtonHTMLAttributes<HTMLButtonElement> & { variant?: "primary"|"secondary"|"link"; size?: "sm"|"md"|"lg"; alt?:string;});
+
+export default function Button(props: ButtonProps) {
+  const { variant="primary", size="md", className="", alt="", children, ...rest } = props as any;
+  const base = "inline-flex items-center justify-center rounded-full font-medium transition-colors duration-200 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2";
+  const v = variant==="primary" ? "bg-accent text-white hover:bg-accent-2" :
+            variant==="secondary" ? "bg-card text-foreground border border-border hover:bg-muted/[0.1]" :
+            "text-link hover:underline";
+  const s = size==="lg" ? "px-6 py-3 text-lg" : size==="sm" ? "px-4 py-2 text-small" : "px-5 py-2.5 text-base";
+  const cls = `${base} ${v} ${s} ${className}`.trim();
+
+  if ("href" in props && props.href) {
+    const { href, ...a } = rest as React.AnchorHTMLAttributes<HTMLAnchorElement>;
+    return <a href={href} className={cls} aria-label={alt} {...a}>{children}</a>;
+  }
+  return <button className={cls} aria-label={alt} {...(rest as React.ButtonHTMLAttributes<HTMLButtonElement>)}>{children}</button>;
 }
-
-const Button: React.FC<ButtonProps> = ({ variant = 'primary', size = 'md', className, asChild = false, children, alt, ...props }) => {
-  const Comp = asChild ? Slot : 'button';
-
-  const baseStyles = "inline-flex items-center justify-center font-medium rounded-full transition-colors duration-200 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2";
-
-  const variantStyles = {
-    primary: "bg-accent text-white hover:bg-accent-2",
-    secondary: "bg-card text-foreground border border-border hover:bg-muted/[0.1]",
-    link: "text-link hover:underline",
-  };
-
-  const sizeStyles = {
-    sm: "px-4 py-2 text-small",
-    md: "px-5 py-2.5 text-base",
-    lg: "px-6 py-3 text-lg",
-  };
-
-  return (
-    <Comp className={`${baseStyles} ${variantStyles[variant]} ${sizeStyles[size]} ${className}`} aria-label={alt} {...props}>
-      {children}
-    </Comp>
-  );
-};
-
-export default Button;

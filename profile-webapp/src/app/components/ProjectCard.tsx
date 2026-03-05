@@ -1,5 +1,5 @@
 "use client";
-import type { Project } from '../../data';
+import type { Project } from '../../../data';
 import Image from 'next/image';
 import Button from './Button';
 import { FaExternalLinkAlt } from 'react-icons/fa';
@@ -34,10 +34,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, className }) => {
           </div>
           <div className="mt-auto flex flex-wrap gap-3">
             {project.links.map((link, index) => (
-              <Button key={index} variant={link.label === 'Live Demo' || link.label === 'GitHub' ? 'primary' : 'secondary'} size="sm" asChild>
-                <a href={link.href} target="_blank" rel="noopener noreferrer" aria-label={`${project.title} ${link.label}`}>
-                  {link.label}
-                </a>
+              <Button key={index} variant={link.label === 'Live Demo' || link.label === 'GitHub' ? 'primary' : 'secondary'} size="sm" href={link.href} target="_blank" rel="noopener noreferrer" alt={`${project.title} ${link.label}`}>
+                {link.label}
               </Button>
             ))}
           </div>

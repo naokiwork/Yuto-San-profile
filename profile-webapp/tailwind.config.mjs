@@ -73,5 +73,7 @@ export default {
         'heading': 'var(--line-height-heading)',
         'body': 'var(--line-height-body)',
       },
+    },
+  },
   plugins: [],
 };
