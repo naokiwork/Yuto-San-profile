@@ -19,13 +19,15 @@ const TabNav: React.FC<TabNavProps> = ({ activeSection, setActiveSection }) => {
   return (
     <nav className="hidden md:flex items-center space-x-6">
       {sections.map((section) => (
-        <a key={section.id} href={`#${section.id}`} onClick={() => setActiveSection(section.id)} className={`relative text-body font-medium transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 rounded-md\n          ${activeSection === section.id ? 'text-foreground' : 'text-muted hover:text-foreground'}
-        `}>
-          {section.label}
-          {activeSection === section.id && (
-            <span className="absolute bottom-[-8px] left-0 w-full h-0.5 bg-accent rounded-full" />
-          )}
-        </a>
+        <Reveal key={section.id} delay={index * 50}>
+          <a href={`#${section.id}`} onClick={() => setActiveSection(section.id)} className={`relative text-body font-medium transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 rounded-md\n            ${activeSection === section.id ? 'text-foreground' : 'text-muted hover:text-foreground'}
+          `}>
+            {section.label}
+            {activeSection === section.id && (
+              <span className="absolute bottom-[-8px] left-0 w-full h-0.5 bg-accent rounded-full" />
+            )}
+          </a>
+        </Reveal>
       ))}
     </nav>
   );

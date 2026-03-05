@@ -61,13 +61,11 @@ const PublicationList: React.FC<PublicationListProps> = ({ publications }) => {
                   </div>
                   <div className="flex flex-wrap gap-3 mt-4">
                     {pub.links.map((link, linkIndex) => (
-                      <Button key={linkIndex} variant="secondary" size="sm" asChild>
-                        <a href={link.href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2" aria-label={`${pub.title} ${link.label}`} alt={`${pub.title} ${link.label}`}>
+                      <Button key={linkIndex} variant="secondary" size="sm" href={link.href} target="_blank" rel="noopener noreferrer" alt={`${pub.title} ${link.label}`}>
                           {link.label === 'Paper' && <FaFilePdf className="w-4 h-4" />}
                           {link.label === 'Abstract' && <FaBook className="w-4 h-4" />}
                           {link.label !== 'Paper' && link.label !== 'Abstract' && <FaExternalLinkAlt className="w-4 h-4" />}
                           <span>{link.label}</span>
-                        </a>
                       </Button>
                     ))}
                   </div>
