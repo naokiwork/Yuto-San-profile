@@ -2,7 +2,7 @@
 import type { Project } from '@/data';
 import Image from 'next/image';
 import Button from './Button';
-// import { FaExternalLinkAlt } from '@/components/icons'; // Removed as unused
+import { FaExternalLinkAlt, FaGithub } from '@/components/icons'; // Import specific icons
 import Chip from './Chip'; // Import Chip component
 import Card from './Card'; // Import Card component
 
@@ -38,7 +38,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
       </div>
       <div className="mt-auto flex flex-wrap gap-3">
         {project.links.map((link, index) => (
-          <Button key={index} variant={link.label === 'Live Demo' || link.label === 'GitHub' ? 'cta-primary' : 'secondary'} size="sm" href={link.href} target="_blank" rel="noopener noreferrer" alt={`${project.title} ${link.label}`}>
+          <Button key={index} variant={link.label === 'Live Demo' ? 'cta-primary' : 'secondary'} size="sm" href={link.href} target="_blank" rel="noopener noreferrer" alt={`${project.title} ${link.label}`}>
+            {link.label === 'Live Demo' && <FaExternalLinkAlt className="mr-2" />}
+            {link.label === 'GitHub' && <FaGithub className="mr-2" />}
             {link.label}
           </Button>
         ))}

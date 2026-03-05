@@ -12,7 +12,7 @@ export default function Button(props: ButtonProps) {
   const variantStyles = {
     primary: "bg-accent text-brand-contrast hover:opacity-90",
     secondary: "bg-surface text-text hover:bg-surface-2",
-    link: "text-link hover:underline",
+    link: "bg-surface text-link hover:bg-surface-2 rounded-md", // Changed to match image style
     'cta-primary': "bg-cta text-brand-contrast hover:opacity-90",
   };
 
