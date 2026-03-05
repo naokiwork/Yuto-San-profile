@@ -1,8 +1,8 @@
 "use client";
-import type { Project } from '../../../data';
+import type { Project } from '@/data';
 import Image from 'next/image';
 import Button from './Button';
-import { FaExternalLinkAlt } from 'react-icons/fa';
+import { FaExternalLinkAlt } from '@/components/icons';
 import React from 'react';
 import Reveal from './Reveal';
 
@@ -34,7 +34,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, className }) => {
           </div>
           <div className="mt-auto flex flex-wrap gap-3">
             {project.links.map((link, index) => (
-              <Button key={index} variant={link.label === 'Live Demo' || link.label === 'GitHub' ? 'brand-cta-primary' : 'secondary'} size="sm" href={link.href} target="_blank" rel="noopener noreferrer" alt={`${project.title} ${link.label}`}>
+              <Button key={index} variant={link.label === 'Live Demo' || link.label === 'GitHub' ? 'cta-primary' : 'secondary'} size="sm" href={link.href} target="_blank" rel="noopener noreferrer" alt={`${project.title} ${link.label}`}>
                 {link.label}
               </Button>
             ))}

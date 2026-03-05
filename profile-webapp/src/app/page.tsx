@@ -1,13 +1,17 @@
 "use client";
 import type { Metadata } from 'next';
 import Image from 'next/image';
-import { profile, projects, repos, Publication, publicationsData } from '../../data';
+import { profile, projects, repos, publicationsData } from '@/data';
+import type { Publication } from '@/data';
 import AcademicIDList from './components/AcademicIDList';
 import ProjectCard from './components/ProjectCard';
 import RepositoryItem from './components/RepositoryItem';
 import SectionHeading from './components/SectionHeading';
 import TabNav from './components/TabNav';
-import { FaGithub, FaLinkedin, FaEnvelope, FaGraduationCap, FaMapMarkerAlt, FaUniversity, FaArrowDown } from 'react-icons/fa';
+import PublicationList from './components/PublicationList';
+import ResearchFocusCard from './components/ResearchFocusCard';
+
+import { FaGithub, FaLinkedin, FaEnvelope, FaGraduationCap, FaMapMarkerAlt, FaUniversity, FaArrowDown } from '@/components/icons';
 import { useEffect, useState } from 'react';
 import Reveal from './components/Reveal';
 import React from 'react';
@@ -16,32 +20,13 @@ import Button from './components/Button';
 const Container: React.FC<{ children: React.ReactNode; className?: string }> = ({ children, className = '' }) => (<div className={`mx-auto px-4 max-w-md-container ${className}`}>{children}</div>);
 const Module: React.FC<{ children: React.ReactNode; className?: string; id?: string }> = ({ children, className = '', id }) => (<section id={id} className={`py-16 md:py-24 ${className}`}>{children}</section>);
 
-const ResearchFocusCard: React.FC<{ title: string; claim: string; keywords: string[]; linkHref: string }> = ({ title, claim, keywords, linkHref }) => (
-  <Reveal>
-    <div className="bg-bg-surface border border-border-subtle rounded-lg shadow-sm p-6 flex flex-col items-start h-full">
-      <h3 className="text-h3 font-semibold text-text-primary mb-2 leading-tight">{title}</h3>
-      <p className="text-text-secondary text-body flex-grow mb-4">{claim}</p>
-      <div className="flex flex-wrap gap-2 mb-4">
-        {keywords.map((keyword, index) => (
-          <span key={index} className="bg-bg-elevated text-text-muted text-xs px-2 py-0.5 rounded-full border border-border-subtle">{keyword}</span>
-        ))}
-      </div>
-      <div className="mt-auto">
-        <Button variant="link" size="sm" href={linkHref} alt={`Read more about ${title}`}>
-          Read more <FaExternalLinkAlt className="inline-block ml-1 w-3 h-3" />
-        </Button>
-      </div>
-    </div>
-  </Reveal>
-);
-
 const ProjectFilter: React.FC<{ tags: string[]; selectedTag: string; onSelectTag: (tag: string) => void }> = ({ tags, selectedTag, onSelectTag }) => {
   return (
     <div className="flex flex-wrap gap-2">
       {tags.map(tag => (
         <Button
           key={tag}
-          variant={selectedTag === tag ? 'brand-primary' : 'secondary'}
+          variant={selectedTag === tag ? 'cta-primary' : 'secondary'}
           size="sm"
           onClick={() => onSelectTag(tag)}
           alt={`Filter projects by ${tag}`}
@@ -187,7 +172,7 @@ export default function Home() {
           <Reveal>
             <SectionHeading title="Open-Source Contributions" subtitle="Exploring my public code repositories on GitHub." className="text-text-primary" />
           </Reveal>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12 bg-bg-elevated">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
             {repos.map((repo) => (
               <RepositoryItem key={repo.name} repo={repo} />
             ))}

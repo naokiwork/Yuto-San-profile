@@ -1,7 +1,7 @@
 "use client";
 import React from 'react';
 import SectionHeading from './SectionHeading';
-import { FaExternalLinkAlt } from 'react-icons/fa';
+import { FaExternalLinkAlt } from '@/components/icons';
 
 interface AcademicID {
   icon: React.ReactNode;

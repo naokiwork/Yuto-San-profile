@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import Button from './Button';
 import Reveal from './Reveal';
-import { FaExternalLinkAlt, FaBook, FaFilePdf } from 'react-icons/fa';
+import { FaExternalLinkAlt, FaBook, FaFilePdf } from '@/components/icons';
 
 interface Publication {
   id: string;
@@ -39,10 +39,10 @@ const PublicationList: React.FC<PublicationListProps> = ({ publications, classNa
   return (
     <div className={`mt-12 ${className}`}>
       <div className="flex flex-wrap gap-2 mb-8 justify-center">
-        <Button variant={filter === 'All' ? 'brand-cta-primary' : 'secondary'} size="sm" onClick={() => setFilter('All')} alt="Show all publications">All</Button>
-        <Button variant={filter === 'Journal' ? 'brand-cta-primary' : 'secondary'} size="sm" onClick={() => setFilter('Journal')} alt="Show journal publications">Journals</Button>
-        <Button variant={filter === 'Conference' ? 'brand-cta-primary' : 'secondary'} size="sm" onClick={() => setFilter('Conference')} alt="Show conference publications">Conferences</Button>
-        <Button variant={filter === 'Preprint' ? 'brand-cta-primary' : 'secondary'} size="sm" onClick={() => setFilter('Preprint')} alt="Show preprint publications">Preprints</Button>
+        <Button variant={filter === 'All' ? 'cta-primary' : 'secondary'} size="sm" onClick={() => setFilter('All')} alt="Show all publications">All</Button>
+        <Button variant={filter === 'Journal' ? 'cta-primary' : 'secondary'} size="sm" onClick={() => setFilter('Journal')} alt="Show journal publications">Journals</Button>
+        <Button variant={filter === 'Conference' ? 'cta-primary' : 'secondary'} size="sm" onClick={() => setFilter('Conference')} alt="Show conference publications">Conferences</Button>
+        <Button variant={filter === 'Preprint' ? 'cta-primary' : 'secondary'} size="sm" onClick={() => setFilter('Preprint')} alt="Show preprint publications">Preprints</Button>
       </div>
 
       {Object.keys(groupedPublications).sort((a, b) => parseInt(b) - parseInt(a)).map(year => (
