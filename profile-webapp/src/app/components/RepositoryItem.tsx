@@ -1,7 +1,7 @@
 "use client";
 import type { Repo } from '@/data';
 import React, { useState } from 'react';
-import { FaStar, FaCodeBranch, FaGithub } from '@/components/icons';
+import { FaStar, FaCodeBranch, FaGithub, Fa } from '@/components/icons';
 import Button from './Button';
 import Reveal from './Reveal';
 import Card from './Card'; // Import Card component

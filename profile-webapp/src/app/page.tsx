@@ -10,7 +10,7 @@ import ResearchFocusCard from '@/components/ResearchFocusCard';
 import Card from '@/components/Card'; // Add Card component
 import Chip from '@/components/Chip'; // Add Chip component
 
-import { FaGithub, FaLinkedin, FaEnvelope, FaGraduationCap, FaUniversity, FaArrowDown } from '@/components/icons';
+import { FaGithub, FaLinkedin, FaEnvelope, FaGraduationCap, FaUniversity, FaArrowDown, Fa } from '@/components/icons';
 import { useState } from 'react';
 import Reveal from '@/components/Reveal';
 import React from 'react';
@@ -56,7 +56,7 @@ export default function Home() {
         <div className="absolute inset-0 radial-gradient-vignette"></div>
         <Container className="grid grid-cols-1 gap-8 items-center text-center relative z-10">
           <Reveal>
-            <h1 className="text-display font-bold text-transparent bg-clip-text bg-gradient-to-r from-accent to-blue-300 mb-4 leading-tight">
+            <h1 className="text-display font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#9A96F0] to-[#6a82fb] mb-4 leading-tight">
               {profile.name}
             </h1>
           </Reveal>

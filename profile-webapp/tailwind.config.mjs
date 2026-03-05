@@ -21,7 +21,7 @@ const config = {
         'brand-cta-secondary': 'var(--brand-cta-secondary)',
         'link': 'var(--link)',
         'brand-contrast': 'var(--brand-contrast)',
-        'border': 'var(--border)',
+        /* Removed border token mapping: 'border': 'var(--border)', */
         'focus-ring': 'var(--focus-ring)',
       },
       fontSize: {
@@ -53,8 +53,8 @@ const config = {
         '7': 'var(--space-3xl)',
         '8': 'var(--space-4xl)',
         '9': 'var(--space-5xl)',
-        'section-mobile': '3rem',
-        'section-desktop': '6rem',
+        'section-mobile': '4rem', /* Increased from 3rem */
+        'section-desktop': '8rem', /* Increased from 6rem */
       },
       borderRadius: {
         sm: 'var(--radius-sm)',

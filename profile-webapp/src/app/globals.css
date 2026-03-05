@@ -21,7 +21,7 @@
   --brand-cta-secondary: #9A96F0; /* Lavender for secondary CTA text */
   --link: #9A96F0; /* Lavender for links */
 
-  --border: #2A2F38;
+  /* Removed border token: --border: #2A2F38; */
   --shadow-default: 0 4px 12px rgba(0,0,0,0.4);
   --shadow-sm: 0 1px 2px rgba(0,0,0,0.2);
 
@@ -35,9 +35,9 @@
   --space-lg: 16px;
   --space-xl: 24px;
   --space-2xl: 32px;
-  --space-3xl: 48px;
-  --space-4xl: 64px;
-  --space-5xl: 96px;
+  --space-3xl: 64px; /* Increased from 48px */
+  --space-4xl: 96px; /* Increased from 64px */
+  --space-5xl: 128px; /* Increased from 96px */
 
   /* Border Radii */
   --radius-sm: 8px;
