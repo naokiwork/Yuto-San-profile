@@ -7,6 +7,14 @@ const __dirname = path.dirname(__filename);
 
 const projectRoot = path.resolve(__dirname, '../..'); // Assuming scripts/deploy-with-retry.mjs is in profile-webapp/scripts
 
+// Assert package.json exists
+import fs from 'fs';
+const packageJsonPath = path.join(projectRoot, 'package.json');
+if (!fs.existsSync(packageJsonPath)) {
+  console.error(`Error: package.json not found at expected path: ${packageJsonPath}`);
+  process.exit(1);
+}
+
 const MAX_RETRIES = 5;
 const BACKOFF_SCHEDULE = [2000, 5000, 12000, 30000, 60000]; // milliseconds
 
