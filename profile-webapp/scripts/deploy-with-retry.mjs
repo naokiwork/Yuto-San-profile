@@ -1,4 +1,11 @@
 import { spawn } from 'child_process';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const projectRoot = path.resolve(__dirname, '../..'); // Assuming scripts/deploy-with-retry.mjs is in profile-webapp/scripts
 
 const MAX_RETRIES = 5;
 const BACKOFF_SCHEDULE = [2000, 5000, 12000, 30000, 60000]; // milliseconds
@@ -8,6 +15,31 @@ async function sleep(ms) {
 }
 
 async function deployWithRetry() {
+  // Run predeploy steps first
+  console.log("Running pre-deploy checks and build...");
+  const predeployProcess = spawn(
+    'npm',
+    ['run', 'predeploy'],
+    {
+      stdio: 'inherit',
+      cwd: projectRoot, // Ensure it runs in the correct working directory
+    }
+  );
+
+  await new Promise((resolve, reject) => {
+    predeployProcess.on('close', (code) => {
+      if (code === 0) {
+        console.log("Pre-deploy checks and build successful.");
+        resolve();
+      } else {
+        reject(new Error(`Pre-deploy failed with code ${code}`));
+      }
+    });
+    predeployProcess.on('error', (err) => {
+      reject(err);
+    });
+  });
+
   for (let i = 0; i < MAX_RETRIES; i++) {
     try {
       console.log(`Attempt ${i + 1}/${MAX_RETRIES}: Deploying with wrangler...`);
@@ -20,7 +52,7 @@ async function deployWithRetry() {
             ...process.env,
             WRANGLER_LOG_PATH: process.env.WRANGLER_LOG_PATH || '/tmp/wrangler.log',
           },
-          cwd: process.cwd(), // Ensure it runs in the current working directory
+          cwd: projectRoot, // Ensure it runs in the correct working directory
         }
       );
 

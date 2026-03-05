@@ -10,8 +10,8 @@ interface SectionHeadingProps {
 const SectionHeading: React.FC<SectionHeadingProps> = ({ title, subtitle, className = '', id }) => {
   return (
     <div id={id} className={`text-center max-w-prose mx-auto ${className}`}>
-      <h2 className="text-h1 font-bold text-text-primary mb-4 leading-heading tracking-tight">{title}</h2>
-      <p className="text-h3 text-text-secondary leading-body">{subtitle}</p>
+      <h2 className="text-h1 font-bold text-text mb-4 leading-heading tracking-tight">{title}</h2>
+      <p className="text-h3 text-muted leading-body">{subtitle}</p>
     </div>
   );
 };

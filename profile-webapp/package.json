@@ -4,13 +4,12 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && rm -rf out && mkdir -p out/_next/static && cp -r .next/static/* out/_next/static/ && cp -r public/* out/ && cp -r .next/server/app/*.html out/",
+    "build": "next build",
     "start": "next start",
-    "deploy": "node scripts/deploy-with-retry.mjs",
-    "typecheck": "tsc -p tsconfig.json --noEmit",
-    "lint": "next lint",
-    "build:ci": "npm run typecheck && npm run lint && next build",
-    "lint": "eslint"
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint",
+    "predeploy": "npm run typecheck && npm run lint && npm run build",
+    "deploy": "node scripts/deploy-with-retry.mjs"
   },
   "dependencies": {
     "next": "16.1.6",

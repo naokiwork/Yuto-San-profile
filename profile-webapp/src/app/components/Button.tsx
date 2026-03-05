@@ -10,10 +10,10 @@ export default function Button(props: ButtonProps) {
   const base = "inline-flex items-center justify-center rounded-full font-medium transition-colors duration-200 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus-ring focus-visible:ring-offset-2";
   
   const variantStyles = {
-    primary: "bg-brand-primary text-brand-contrast hover:opacity-90",
-    secondary: "bg-bg-surface text-text-primary border border-border-subtle hover:bg-bg-elevated",
-    link: "text-brand-link hover:underline",
-    'cta-primary': "bg-brand-cta-primary text-brand-contrast hover:opacity-90",
+    primary: "bg-accent text-brand-contrast hover:opacity-90",
+    secondary: "bg-surface text-text-primary border border-border hover:bg-surface-2",
+    link: "text-link hover:underline",
+    'cta-primary': "bg-cta text-brand-contrast hover:opacity-90",
   };
 
   const sizeStyles = {
