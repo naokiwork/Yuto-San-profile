@@ -6,7 +6,7 @@ type ButtonProps =
   | ({ href?: undefined } & React.ButtonHTMLAttributes<HTMLButtonElement> & { variant?: "primary"|"secondary"|"link"|"cta-primary"; size?: "sm"|"md"|"lg"; alt?:string;});
 
 export default function Button(props: ButtonProps) {
-  const { variant="primary", size="md", className="", alt="", children, ...rest } = props as any;
+  const { variant="primary", size="md", className="", alt="", children, ...rest } = props;
   const base = "inline-flex items-center justify-center rounded-full font-medium transition-colors duration-200 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus-ring focus-visible:ring-offset-2";
   
   const variantStyles = {
